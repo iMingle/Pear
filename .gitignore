@@ -1,3 +1,6 @@
-/target/
-/.idea/
-/.settings/
+target/
+.idea/
+.settings/
+.classpath
+.project
+*.aj
