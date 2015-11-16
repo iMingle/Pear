@@ -1,5 +1,7 @@
 package org.mingle.pear.config;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
@@ -7,8 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -20,10 +24,6 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.theme.CookieThemeResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles3.TilesView;
 
 @EnableWebMvc
 @Configuration
@@ -54,15 +54,24 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(new ThemeChangeInterceptor());
 		registry.addInterceptor(new LocaleChangeInterceptor());
 	}
-
-	@Bean  
-    public InternalResourceViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/jsp/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
 	
+	@Bean
+	public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
+		return new OpenEntityManagerInViewInterceptor();
+	}
+
+	@Override
+	public void configureHandlerExceptionResolvers(
+			List<HandlerExceptionResolver> exceptionResolvers) {
+		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+		resolver.setOrder(100);
+		resolver.setDefaultErrorView("errors.default");
+		Properties mappings = new Properties();
+		mappings.put("java.io.FileNotFoundException", "errors.uncaught");
+		resolver.setExceptionMappings(mappings);
+		exceptionResolvers.add(resolver);
+	}
+
 	/**
      * 必须加上static
      */
@@ -96,6 +105,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public CookieLocaleResolver cookieLocaleResolver() {
     	CookieLocaleResolver resolver = new CookieLocaleResolver();
     	resolver.setCookieName("locale");
+    	resolver.setDefaultLocale(Locale.CHINESE);
+    	resolver.setCookieMaxAge(2 * 7 * 24 * 60 * 60);
     	return resolver;
     }
     
@@ -120,6 +131,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     	CookieThemeResolver resolver = new CookieThemeResolver();
     	resolver.setCookieName("theme");
     	resolver.setDefaultThemeName("standard");
+    	resolver.setCookieMaxAge(2 * 7 * 24 * 60 * 60);
     	return resolver;
     }
     
@@ -150,20 +162,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      */
     @Bean
     public CommonsMultipartResolver commonsMultipartResolver() {
-    	return new CommonsMultipartResolver();
-    }
-    
-    @Bean
-    public UrlBasedViewResolver urlBasedViewResolver() {
-    	UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-    	resolver.setViewClass(TilesView.class);
+    	CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+    	resolver.setMaxUploadSize(1024 * 1024 * 500);
+    	resolver.setMaxInMemorySize(1024 * 1024 * 10);
     	return resolver;
-    }
-    
-    @Bean
-    public static TilesConfigurer tilesConfigurer() {
-    	TilesConfigurer configurer = new TilesConfigurer();
-    	configurer.setDefinitions("/WEB-INF/**/*.xml");
-    	return configurer;
     }
 }
