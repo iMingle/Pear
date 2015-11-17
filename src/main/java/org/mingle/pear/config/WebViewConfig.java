@@ -27,6 +27,12 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * 视图解析配置
+ * 
+ * @since 1.8
+ * @author Mingle
+ */
 @EnableWebMvc
 @Configuration
 public class WebViewConfig extends WebMvcConfigurerAdapter {

@@ -41,6 +41,7 @@
         <mapdb.version>2.0-beta10</mapdb.version>
         <commons-fileupload.version>1.3.1</commons-fileupload.version>
         <commons-logging.version>1.2</commons-logging.version>
+        <activemq.version>5.12.1</activemq.version>
     </properties>
     <repositories>
         <repository>
@@ -410,6 +411,13 @@
 			<groupId>org.mapdb</groupId>
 			<artifactId>mapdb</artifactId>
 			<version>${mapdb.version}</version>
+		</dependency>
+		
+		<!-- The ActiveMQ Message Broker and Client implementations -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>${activemq.version}</version>
 		</dependency>
     </dependencies>
     <build>

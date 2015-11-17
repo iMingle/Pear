@@ -25,6 +25,12 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.theme.CookieThemeResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 
+/**
+ * WEB MVC配置
+ * 
+ * @since 1.8
+ * @author Mingle
+ */
 @EnableWebMvc
 @Configuration
 @PropertySource("classpath:META-INF/spring/database.properties")

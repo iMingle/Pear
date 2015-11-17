@@ -15,6 +15,12 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * 数据访问配置
+ * 
+ * @since 1.8
+ * @author Mingle
+ */
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages="org.mingle.pear")
