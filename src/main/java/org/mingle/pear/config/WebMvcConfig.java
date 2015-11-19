@@ -48,11 +48,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/");
+		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/login");
-		registry.addViewController("/uncaughtException");
-		registry.addViewController("/resourceNotFound");
-		registry.addViewController("/dataAccessFailure");
 	}
 	
 	@Override
@@ -110,12 +107,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      * @return
      */
     @Bean
-    public CookieLocaleResolver cookieLocaleResolver() {
-    	CookieLocaleResolver resolver = new CookieLocaleResolver();
-    	resolver.setCookieName("locale");
-    	resolver.setDefaultLocale(Locale.CHINESE);
-    	resolver.setCookieMaxAge(2 * 7 * 24 * 60 * 60);
-    	return resolver;
+    public CookieLocaleResolver localeResolver() {
+    	CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+    	localeResolver.setCookieName("locale");
+    	localeResolver.setDefaultLocale(Locale.CHINESE);
+    	localeResolver.setCookieMaxAge(2 * 7 * 24 * 60 * 60);
+    	return localeResolver;
     }
     
     /**
@@ -125,8 +122,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      * @return
      */
     @Bean
-    public ResourceBundleThemeSource resourceBundleThemeSource() {
-    	return new ResourceBundleThemeSource();
+    public ResourceBundleThemeSource themeSource() {
+    	ResourceBundleThemeSource themeSource = new ResourceBundleThemeSource();
+    	themeSource.setDefaultEncoding("UTF-8");
+    	return themeSource;
     }
     
     /**
@@ -135,12 +134,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      * @return
      */
     @Bean
-    public CookieThemeResolver cookieThemeResolver() {
-    	CookieThemeResolver resolver = new CookieThemeResolver();
-    	resolver.setCookieName("theme");
-    	resolver.setDefaultThemeName("standard");
-    	resolver.setCookieMaxAge(2 * 7 * 24 * 60 * 60);
-    	return resolver;
+    public CookieThemeResolver themeResolver() {
+    	CookieThemeResolver themeResolver = new CookieThemeResolver();
+    	themeResolver.setCookieName("theme");
+    	themeResolver.setDefaultThemeName("standard");
+    	themeResolver.setCookieMaxAge(2 * 7 * 24 * 60 * 60);
+    	return themeResolver;
     }
     
     /**
@@ -169,10 +168,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      * @return
      */
     @Bean
-    public CommonsMultipartResolver commonsMultipartResolver() {
-    	CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-    	resolver.setMaxUploadSize(1024 * 1024 * 500);
-    	resolver.setMaxInMemorySize(1024 * 1024 * 10);
-    	return resolver;
+    public CommonsMultipartResolver multipartResolver() {
+    	CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+    	multipartResolver.setMaxUploadSize(1024 * 1024 * 500);
+    	multipartResolver.setMaxInMemorySize(1024 * 1024 * 10);
+    	return multipartResolver;
     }
 }

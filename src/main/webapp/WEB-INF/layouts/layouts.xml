@@ -4,15 +4,15 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-  <definition name="default" template="/WEB-INF/layouts/default.jspx">
-    <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
-    <put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
-    <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
-  </definition>
+	<definition name="default" template="/WEB-INF/views/templates/default.jspx">
+		<put-attribute name="header" value="/WEB-INF/views/templates/header.jspx"/>
+		<put-attribute name="menu" value="/WEB-INF/views/templates/menu.jspx"/>
+		<put-attribute name="footer" value="/WEB-INF/views/templates/footer.jspx"/>
+	</definition>
 
-  <definition name="public" template="/WEB-INF/layouts/default.jspx">
-    <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
-    <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
-  </definition>
+	<definition name="public" template="/WEB-INF/views/templates/default.jspx">
+		<put-attribute name="header" value="/WEB-INF/views/templates/header.jspx"/>
+		<put-attribute name="footer" value="/WEB-INF/views/templates/footer.jspx"/>
+	</definition>
 
 </tiles-definitions>

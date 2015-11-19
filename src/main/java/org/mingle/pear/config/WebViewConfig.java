@@ -69,30 +69,42 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public BeanNameViewResolver BeanNameViewResolver() {
 		BeanNameViewResolver resolver = new BeanNameViewResolver();
-		resolver.setOrder(10);
+		resolver.setOrder(2);
 		return resolver;
 	}
+	
+	@Bean
+    public UrlBasedViewResolver tilesViewResolver() {
+    	UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
+    	tilesViewResolver.setViewClass(TilesView.class);
+    	tilesViewResolver.setOrder(3);
+    	return tilesViewResolver;
+    }
 	
 	@Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/jsp/");
-        resolver.setSuffix(".jsp");
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jspx");
+        resolver.setOrder(4);
         return resolver;
     }
     
-    @Bean
-    public UrlBasedViewResolver urlBasedViewResolver() {
-    	UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-    	resolver.setViewClass(TilesView.class);
-    	return resolver;
-    }
-    
+    /**
+     * 配置tiles布局文件
+     * 
+     * @return
+     */
     @Bean
     public static TilesConfigurer tilesConfigurer() {
     	TilesConfigurer configurer = new TilesConfigurer();
-    	configurer.setDefinitions("/WEB-INF/layouts/layouts.xml");
+    	configurer.setDefinitions(
+    		"/WEB-INF/layouts/layouts.xml",
+    		"/WEB-INF/layouts/views.xml",
+    		"/WEB-INF/layouts/accounts/views.xml",
+    		"/WEB-INF/layouts/errors/views.xml"
+    	);
     	configurer.setPreparerFactoryClass(SpringBeanPreparerFactory.class);
     	return configurer;
     }
