@@ -61,7 +61,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
 		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
-		resolver.setBasenames("views/excel", "views/word");
+		resolver.setBasename("views"); // default value
 		resolver.setOrder(1);
 		return resolver;
 	}
@@ -92,7 +92,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     @Bean
     public static TilesConfigurer tilesConfigurer() {
     	TilesConfigurer configurer = new TilesConfigurer();
-    	configurer.setDefinitions("/WEB-INF/**/*.xml");
+    	configurer.setDefinitions("/WEB-INF/layouts/layouts.xml");
     	configurer.setPreparerFactoryClass(SpringBeanPreparerFactory.class);
     	return configurer;
     }

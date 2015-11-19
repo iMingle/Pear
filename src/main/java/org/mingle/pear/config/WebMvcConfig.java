@@ -95,10 +95,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      * @return
      */
     @Bean
-    public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource() {
+    public ReloadableResourceBundleMessageSource messageSource() {
     	ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
     	messageSource.setBasenames("WEB-INF/i18n/messages", "WEB-INF/i18n/application");
     	messageSource.setFallbackToSystemLocale(false);
+    	messageSource.setDefaultEncoding("UTF-8");
+    	messageSource.setUseCodeAsDefaultMessage(true);
     	return messageSource;
     }
     
