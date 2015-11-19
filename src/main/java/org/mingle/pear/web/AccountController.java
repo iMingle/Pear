@@ -8,4 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RooWebScaffold(path = "accounts", formBackingObject = Account.class)
 public class AccountController {
+	
+	@RequestMapping("/indexBundle")
+	public String index() {
+		System.out.println("indexBundle");
+		return "indexBundle";
+	}
 }

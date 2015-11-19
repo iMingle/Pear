@@ -61,7 +61,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
 		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
-		resolver.setBasenames("views/excel", "views/word");
+		resolver.setBasename("views"); // default value
 		resolver.setOrder(1);
 		return resolver;
 	}
