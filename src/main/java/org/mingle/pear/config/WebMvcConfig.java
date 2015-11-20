@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
@@ -33,7 +33,9 @@ import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
  */
 @EnableWebMvc
 @Configuration
-@PropertySource("classpath:META-INF/spring/database.properties")
+@PropertySource({
+	"classpath:META-INF/database.properties"
+})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
@@ -79,9 +81,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      * 必须加上static
      */
     @Bean
-    public static PropertyPlaceholderConfigurer loadProperties() {
-        PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
-        return configurer;
+    public PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
     
     /**
