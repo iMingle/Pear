@@ -60,11 +60,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(new LocaleChangeInterceptor());
 	}
 	
-	@Bean
-	public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
-		return new OpenEntityManagerInViewInterceptor();
-	}
-
 	@Override
 	public void configureHandlerExceptionResolvers(
 			List<HandlerExceptionResolver> exceptionResolvers) {
@@ -76,10 +71,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		resolver.setExceptionMappings(mappings);
 		exceptionResolvers.add(resolver);
 	}
-
+	
 	/**
-     * 必须加上static
-     */
+	 * Open EntityManager in View, i.e. to allow for lazy loading in web views 
+	 * despite the original transactions already being completed.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
+		return new OpenEntityManagerInViewInterceptor();
+	}
+
     @Bean
     public PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
