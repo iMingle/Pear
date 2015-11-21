@@ -2,10 +2,11 @@ package org.mingle.pear.config;
 
 import java.util.Collections;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.mingle.pear.properties.PropertiesDatabase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,14 +27,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan(basePackages="org.mingle.pear")
 public class DataAccessConfig {
-	@Value("${database.driverClassName}")
-	private String driverClassName;
-	@Value("${database.url}")
-	private String url;
-	@Value("${database.username}")
-	private String username;
-	@Value("${database.password}")
-	private String password;
+	@Inject
+	private PropertiesDatabase propDatabase;
 
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
@@ -54,8 +49,8 @@ public class DataAccessConfig {
 
 	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource(url, username, password);
-		dataSource.setDriverClassName(driverClassName);
+		DriverManagerDataSource dataSource = new DriverManagerDataSource(propDatabase.getUrl(), propDatabase.getUsername(), propDatabase.getPassword());
+		dataSource.setDriverClassName(propDatabase.getDriverClassName());
 		return dataSource;
 	}
 

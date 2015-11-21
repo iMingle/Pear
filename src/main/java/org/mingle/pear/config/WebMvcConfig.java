@@ -34,7 +34,8 @@ import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 @EnableWebMvc
 @Configuration
 @PropertySource({
-	"classpath:META-INF/database.properties"
+	"classpath:META-INF/database.properties",
+	"classpath:META-INF/mail.properties"
 })
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
@@ -64,11 +65,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void configureHandlerExceptionResolvers(
 			List<HandlerExceptionResolver> exceptionResolvers) {
 		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-		resolver.setOrder(100);
-		resolver.setDefaultErrorView("errors.default");
-		Properties mappings = new Properties();
-		mappings.put("java.io.FileNotFoundException", "errors.uncaught");
-		resolver.setExceptionMappings(mappings);
+		resolver.setDefaultErrorView("errors.uncaughtException");
+    	Properties mappings = new Properties();
+    	mappings.put(".DataAccessException", "errors.dataAccessFailure");
+    	mappings.put(".NoSuchRequestHandlingMethodException", "errors.resourceNotFound");
+    	mappings.put(".TypeMismatchException", "errors.resourceNotFound");
+    	mappings.put(".MissingServletRequestParameterException", "errors.resourceNotFound");
+    	resolver.setExceptionMappings(mappings);
+		
 		exceptionResolvers.add(resolver);
 	}
 	
@@ -144,26 +148,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     	themeResolver.setDefaultThemeName("standard");
     	themeResolver.setCookieMaxAge(2 * 7 * 24 * 60 * 60);
     	return themeResolver;
-    }
-    
-    /**
-     * This bean resolves specific types of exceptions to corresponding logical - view names for error views. 
-     * The default behaviour of DispatcherServlet - is to propagate all exceptions to the servlet 
-     * container: this will happen - here with all other types of exceptions.
-     * 
-     * @return
-     */
-    @Bean
-    public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
-    	SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-    	resolver.setDefaultErrorView("uncaughtException");
-    	Properties mappings = new Properties();
-    	mappings.put(".DataAccessException", "dataAccessFailure");
-    	mappings.put(".NoSuchRequestHandlingMethodException", "resourceNotFound");
-    	mappings.put(".TypeMismatchException", "resourceNotFound");
-    	mappings.put(".MissingServletRequestParameterException", "resourceNotFound");
-    	resolver.setExceptionMappings(mappings);
-    	return resolver;
     }
     
     /**

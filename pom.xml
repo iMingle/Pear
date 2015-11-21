@@ -8,7 +8,7 @@
     <name>pear</name>
     
     <properties>
-        <spring-framework-version>4.2.2.RELEASE</spring-framework-version>
+        <spring-framework-version>4.2.3.RELEASE</spring-framework-version>
     	<spring-security.version>4.0.3.RELEASE</spring-security.version>
         <aspectj.version>1.8.7</aspectj.version>
         <java.version>8</java.version>
@@ -44,6 +44,7 @@
         <commons-logging.version>1.2</commons-logging.version>
         <activemq.version>5.7.0</activemq.version>
         <jasypt.version>1.9.2</jasypt.version>
+        <javax.mail.version>1.5.4</javax.mail.version>
     </properties>
     
     <repositories>
@@ -127,6 +128,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+        
+        <!-- Spring Context Support -->
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
         
         <!-- Spring AOP -->
         <dependency>
@@ -330,6 +337,20 @@
 			<artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
         </dependency>
+        
+        <!-- JavaMail API -->
+        <dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>${javax.mail.version}</version>
+		</dependency>
+		
+		<!-- JavaMail API -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>${javax.mail.version}</version>
+		</dependency>
         
         <!-- Date and time library to replace JDK date handling -->
         <dependency>

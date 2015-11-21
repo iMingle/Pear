@@ -22,7 +22,9 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 			DataAccessConfig.class,
 			WebMvcConfig.class,
 			ApplicationConfig.class,
-			WebViewConfig.class
+			WebViewConfig.class,
+			MessageConfig.class,
+			MailConfig.class
 		};
 	}
 
