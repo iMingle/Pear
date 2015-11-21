@@ -88,7 +88,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}
 
     @Bean
-    public PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
     

@@ -24,7 +24,10 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 			ApplicationConfig.class,
 			WebViewConfig.class,
 			MessageConfig.class,
-			MailConfig.class
+			MailConfig.class,
+			ScheduleConfig.class,
+			AsyncConfig.class,
+			AspectJConfig.class
 		};
 	}
 

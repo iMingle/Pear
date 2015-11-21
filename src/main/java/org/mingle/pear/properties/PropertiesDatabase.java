@@ -6,7 +6,7 @@ package org.mingle.pear.properties;
 import lombok.Getter;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 读取数据库的配置文件信息
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @since 1.8
  * @author Mingle
  */
-@Component
+@Repository
 public class PropertiesDatabase {
 	@Value("${database.driverClassName}")
 	@Getter private String driverClassName;

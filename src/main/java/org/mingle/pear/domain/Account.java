@@ -12,12 +12,8 @@ import lombok.Data;
 @RooJpaActiveRecord
 public @Data class Account {
 
-    /**
-     */
     @NotNull
     private String name;
 
-    /**
-     */
     private int age;
 }
