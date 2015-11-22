@@ -28,7 +28,6 @@ public class MailConfig {
 		mailSender.setProtocol(propMail.getProtocol());
 		mailSender.setUsername(propMail.getUsername());
 		mailSender.setPassword(MailUtils.decryptPassword(propMail.getPassword()));
-		
 		return mailSender;
 	}
 

@@ -54,7 +54,6 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 		jackson2JsonView.setObjectMapper(new ObjectMapper());
 		defaultViews.add(jackson2JsonView);
 		resolver.setDefaultViews(defaultViews);
-		
 		return resolver;
 	}
 	
@@ -99,12 +98,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     @Bean
     public static TilesConfigurer tilesConfigurer() {
     	TilesConfigurer configurer = new TilesConfigurer();
-    	configurer.setDefinitions(
-    		"/WEB-INF/layouts/layouts.xml",
-    		"/WEB-INF/layouts/views.xml",
-    		"/WEB-INF/layouts/accounts/views.xml",
-    		"/WEB-INF/layouts/errors/views.xml"
-    	);
+    	configurer.setDefinitions("/WEB-INF/layouts/layouts.xml", "/WEB-INF/layouts/**/views.xml");
     	configurer.setPreparerFactoryClass(SpringBeanPreparerFactory.class);
     	return configurer;
     }

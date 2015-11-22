@@ -5,11 +5,14 @@ import java.util.Locale;
 import java.util.Properties;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -36,6 +39,9 @@ import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 @PropertySource({
 	"classpath:META-INF/database.properties",
 	"classpath:META-INF/mail.properties"
+})
+@ComponentScan(basePackages = "org.mingle.pear", includeFilters = {
+	@Filter(value = Controller.class)
 })
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 

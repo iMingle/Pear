@@ -9,6 +9,7 @@
     
     <properties>
         <spring-framework-version>4.2.3.RELEASE</spring-framework-version>
+        <spring-js-resources.version>2.4.2.RELEASE</spring-js-resources.version>
     	<spring-security.version>4.0.3.RELEASE</spring-security.version>
         <aspectj.version>1.8.7</aspectj.version>
         <java.version>8</java.version>
@@ -163,6 +164,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        
+        <!-- Spring JS Resources -->
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-js-resources</artifactId>
+            <version>${spring-js-resources.version}</version>
         </dependency>
         
         <!-- spring-security-core -->

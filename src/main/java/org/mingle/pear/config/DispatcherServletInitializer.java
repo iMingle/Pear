@@ -1,6 +1,9 @@
 package org.mingle.pear.config;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.SessionCookieConfig;
 
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -51,6 +54,16 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 			new OpenEntityManagerInViewFilter(),
 			characterEncodingFilter
 		};
+	}
+
+	@Override
+	public void onStartup(ServletContext servletContext)
+			throws ServletException {
+		/* Enable escaping of form submission contents */
+		servletContext.setInitParameter("defaultHtmlEscape", "true");
+		SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
+		sessionCookieConfig.setMaxAge(60 * 10);
+		super.onStartup(servletContext);
 	}
 
 }

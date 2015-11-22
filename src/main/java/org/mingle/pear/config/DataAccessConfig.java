@@ -6,11 +6,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.mingle.pear.properties.PropertiesDatabase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -49,8 +49,18 @@ public class DataAccessConfig {
 
 	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource(propDatabase.getUrl(), propDatabase.getUsername(), propDatabase.getPassword());
+		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(propDatabase.getDriverClassName());
+		dataSource.setUrl(propDatabase.getUrl());
+		dataSource.setUsername(propDatabase.getUsername());
+		dataSource.setPassword(propDatabase.getPassword());
+		dataSource.setInitialSize(5);
+		dataSource.setTestOnBorrow(true);
+		dataSource.setTestOnReturn(true);
+		dataSource.setTestWhileIdle(true);
+		dataSource.setTimeBetweenEvictionRunsMillis(1800000L);
+		dataSource.setNumTestsPerEvictionRun(3);
+		dataSource.setMinEvictableIdleTimeMillis(1800000L);
 		return dataSource;
 	}
 
