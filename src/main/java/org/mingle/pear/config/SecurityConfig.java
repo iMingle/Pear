@@ -3,9 +3,9 @@ package org.mingle.pear.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * 安全配置
@@ -16,6 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+//		web.ignoring().antMatchers("/resources/**");
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -32,6 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()
 			.antMatchers("/**")
 			.authenticated()
+			.anyRequest()
+			.authenticated()
 			.and()
 			.formLogin()
 			.loginPage("/login")
@@ -39,15 +46,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.failureUrl("/login?login_error=t")
 			.and()
 			.logout()
-			.logoutUrl("/resources/j_spring_security_logout");
+			.logoutUrl("/resources/j_spring_security_logout")
+			.and()
+			.httpBasic();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-			.passwordEncoder(new BCryptPasswordEncoder())
-			.withUser("admin").password("$2a$10$E94cbGn/p5hEvj1Hmfo4UuUBjVTPkFWnGFGD4/iy35tFnvZe3h9Ke").authorities("ROLE_ADMIN").and()
-			.withUser("user").password("$2a$10$tQnNdm.r3gofhyYP3oITluyYs/LdLU1WswS9prYNdlKziWgYWMQVS").authorities("ROLE_USER");
+//			.passwordEncoder(new BCryptPasswordEncoder())
+//			.withUser("admin").password("$2a$10$E94cbGn/p5hEvj1Hmfo4UuUBjVTPkFWnGFGD4/iy35tFnvZe3h9Ke").authorities("ROLE_ADMIN").and()
+//			.withUser("user").password("$2a$10$tQnNdm.r3gofhyYP3oITluyYs/LdLU1WswS9prYNdlKziWgYWMQVS").authorities("ROLE_USER");
+		.withUser("admin").password("admin").authorities("ADMIN").and()
+		.withUser("user").password("user").authorities("ADMIN", "USER");
 	}
 
 }
