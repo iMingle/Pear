@@ -58,39 +58,14 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public ResourceBundleViewResolver resourceBundleViewResolver() {
-		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
-		resolver.setBasename("views"); // default value
-		resolver.setOrder(1);
-		return resolver;
-	}
-	
-	@Bean
-	public BeanNameViewResolver BeanNameViewResolver() {
-		BeanNameViewResolver resolver = new BeanNameViewResolver();
-		resolver.setOrder(2);
-		return resolver;
-	}
-	
-	@Bean
     public UrlBasedViewResolver tilesViewResolver() {
     	UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
     	tilesViewResolver.setViewClass(TilesView.class);
-    	tilesViewResolver.setOrder(3);
+    	tilesViewResolver.setOrder(1);
     	return tilesViewResolver;
     }
 	
-	@Bean
-    public InternalResourceViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jspx");
-        resolver.setOrder(4);
-        return resolver;
-    }
-    
-    /**
+	/**
      * 配置tiles布局文件
      * 
      * @return
@@ -102,4 +77,30 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     	configurer.setPreparerFactoryClass(SpringBeanPreparerFactory.class);
     	return configurer;
     }
+	
+	@Bean
+    public InternalResourceViewResolver internalResourceViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jspx");
+        resolver.setOrder(2);
+        return resolver;
+    }
+	
+	@Bean
+	public BeanNameViewResolver BeanNameViewResolver() {
+		BeanNameViewResolver resolver = new BeanNameViewResolver();
+		resolver.setOrder(3);
+		return resolver;
+	}
+    
+	@Bean
+	public ResourceBundleViewResolver resourceBundleViewResolver() {
+		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
+		resolver.setBasename("views"); // default value
+		resolver.setOrder(4);
+		return resolver;
+	}
+	
 }
