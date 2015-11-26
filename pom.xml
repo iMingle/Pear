@@ -14,7 +14,6 @@
         <aspectj.version>1.8.7</aspectj.version>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <roo.version>2.0.0.M1</roo.version>
         <slf4j.version>1.7.13</slf4j.version>
         <log4j.version>2.4.1</log4j.version>
         <apache-log4j-extras.version>1.2.17</apache-log4j-extras.version>
@@ -59,11 +58,6 @@
             <name>Spring Maven Milestone Repository</name>
             <url>http://maven.springframework.org/milestone</url>
         </repository>
-        <repository>
-            <id>spring-roo-repository</id>
-            <name>Spring Roo Repository</name>
-            <url>http://spring-roo-repository.springsource.org/release</url>
-        </repository>
     </repositories>
     
     <pluginRepositories>
@@ -76,11 +70,6 @@
             <id>spring-maven-milestone</id>
             <name>Spring Maven Milestone Repository</name>
             <url>http://maven.springframework.org/milestone</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-roo-repository</id>
-            <name>Spring Roo Repository</name>
-            <url>http://spring-roo-repository.springsource.org/release</url>
         </pluginRepository>
     </pluginRepositories>
 
@@ -97,14 +86,6 @@
 	</dependencyManagement>
 
     <dependencies>
-        <!-- ROO dependencies -->
-        <dependency>
-            <groupId>org.springframework.roo</groupId>
-            <artifactId>org.springframework.roo.annotations</artifactId>
-            <version>${roo.version}</version>
-            <type>pom</type>
-        </dependency>
-        
         <!-- Spring Core -->
         <dependency>
             <groupId>org.springframework</groupId>
