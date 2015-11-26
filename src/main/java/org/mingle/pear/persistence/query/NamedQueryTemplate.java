@@ -1,0 +1,28 @@
+/**
+ * Copyright (c) 2015, Mingle. All rights reserved.
+ */
+package org.mingle.pear.persistence.query;
+
+import java.util.Map;
+
+/**
+ * 命名查询模板
+ * 
+ * @since 1.8
+ * @author Mingle
+ */
+public class NamedQueryTemplate extends QueryTemplate {
+
+	public NamedQueryTemplate() {
+		super();
+	}
+
+	public NamedQueryTemplate(String query, Map<String, Object> parameters) {
+		super(query, parameters);
+	}
+
+	public NamedQueryTemplate(String query) {
+		super(query);
+	}
+
+}

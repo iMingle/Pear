@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import org.mingle.pear.persistence.BaseDomain;
+import org.mingle.pear.persistence.domain.BaseDomain;
 
 @Entity
 @Table(name = "t_account")
@@ -27,7 +27,7 @@ public @Data class Account extends BaseDomain<Long> {
 
 	@Version
 	@Column(name = "version")
-	private Integer version;
+	private int version;
 
 	@NotNull
 	@Column(name = "name", length = 30, nullable = false, unique = true)

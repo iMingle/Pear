@@ -1,12 +1,13 @@
 /**
  * Copyright (c) 2015, Mingle. All rights reserved.
  */
-package org.mingle.pear.persistence;
+package org.mingle.pear.persistence.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.mingle.pear.persistence.Identifiable;
 
 /**
  * domain的基础类

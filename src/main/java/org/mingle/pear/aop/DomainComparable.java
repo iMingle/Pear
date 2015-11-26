@@ -5,7 +5,7 @@ package org.mingle.pear.aop;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.DeclareParents;
-import org.mingle.pear.persistence.BaseDomain;
+import org.mingle.pear.persistence.domain.BaseDomain;
 import org.springframework.stereotype.Component;
 
 /**
