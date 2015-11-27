@@ -5,7 +5,6 @@ package org.mingle.pear.aop;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.DeclareParents;
-import org.mingle.pear.persistence.domain.BaseDomain;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,6 +16,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class DomainComparable {
-	@DeclareParents(value = "org.mingle.pear.domain.*", defaultImpl = BaseDomain.class)
-	public static Comparable<Integer> comparable;
+	/**
+	 * For test
+	 */
+	@DeclareParents(value = "org.mingle.pear.domain.*", defaultImpl = NewFunctionImpl.class)
+	public static Comparable<NewFunction> comparable;
 }

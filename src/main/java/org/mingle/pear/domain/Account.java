@@ -36,9 +36,4 @@ public @Data class Account extends BaseDomain<Long> {
 	@Column(name = "age")
 	private int age;
 
-	@Override
-	public int compareTo(BaseDomain<?> o) {
-		return 0;
-	}
-	
 }

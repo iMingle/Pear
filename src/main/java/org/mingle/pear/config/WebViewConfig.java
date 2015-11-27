@@ -61,7 +61,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     public UrlBasedViewResolver tilesViewResolver() {
     	UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
     	tilesViewResolver.setViewClass(TilesView.class);
-    	tilesViewResolver.setOrder(1);
+    	tilesViewResolver.setOrder(0);
     	return tilesViewResolver;
     }
 	
@@ -84,14 +84,14 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jspx");
-        resolver.setOrder(2);
+        resolver.setOrder(1);
         return resolver;
     }
 	
 	@Bean
 	public BeanNameViewResolver BeanNameViewResolver() {
 		BeanNameViewResolver resolver = new BeanNameViewResolver();
-		resolver.setOrder(3);
+		resolver.setOrder(2);
 		return resolver;
 	}
     
@@ -99,7 +99,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
 		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
 		resolver.setBasename("views"); // default value
-		resolver.setOrder(4);
+		resolver.setOrder(3);
 		return resolver;
 	}
 	

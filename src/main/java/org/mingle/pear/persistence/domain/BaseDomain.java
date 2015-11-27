@@ -15,8 +15,7 @@ import org.mingle.pear.persistence.Identifiable;
  * @since 1.8
  * @author Mingle
  */
-public abstract class BaseDomain<ID extends Serializable> implements Identifiable<ID>,
-		Comparable<BaseDomain<?>> {
+public abstract class BaseDomain<ID extends Serializable> implements Identifiable<ID> {
 	private static final long serialVersionUID = 3030311272814932991L;
 
 	@Override
@@ -28,9 +27,6 @@ public abstract class BaseDomain<ID extends Serializable> implements Identifiabl
 		return primaryKey != null;
 	}
 
-	@Override
-	public abstract int compareTo(BaseDomain<?> o);
-	
 	@Override
 	public boolean equals(Object obj) {
 		return Objects.equals(this, obj);

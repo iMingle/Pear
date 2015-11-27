@@ -10,6 +10,7 @@ import org.mingle.pear.domain.Account;
 import org.mingle.pear.persistence.dao.GenericDao;
 import org.mingle.pear.persistence.service.impl.GenericServiceImpl;
 import org.mingle.pear.service.AccountService;
+import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -17,6 +18,7 @@ import org.mingle.pear.service.AccountService;
  * @since 1.8
  * @author Mingle
  */
+@Service
 public class AccountServiceImpl extends GenericServiceImpl<Account, Long>
 		implements AccountService {
 	@Inject
