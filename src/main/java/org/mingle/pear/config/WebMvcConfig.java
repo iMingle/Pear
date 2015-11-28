@@ -71,12 +71,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void configureHandlerExceptionResolvers(
 			List<HandlerExceptionResolver> exceptionResolvers) {
 		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-		resolver.setDefaultErrorView("errors.uncaughtException");
+		resolver.setDefaultErrorView("errors/uncaughtException");
     	Properties mappings = new Properties();
-    	mappings.put(".DataAccessException", "errors.dataAccessFailure");
-    	mappings.put(".NoSuchRequestHandlingMethodException", "errors.resourceNotFound");
-    	mappings.put(".TypeMismatchException", "errors.resourceNotFound");
-    	mappings.put(".MissingServletRequestParameterException", "errors.resourceNotFound");
+    	mappings.put(".DataAccessException", "errors/dataAccessFailure");
+    	mappings.put(".NoSuchRequestHandlingMethodException", "errors/resourceNotFound");
+    	mappings.put(".TypeMismatchException", "errors/resourceNotFound");
+    	mappings.put(".MissingServletRequestParameterException", "errors/resourceNotFound");
     	resolver.setExceptionMappings(mappings);
 		
 		exceptionResolvers.add(resolver);

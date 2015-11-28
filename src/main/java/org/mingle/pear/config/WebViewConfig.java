@@ -86,7 +86,6 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 		return templateResolver;
 	}
 	
-	@Bean
     public UrlBasedViewResolver tilesViewResolver() {
     	UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
     	tilesViewResolver.setViewClass(TilesView.class);
@@ -99,7 +98,6 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
      * 
      * @return
      */
-    @Bean
     public static TilesConfigurer tilesConfigurer() {
     	TilesConfigurer configurer = new TilesConfigurer();
     	configurer.setDefinitions("/WEB-INF/layouts/layouts.xml", "/WEB-INF/layouts/**/views.xml");
