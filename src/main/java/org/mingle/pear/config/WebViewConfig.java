@@ -24,6 +24,9 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -54,14 +57,40 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 		jackson2JsonView.setObjectMapper(new ObjectMapper());
 		defaultViews.add(jackson2JsonView);
 		resolver.setDefaultViews(defaultViews);
+		resolver.setOrder(0);
 		return resolver;
+	}
+	
+	@Bean
+	public ThymeleafViewResolver thymeleafViewResolver() {
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setOrder(1);
+		viewResolver.setTemplateEngine(templateEngine());
+		return viewResolver;
+	}
+	
+	@Bean
+	public SpringTemplateEngine templateEngine() {
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver());
+		return templateEngine;
+	}
+	
+	@Bean
+	public SpringResourceTemplateResolver templateResolver() {
+		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+		templateResolver.setPrefix("/WEB-INF/views/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode("HTML");
+		templateResolver.setCacheable(false);
+		return templateResolver;
 	}
 	
 	@Bean
     public UrlBasedViewResolver tilesViewResolver() {
     	UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
     	tilesViewResolver.setViewClass(TilesView.class);
-    	tilesViewResolver.setOrder(0);
+    	tilesViewResolver.setOrder(2);
     	return tilesViewResolver;
     }
 	
@@ -78,20 +107,20 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     	return configurer;
     }
 	
-	@Bean
+    @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jspx");
-        resolver.setOrder(1);
+        resolver.setSuffix(".html");
+        resolver.setOrder(3);
         return resolver;
     }
 	
-	@Bean
-	public BeanNameViewResolver BeanNameViewResolver() {
+    @Bean
+	public BeanNameViewResolver beanNameViewResolver() {
 		BeanNameViewResolver resolver = new BeanNameViewResolver();
-		resolver.setOrder(2);
+		resolver.setOrder(4);
 		return resolver;
 	}
     
@@ -99,7 +128,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
 		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
 		resolver.setBasename("views"); // default value
-		resolver.setOrder(3);
+		resolver.setOrder(5);
 		return resolver;
 	}
 	

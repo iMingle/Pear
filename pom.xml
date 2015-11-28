@@ -9,7 +9,6 @@
     
     <properties>
         <spring-framework-version>4.2.3.RELEASE</spring-framework-version>
-        <spring-js-resources.version>2.4.2.RELEASE</spring-js-resources.version>
     	<spring-security.version>4.0.3.RELEASE</spring-security.version>
         <aspectj.version>1.8.7</aspectj.version>
         <java.version>8</java.version>
@@ -45,6 +44,10 @@
         <activemq.version>5.7.0</activemq.version>
         <jasypt.version>1.9.2</jasypt.version>
         <javax.mail.version>1.5.4</javax.mail.version>
+        <thymeleaf-version>3.0.0.BETA01</thymeleaf-version>
+		<thymeleaf-extras-tiles2-version>2.1.1.RELEASE</thymeleaf-extras-tiles2-version>
+		<thymeleaf-extras-springsecurity4-version>3.0.0.BETA01</thymeleaf-extras-springsecurity4-version>
+		<thymeleaf-extras-conditionalcomments-version>2.1.1.RELEASE</thymeleaf-extras-conditionalcomments-version>
     </properties>
     
     <repositories>
@@ -145,13 +148,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        
-        <!-- Spring JS Resources -->
-        <dependency>
-            <groupId>org.springframework.webflow</groupId>
-            <artifactId>spring-js-resources</artifactId>
-            <version>${spring-js-resources.version}</version>
         </dependency>
         
         <!-- spring-security-core -->
@@ -347,6 +343,37 @@
             <artifactId>joda-time</artifactId>
             <version>${joda.version}</version>
         </dependency>
+        
+        <!-- XML/XHTML/HTML5 template engine for Java -->
+        <dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+			<version>${thymeleaf-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring4</artifactId>
+			<version>${thymeleaf-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
+			<version>${thymeleaf-extras-tiles2-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<version>${thymeleaf-extras-springsecurity4-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-conditionalcomments</artifactId>
+			<version>${thymeleaf-extras-conditionalcomments-version}</version>
+		</dependency>
         
 	    <!-- Tiles Core Library, including basic implementation of the APIs. -->
 		<dependency>
