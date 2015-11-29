@@ -3,15 +3,15 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition extends="public" name="errors.dataAccessFailure">
-    	<put-attribute name="body" value="/WEB-INF/views/errors/dataAccessFailure.jspx"/>
+	<definition extends="public" name="errors/dataAccessFailure">
+    	<put-attribute name="body" value="/WEB-INF/views/errors/dataAccessFailure.html"/>
 	</definition>
 
-	<definition extends="public" name="errors.resourceNotFound">
-    	<put-attribute name="body" value="/WEB-INF/views/errors/resourceNotFound.jspx"/>
+	<definition extends="public" name="errors/resourceNotFound">
+    	<put-attribute name="body" value="/WEB-INF/views/errors/resourceNotFound.html"/>
 	</definition>
 
-	<definition extends="public" name="errors.uncaughtException">
-    	<put-attribute name="body" value="/WEB-INF/views/errors/uncaughtException.jspx"/>
+	<definition extends="public" name="errors/uncaughtException">
+    	<put-attribute name="body" value="/WEB-INF/views/errors/uncaughtException.html"/>
 	</definition>
 </tiles-definitions>

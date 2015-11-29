@@ -1,0 +1,17 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title><div th:text="#{welcome_h3(#application_name)}"></div></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+</head>
+
+<body>
+	<div th:fragment="body">
+		<a href="#" th:href="@{/}" th:name-title="#{button_home}">
+    		<img th:src="@{/resources/images/banner-graphic.png}/>
+		</a>
+	</div>
+</body>
+</html>

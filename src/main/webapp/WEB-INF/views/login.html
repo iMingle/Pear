@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org" lang="en">
+	lang="en">
 <head>
 
 <title>Pear</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<link rel="stylesheet" type="text/css" media="screen, projection"
+<link rel="stylesheet" type="text/css" media="all"
 	href="../styles/blueprint/screen.css" />
 
-<link rel="stylesheet" type="text/css" media="print"
+<link rel="stylesheet" type="text/css" media="all"
 	href="../styles/blueprint/print.css" />
 
 <!--[if lt IE 8]>
@@ -24,49 +24,37 @@
 </head>
 
 <body>
-	<div class="span-5">
-		<p>Valid username/passwords are:</p>
-		<ul>
-			<li>admin/admin</li>
-			<li>user/user</li>
-		</ul>
-	</div>
-
 	<div class="span-10 append-2 last">
 
 		<div class="error" th:if="${param.login_error}">
-			Your login attempt was not successful, try again.<br /> <br />
+			<div th:text="#{security_login_unsuccessful}"></div>
+			<div th:text="*{SPRING_SECURITY_LAST_EXCEPTION}"></div>
+			<br /> <br />
+		</div>
+		<div class="success" th:if="${param.login_error == null}">
+			<div th:text="#{security_login_message}"></div>
+			<br /> <br />
 		</div>
 
 		<form name="f" action="#" th:action="@{/loginProcess}" method="post">
-
 			<fieldset>
-
 				<legend>Login Information</legend>
 
 				<p>
-					<label for="username">User:</label> <br /> <input type="text"
-						name="username" id="username" />
+					<label for="username"><div th:text="#{security_login_form_name}"></div></label> <br /> <input type="text" name="username" id="username" />
 				</p>
-
 				<p>
-					<label for="password">Password:</label> <br /> <input
-						type="password" name="password" id="password" />
+					<label for="password"><div th:text="#{security_login_form_password}"></div></label> <br /> <input type="password" name="password" id="password" />
 				</p>
-
 				<p>
 					<input type="checkbox" name="_spring_security_remember_me"
 						id="remember_me" /> <label for="remember_me">Don't ask
 						for my password for two weeks:</label>
 				</p>
-
-
 				<p>
 					<button id="submit" type="submit">Login</button>
 				</p>
-
 			</fieldset>
-
 		</form>
 	</div>
 </body>

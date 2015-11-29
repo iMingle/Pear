@@ -31,20 +31,20 @@ public class DataAccessConfig {
 	private PropertiesDatabase propDatabase;
 
 	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
-		JpaTransactionManager txManager = new JpaTransactionManager();
-		txManager.setEntityManagerFactory(emf);
-		return txManager;
+	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(entityManagerFactory);
+		return transactionManager;
 	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-		emf.setDataSource(dataSource());
-		emf.setPersistenceUnitName("persistenceUnit");
-		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-		emf.setJpaPropertyMap(Collections.singletonMap("hibernate.session_factory_name", "mySessionFactory"));
-		return emf;
+		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		entityManagerFactory.setDataSource(dataSource());
+		entityManagerFactory.setPersistenceUnitName("persistenceUnit");
+		entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		entityManagerFactory.setJpaPropertyMap(Collections.singletonMap("hibernate.session_factory_name", "sessionFactory"));
+		return entityManagerFactory;
 	}
 
 	@Bean

@@ -27,6 +27,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -81,8 +82,12 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
 		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
 		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
-		templateResolver.setTemplateMode("HTML");
-		templateResolver.setCacheable(false);
+		templateResolver.setTemplateMode(TemplateMode.HTML);
+		templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setCacheable(false);	// Default is true
+		// Default is no TTL (only LRU would remove entries)
+		templateResolver.setCacheTTLMs(60000L);
+		templateResolver.getCacheablePatternSpec().addPattern("/templates/*");
 		return templateResolver;
 	}
 	
@@ -105,7 +110,6 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     	return configurer;
     }
 	
-    @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
@@ -115,14 +119,12 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 	
-    @Bean
 	public BeanNameViewResolver beanNameViewResolver() {
 		BeanNameViewResolver resolver = new BeanNameViewResolver();
 		resolver.setOrder(4);
 		return resolver;
 	}
     
-	@Bean
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
 		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
 		resolver.setBasename("views"); // default value
