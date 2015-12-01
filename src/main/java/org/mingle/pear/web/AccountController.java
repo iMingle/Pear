@@ -32,7 +32,7 @@ public class AccountController {
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, account);
-			return "accounts.create";
+			return "/create";
 		}
 		uiModel.asMap().clear();
 		accountService.persist(account);
@@ -42,14 +42,14 @@ public class AccountController {
 	@RequestMapping(params = "form", produces = "text/html")
 	public String createForm(Model uiModel) {
 		populateEditForm(uiModel, new Account());
-		return "accounts.create";
+		return "/create";
 	}
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		uiModel.addAttribute("account", accountService.find(id));
 		uiModel.addAttribute("itemId", id);
-		return "accounts.show";
+		return "/show";
 	}
 
 	@RequestMapping(produces = "text/html")
@@ -77,7 +77,7 @@ public class AccountController {
 			qt.append(QueryTemplate.buildOrderBy("t", sortFieldName, sortOrder));
 			uiModel.addAttribute("accounts", accountService.find(qt));
 		}
-		return "accounts.list";
+		return "/list";
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -85,7 +85,7 @@ public class AccountController {
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, account);
-			return "accounts.update";
+			return "/update";
 		}
 		uiModel.asMap().clear();
 		accountService.merge(account);
@@ -95,7 +95,7 @@ public class AccountController {
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
 	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
 		populateEditForm(uiModel, accountService.find(id));
-		return "accounts.update";
+		return "/update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")

@@ -2,17 +2,22 @@ package org.mingle.pear.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import org.mingle.pear.persistence.domain.BaseDomain;
+import org.mingle.pear.util.Sex;
 
 @Entity
 @Table(name = "t_account")
@@ -34,6 +39,14 @@ public @Data class Account extends BaseDomain<Long> {
 	private String name;
 
 	@Column(name = "age")
+	@Min(value = 0, message = "your age must greater than 0")
+	@Max(value = 150, message = "your age must under 150")
 	private int age;
 
+	@Column(name = "email", length = 50)
+	private String email;
+	
+	@Column(name = "sex", length = 10)
+	@Enumerated(EnumType.STRING)
+	private Sex sex = Sex.MAN;
 }

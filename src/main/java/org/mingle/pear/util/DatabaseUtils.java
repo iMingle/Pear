@@ -11,7 +11,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
  * @since 1.8
  * @author Mingle
  */
-public class DatabaseUtils {
+public abstract class DatabaseUtils {
 	public static String decryptPassword(String password) {
 		BasicTextEncryptor basicTextEncryptor = new BasicTextEncryptor();
 		basicTextEncryptor.setPassword("password");
