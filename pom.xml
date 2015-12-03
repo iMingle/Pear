@@ -150,6 +150,18 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
         
+        <!-- Spring WebSocket -->
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+		</dependency>
+		
+		<!-- Spring Messaging -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+		</dependency>
+		
         <!-- spring-security-core -->
         <dependency>
             <groupId>org.springframework.security</groupId>
