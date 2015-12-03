@@ -48,6 +48,8 @@
 		<thymeleaf-extras-tiles2-version>2.1.1.RELEASE</thymeleaf-extras-tiles2-version>
 		<thymeleaf-extras-springsecurity4-version>3.0.0.BETA01</thymeleaf-extras-springsecurity4-version>
 		<thymeleaf-extras-conditionalcomments-version>2.1.1.RELEASE</thymeleaf-extras-conditionalcomments-version>
+		<reactor-version>2.0.7.RELEASE</reactor-version>
+		<netty-version>4.0.33.Final</netty-version>
     </properties>
     
     <repositories>
@@ -150,6 +152,18 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
         
+        <!-- Spring WebSocket -->
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+		</dependency>
+		
+		<!-- Spring Messaging -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+		</dependency>
+		
         <!-- spring-security-core -->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -556,6 +570,24 @@
 			<groupId>org.jasypt</groupId>
 			<artifactId>jasypt</artifactId>
 			<version>${jasypt.version}</version>
+		</dependency>
+		
+		<!-- Reactor is a foundational library for building reactive fast-data applications on the JVM. 
+    	It is an implementation of the Reactive Streams Specification. 
+    	You can use Reactor to power an application that has a low tolerance for latency and demands 
+    	extremely high throughput. -->
+    	<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-net</artifactId>
+			<version>${reactor-version}</version>
+		</dependency>
+		<!-- Netty is a NIO client server framework which enables quick and easy development of 
+		network applications such as protocol servers and clients. It greatly simplifies and 
+		streamlines network programming such as TCP and UDP socket server. -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>${netty-version}</version>
 		</dependency>
     </dependencies>
     

@@ -1,27 +1,86 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	lang="en">
+	xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 
 <title>Pear</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" th:src="@{/scripts/websocket/sockjs-0.3.4.js}"></script>
+<script type="text/javascript" th:src="@{/scripts/websocket/stomp.js}"></script>
+<script type="text/javascript">
+var stompClient = null;
+
+function setConnected(connected) {
+    document.getElementById('connect').disabled = connected;
+    document.getElementById('disconnect').disabled = !connected;
+    document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+    document.getElementById('response').innerHTML = '';
+}
+
+function connect() {
+    var socket = new SockJS('/pear/greeting');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function(frame) {
+        setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/welcome', function(greeting) {
+            showGreeting(greeting.body);
+        });
+    });
+}
+
+function disconnect() {
+    if (stompClient != null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+function sendName() {
+    var name = document.getElementById('name').value;
+    stompClient.send("/app/greeting", {}, name);
+}
+
+function showGreeting(message) {
+    var response = document.getElementById('response');
+    var p = document.createElement('p');
+    p.style.wordWrap = 'break-word';
+    p.appendChild(document.createTextNode(message));
+    response.appendChild(p);
+}
+</script>
 </head>
 
-<body>
+<body onload="disconnect()">
 	<div>
 		<h1>
 			<span th:text="#{welcome_titlepane(Spring )}"></span> <span
-				th:text="#{application_name}"></span>
-				<br/><br/>
+				th:text="#{application_name}"></span> <br />
+			<br />
 		</h1>
-		<h2>Now time is <span th:text="${#calendars.format(#execInfo.now, 'yyyy-MM-dd HH:mm:ss')}"></span></h2>
+		<h2>
+			Now time is <span
+				th:text="${#calendars.format(#execInfo.now, 'yyyy-MM-dd HH:mm:ss')}"></span>
+		</h2>
 		<p>This sample demonstrates how to use Spring MVC together with
 			Thymeleaf.</p>
 		<p>
-			<a href="#" th:href="@{/accounts(page=1,size=5)}">Start
-				your Spring Travel experience</a>
+			<a href="#" th:href="@{/accounts(page=1,size=5)}">Start your
+				Spring Travel experience</a>
 		</p>
+	</div>
+	
+	<div>
+		<div>
+			<button id="connect" onclick="connect();">Connect</button>
+			<button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+		</div>
+		<div id="conversationDiv">
+			<label>What is your name?</label><input type="text" id="name" />
+			<button id="sendName" onclick="sendName();">Send</button>
+			<p id="response"></p>
+		</div>
 	</div>
 </body>
 </html>
