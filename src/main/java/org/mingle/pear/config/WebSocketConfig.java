@@ -21,9 +21,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-<<<<<<< HEAD
-		config.enableSimpleBroker("/topic", "/queue");	// Simple Broker
-//		config.enableStompBrokerRelay("/topic", "/queue");	// Full-Featured Broker for Use ActiveMQ etc.
+//		config.enableSimpleBroker("/topic", "/queue");	// Simple Broker
+		config.enableStompBrokerRelay("/topic", "/queue");	// Full-Featured Broker for Use ActiveMQ etc.
 		config.setApplicationDestinationPrefixes("/app");
 	}
 
@@ -32,14 +31,5 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 		registry.addEndpoint("/greeting").withSockJS()
 			.setHeartbeatTime(5 * 1000)
 			.setDisconnectDelay(3 * 1000);
-=======
-		config.enableSimpleBroker("/topic");
-		config.setApplicationDestinationPrefixes("/app");
-	}
-
-	@Override
-	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/greet").withSockJS();
->>>>>>> branch 'master' of https://github.com/iMingle/Pear.git
 	}
 }
