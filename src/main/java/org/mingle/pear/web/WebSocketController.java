@@ -1,4 +1,5 @@
 package org.mingle.pear.web;
+
 import javax.inject.Inject;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
