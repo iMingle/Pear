@@ -21,8 +21,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-//		config.enableSimpleBroker("/topic", "/queue");	// Simple Broker
-		config.enableStompBrokerRelay("/topic", "/queue");	// Full-Featured Broker for Use ActiveMQ etc.
+		config.enableSimpleBroker("/topic", "/queue");	// Simple Broker
+//		config.enableStompBrokerRelay("/topic", "/queue");	// Full-Featured Broker for Use ActiveMQ etc.
 		config.setApplicationDestinationPrefixes("/app");
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
@@ -75,6 +76,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		
+	}
+	
+	@Override
+	public void configureMessageConverters(
+			List<HttpMessageConverter<?>> converters) {
+		super.configureMessageConverters(converters);
 	}
 
 	@Override
