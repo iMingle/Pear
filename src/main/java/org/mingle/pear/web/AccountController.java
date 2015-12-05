@@ -27,7 +27,7 @@ public class AccountController {
 	@Inject
 	private AccountService accountService;
 
-	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Account account, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
@@ -36,23 +36,23 @@ public class AccountController {
 		}
 		uiModel.asMap().clear();
 		accountService.persist(account);
-		return "redirect:/accounts/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
+		return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
 	}
 
-	@RequestMapping(params = "form", produces = "text/html")
+	@RequestMapping(value = "/create", produces = "text/html")
 	public String createForm(Model uiModel) {
 		populateEditForm(uiModel, new Account());
 		return "/create";
 	}
 
-	@RequestMapping(value = "/{id}", produces = "text/html")
+	@RequestMapping(value = "/show/{id}", produces = "text/html")
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		uiModel.addAttribute("account", accountService.find(id));
 		uiModel.addAttribute("itemId", id);
 		return "/show";
 	}
 
-	@RequestMapping(produces = "text/html")
+	@RequestMapping(value = "/list", produces = "text/html")
 	public String list(
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
@@ -80,7 +80,7 @@ public class AccountController {
 		return "/list";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+	@RequestMapping(value = "/update", method = RequestMethod.PUT, produces = "text/html")
 	public String update(@Valid Account account, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
@@ -92,7 +92,7 @@ public class AccountController {
 		return "redirect:/accounts/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
 	}
 
-	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+	@RequestMapping(value = "/update/{id}", params = "form", produces = "text/html")
 	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
 		populateEditForm(uiModel, accountService.find(id));
 		return "/update";
@@ -107,7 +107,7 @@ public class AccountController {
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
 		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-		return "redirect:/accounts";
+		return "redirect:/accounts/list";
 	}
 
 	void populateEditForm(Model uiModel, Account account) {

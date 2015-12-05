@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+	<!-- 将注解优先使用在属性上 -->
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<access>FIELD</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	
+	<!-- 为了提高系统性能
+		  尽可能地为每个模块都声明一个或多个ID生成器
+		 起始ID必须从10开始,前10个ID系统留用 -->
+	<!-- 默认的系统序列生成器, 此序列生成器为平台专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_APP"
+						allocation-size="10"
+						initial-value="110"
+						sequence-name="SEQ_APP">
+	</sequence-generator>
+	
+	<!-- 系统日历 -->
+	<sequence-generator name="GEN_SEQ_CALENDAR"
+						allocation-size="10"
+						initial-value="10"
+						sequence-name="SEQ_CALENDAR">
+	</sequence-generator>
+	
+	<!-- 系统日志 -->
+	<sequence-generator name="GEN_SEQ_LOGGER"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_LOGGER">
+	</sequence-generator>
+	
+	
+	<sequence-generator name="GEN_SEQ_TUTOR"
+						allocation-size="10"
+						initial-value="10"
+						sequence-name="SEQ_TUTOR">
+	</sequence-generator>
+	
+	<!-- 安全对象管理模块的系统序列生成器, 此序列生成器为资产管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_ASSET"
+						allocation-size="10"
+						initial-value="10"
+						sequence-name="SEQ_ASSET">
+	</sequence-generator>
+	
+	<!-- 告警管理模块的系统序列生成器, 此序列生成器为告警管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_ALARM"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_ALARM">
+	</sequence-generator>
+	
+	<!-- 安全检查管理模块的系统序列生成器, 此序列生成器为告警管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_CHECK"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_CHECK">
+	</sequence-generator>
+	
+	<!-- 等级保护管理模块的系统序列生成器, 此序列生成器为告警管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_DB"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_DB">
+	</sequence-generator>
+	
+	<!-- 指标管理模块的系统序列生成器, 此序列生成器为告警管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_IND"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_IND">
+	</sequence-generator>
+	
+	<!-- 知识库管理模块的系统序列生成器, 此序列生成器为告警管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_KN"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_DB">
+	</sequence-generator>
+	
+	<!--页面邮箱管理模块的系统序列生成器, 此序列生成器为告警管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_MAIL"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_MAIL">
+	</sequence-generator>
+	
+		
+	<!--保障专题管理模块的系统序列生成器, 此序列生成器为告警管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_SG"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_SG">
+	</sequence-generator>
+	
+	<!--数据共享日志管理模块的系统序列生成器, 此序列生成器为数据共享日志管理模块专用, 其他模块禁止使用此序列生成器-->
+	<sequence-generator name="GEN_SEQ_SG"
+						allocation-size="100"
+						initial-value="10"
+						sequence-name="SEQ_DATAS">
+	</sequence-generator>
+	
+	<!-- 默认的MELON表序列生成器 -->
+	<table-generator name="GEN_TAB_MELON" table="T_GEN_MELON"
+				 allocation-size="200"
+				 initial-value="10"
+				 pk-column-name="GEN_ID"
+				 pk-column-value="MELON_ID"
+				 value-column-name="GEN_VAL">
+	</table-generator>
+
+</entity-mappings>

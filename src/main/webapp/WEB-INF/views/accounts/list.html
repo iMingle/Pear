@@ -11,7 +11,7 @@
 <body>
 	<div>
 		<h1>Account list</h1>
-		<table>
+		<table border="1">
 			<thead>
 				<tr>
 					<td>Name</td>
@@ -23,6 +23,14 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr>
+					<td>Mingle</td>
+					<td>25</td>
+					<td>Man</td>
+					<td>jinminglei@yeah.net</td>
+					<td><a href="#" th:href="@{/accounts/create}">Create</a></td>
+					<td><a href="#" th:href="@{/accounts/update}">Update</a></td>
+				</tr>
 				<tr th:each="account : ${accounts}" th:class="${accountStat.odd} ? 'odd'">
 					<td th:text="${account.name}">Mingle</td>
 					<td th:text="${account.age}">25</td>
