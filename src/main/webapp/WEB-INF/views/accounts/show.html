@@ -9,19 +9,27 @@
 </head>
 
 <body>
+	<h1>Account Info</h1>
+	<div th:object="${account}">
+		<div>
+			<label for="name">Name:</label>
+			<span id="name" th:text="*{name}">Mingle</span>
+		</div>
+		<div>
+			<label for="age">Age:</label>
+			<span id="age" th:text="*{age}">25</span>
+		</div>
+		<div>
+			<label for="email">Email:</label>
+			<span id="email" th:text="*{email}">jinminglei@yeah.net</span>
+		</div>
+		<div>
+			<label for="sex">Sex:</label>
+			<span id="sex" th:text="((*{sex} == 'MAN') ? 'Man' : ((*{sex} == 'WOMAN') ? 'Woman' : 'Intersex'))">Man</span>
+		</div>
+	</div>
 	<div>
-		<h1>
-			<span th:text="#{welcome_titlepane(Spring )}"></span> <span
-				th:text="#{application_name}"></span>
-				<br/><br/>
-		</h1>
-		<h2>Now time is <span th:text="${#calendars.format(#execInfo.now, 'yyyy-MM-dd HH:mm:ss')}"></span></h2>
-		<p>This sample demonstrates how to use Spring MVC together with
-			Thymeleaf.</p>
-		<p>
-			<a href="#" th:href="@{/accounts/list}">Start
-				your Spring Travel experience</a>
-		</p>
+		<a href="list.html" th:href="@{/accounts/list(page=1,size=5)}">Back to list</a>
 	</div>
 </body>
 </html>

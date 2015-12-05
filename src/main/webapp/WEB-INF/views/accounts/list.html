@@ -10,7 +10,8 @@
 
 <body>
 	<div>
-		<h1>Account list</h1>
+		<h1>Account List</h1>
+		<button><a href="create.html" th:href="@{/accounts/create}"><span th:text="#{button.create}">Create</span></a></button>
 		<table border="1">
 			<thead>
 				<tr>
@@ -18,26 +19,18 @@
 					<td>Age</td>
 					<td>Sex</td>
 					<td>Email</td>
-					<td>Create</td>
 					<td>Update</td>
+					<td>Delete</td>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Mingle</td>
-					<td>25</td>
-					<td>Man</td>
-					<td>jinminglei@yeah.net</td>
-					<td><a href="#" th:href="@{/accounts/create}">Create</a></td>
-					<td><a href="#" th:href="@{/accounts/update}">Update</a></td>
-				</tr>
 				<tr th:each="account : ${accounts}" th:class="${accountStat.odd} ? 'odd'">
-					<td th:text="${account.name}">Mingle</td>
-					<td th:text="${account.age}">25</td>
-					<td th:text="((${account.sex} == 'MAN') ? 'Man' : ((${account.sex} == 'WOMAN') ? 'Woman' : 'Intersex'))">Man</td>
-					<td th:text="${account.email}">jinminglei@yeah.net</td>
-					<td th:text="#{button.create}"><a href="#" th:href="@{/accounts/create}">Create</a></td>
-					<td th:text="#{button.update}"><a href="#" th:href="@{/accounts/update}">Update</a></td>
+					<td th:text="*{account.name}">Mingle</td>
+					<td th:text="*{account.age}">25</td>
+					<td th:text="((*{account.sex} == 'MAN') ? 'Man' : ((*{account.sex} == 'WOMAN') ? 'Woman' : 'Intersex'))">Man</td>
+					<td th:text="*{account.email}">jinminglei@yeah.net</td>
+					<td><a href="update.html" th:href="@{'/accounts/update/' + *{account.id}}"><span th:text="#{button.update}">Update</span></a></td>
+					<td><a href="list.html" th:href="@{'/accounts/delete/' + *{account.id}}" data-method="delete"><span th:text="#{button.delete}">Delete</span></a></td>
 				</tr>
 			</tbody>
 		</table>

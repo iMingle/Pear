@@ -11,9 +11,11 @@ import org.mingle.pear.persistence.query.QueryTemplate;
 import org.mingle.pear.persistence.query.QueryType;
 import org.mingle.pear.persistence.query.SortOrder;
 import org.mingle.pear.service.AccountService;
+import org.mingle.pear.util.Sex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,13 +28,18 @@ import org.springframework.web.util.WebUtils;
 public class AccountController {
 	@Inject
 	private AccountService accountService;
+	
+	@ModelAttribute
+	public void init(Model model) {
+		model.addAttribute("sexTypes", Sex.values());
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Account account, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, account);
-			return "/create";
+			return "accounts/create";
 		}
 		uiModel.asMap().clear();
 		accountService.persist(account);
@@ -42,14 +49,13 @@ public class AccountController {
 	@RequestMapping(value = "/create", produces = "text/html")
 	public String createForm(Model uiModel) {
 		populateEditForm(uiModel, new Account());
-		return "/create";
+		return "accounts/create";
 	}
 
 	@RequestMapping(value = "/show/{id}", produces = "text/html")
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		uiModel.addAttribute("account", accountService.find(id));
-		uiModel.addAttribute("itemId", id);
-		return "/show";
+		return "accounts/show";
 	}
 
 	@RequestMapping(value = "/list", produces = "text/html")
@@ -67,7 +73,7 @@ public class AccountController {
 			qt.setFirstResult(firstResult);
 			qt.setMaxResults(sizeNo);
 			qt.append(QueryTemplate.buildOrderBy("t", sortFieldName, sortOrder));
-			uiModel.addAttribute("accounts", accountService.find(qt));
+			uiModel.addAttribute("accounts", accountService.findDomains(qt));
 			qt = QueryTemplate.create(QueryType.JQL, "SELECT t FROM Account t");
 			int numberOfPages = accountService.findCount(qt).intValue() / sizeNo;
 			uiModel.addAttribute("maxPages", ((numberOfPages > numberOfPages || numberOfPages == 0.0) ? numberOfPages + 1
@@ -75,9 +81,9 @@ public class AccountController {
 		} else {
 			qt = QueryTemplate.create(QueryType.JQL, "SELECT t FROM Account t");
 			qt.append(QueryTemplate.buildOrderBy("t", sortFieldName, sortOrder));
-			uiModel.addAttribute("accounts", accountService.find(qt));
+			uiModel.addAttribute("accounts", accountService.findDomains(qt));
 		}
-		return "/list";
+		return "accounts/list";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.PUT, produces = "text/html")
@@ -85,20 +91,20 @@ public class AccountController {
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, account);
-			return "/update";
+			return "accounts/update";
 		}
 		uiModel.asMap().clear();
 		accountService.merge(account);
 		return "redirect:/accounts/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
 	}
 
-	@RequestMapping(value = "/update/{id}", params = "form", produces = "text/html")
+	@RequestMapping(value = "/update/{id}", produces = "text/html")
 	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
 		populateEditForm(uiModel, accountService.find(id));
-		return "/update";
+		return "accounts/update";
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") Long id,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
@@ -117,9 +123,9 @@ public class AccountController {
 	String encodeUrlPathSegment(String pathSegment,
 			HttpServletRequest httpServletRequest) {
 		String enc = httpServletRequest.getCharacterEncoding();
-		if (enc == null) {
+		if (enc == null)
 			enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
-		}
+		
 		try {
 			pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
 		} catch (UnsupportedEncodingException uee) {}

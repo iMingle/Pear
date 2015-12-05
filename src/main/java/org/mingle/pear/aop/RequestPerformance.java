@@ -32,7 +32,8 @@ public class RequestPerformance {
      * in a type in the org.mingle.pear.web package or any sub-ge
      * under that.
      */
-	@Pointcut("within(org.mingle.pear.web..*)")
+//	@Pointcut("within(org.mingle.pear.web..*)")	// 会影响JPA的persist的执行,先改为统计service layer
+	@Pointcut("within(org.mingle.pear.service.*)")
 	public void performance() {}
 	
 	@Before("performance()")

@@ -124,7 +124,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional
 	public int execute(QueryTemplate qt) {
 		Preconditions.checkArgument(
 				!(qt instanceof SqlResultSetMappingQueryTemplate),
@@ -133,6 +133,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Object[]> find(QueryTemplate qt) {
 		Preconditions.checkArgument(
 				!(qt instanceof SqlResultSetMappingQueryTemplate),
@@ -157,6 +158,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> find(QueryTemplate qt,
 			final String... fileds) {
 		List<Object[]> results = find(qt);
@@ -178,6 +180,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public BigInteger findCount(QueryTemplate qt) {
 		Preconditions.checkArgument(
 				!(qt instanceof SqlResultSetMappingQueryTemplate),
@@ -198,12 +201,14 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public E find(ID id) {
 		if (id == null) return null;
 		return entityManager().find(persistentClass, id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<E> findDomains(QueryTemplate qt) {
 		Preconditions.checkArgument(!(qt instanceof SqlQueryTemplate),
 				"SqlgQueryTemplate can't find Generic domain");
@@ -215,6 +220,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public E findFirstDomain(QueryTemplate qt) {
 		Preconditions.checkArgument(!(qt instanceof SqlQueryTemplate),
 				"SqlgQueryTemplate can't find Generic domain");
@@ -228,6 +234,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public <S, P extends PageQuery<S>> Pagination<E> findDomainPage(
 			QueryType qlType, PageQuery<S> queryPage,
 			PaginationBuilder<S, P> builder) {
@@ -294,6 +301,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public <S, P extends PageQuery<S>> Pagination<Object[]> findArrayPage(
 			QueryType qlType, PageQuery<S> queryPage,
 			PaginationBuilder<S, P> builder) {
@@ -308,6 +316,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public <S, P extends PageQuery<S>> Pagination<Map<String, Object>> findMapPage(
 			QueryType qlType, PageQuery<S> queryPage, String[] fields,
 			PaginationBuilder<S, P> builder) {
@@ -322,11 +331,13 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public E getReference(ID id) {
 		return entityManager().getReference(persistentClass, id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Session getSession() {
 		return entityManager().unwrap(Session.class);
 	}
@@ -351,6 +362,7 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 
 	@Override
+	@Transactional
 	public void detach(E entity) {
 		if (entityManager().contains(entity)) {
 			entityManager().detach(entity);
