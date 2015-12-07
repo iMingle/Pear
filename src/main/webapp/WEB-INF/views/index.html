@@ -5,9 +5,9 @@
 
 <title>Pear</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script type="text/javascript" th:src="@{/scripts/websocket/sockjs-0.3.4.js}"></script>
-<script type="text/javascript" th:src="@{/scripts/websocket/stomp.js}"></script>
-<script type="text/javascript">
+<script th:src="@{/scripts/websocket/sockjs-0.3.4.js}"></script>
+<script th:src="@{/scripts/websocket/stomp.js}"></script>
+<script>
 var stompClient = null;
 
 function setConnected(connected) {

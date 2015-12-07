@@ -11,6 +11,7 @@ import org.mingle.pear.persistence.query.QueryTemplate;
 import org.mingle.pear.persistence.query.QueryType;
 import org.mingle.pear.persistence.query.SortOrder;
 import org.mingle.pear.service.AccountService;
+import org.mingle.pear.util.DeleteStatus;
 import org.mingle.pear.util.Sex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,7 +96,7 @@ public class AccountController {
 		}
 		uiModel.asMap().clear();
 		accountService.merge(account);
-		return "redirect:/accounts/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
+		return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
 	}
 
 	@RequestMapping(value = "/update/{id}", produces = "text/html")
@@ -105,15 +106,20 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "text/html")
-	public String delete(@PathVariable("id") Long id,
+	public DeleteStatus delete(@PathVariable("id") Long id,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			Model uiModel) {
-		accountService.remove(id);
-		uiModel.asMap().clear();
-		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-		return "redirect:/accounts/list";
+		try {
+			accountService.remove(id);
+			uiModel.asMap().clear();
+			uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+			uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+			return DeleteStatus.SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return DeleteStatus.FAIL;
+		}
 	}
 
 	void populateEditForm(Model uiModel, Account account) {

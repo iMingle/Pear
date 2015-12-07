@@ -5,15 +5,58 @@
         <!-- <mapping-file>META-INF/class.xml</mapping-file>
         <mapping-file>META-INF/orm.xml</mapping-file> -->
         <class>org.mingle.pear.domain.Account</class>
+        
+        <exclude-unlisted-classes/>
+		<validation-mode>NONE</validation-mode>
+		<!-- 只有显式标注@Cacheable的对象才缓存 -->
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+		
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+			<!-- Basic Hibernate -->
+			 <!-- ID Generator -->
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
             <!-- value="create" to build a new database on each run; value="update" to modify an existing database; value="create-drop" means the same as "create" but also drops tables when Hibernate closes; value="validate" makes no changes to the database -->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
-            <property name="hibernate.connection.charSet" value="UTF-8"/>
-            <!-- Uncomment the following two properties for JBoss only -->
-            <!-- property name="hibernate.validator.apply_to_ddl" value="false" /-->
-            <!-- property name="hibernate.validator.autoregister_listeners" value="false" /-->
+			<property name="hibernate.connection.useUnicode" value="true"/>
+			<property name="hibernate.connection.charSet" value="UTF-8"/>
+			<!-- <property name="hibernate.connection.release_mode" value="after_transaction"/> -->
+			<property name="hibernate.connection.release_mode" value="on_close"/>
+			<!-- Fetch Config -->
+			<property name="hibernate.bytecode.use_reflection_optimizer" value="true"/>
+			<property name="hibernate.jdbc.use_scrollable_resultset" value="false"/>
+			<property name="hibernate.jdbc.use_streams_for_binary" value="true"/>
+			<property name="hibernate.jdbc.fetch_size" value="300"/>
+			<!-- 与分页数保持一致 -->
+			<property name="hibernate.jdbc.batch_size" value="20"/>
+			<property name="hibernate.max_fetch_depth" value="3"/>
+			
+			<!-- Cache -->
+			<property name="hibernate.cache.use_query_cache" value="true"/>
+			<property name="hibernate.cache.default_cache_concurrency_strategy" value="read-write"/>
+			<property name="hibernate.cache.use_second_level_cache" value="true"/>
+			<property name="hibernate.generate_statistics" value="${hibernate.debug}"/>
+			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
+			<property name="hibernate.cache.provider_configuration_file_resource_path" value="ehcache.xml"/>
+			<property name="hibernate.cache.use_structured_entries" value="${hibernate.debug}"/>
+			
+			<!-- Hibernate Search -->
+			<property name="hibernate.search.lucene_version" value="LUCENE_5_3_1"/>
+			<property name="hibernate.search.autoregister_listeners" value="true"/>
+			<property name="hibernate.search.default.indexmanager" value="near-real-time"/>
+			<property name="hibernate.search.default.indexmanager" value="directory-based"/>
+			<property name="hibernate.search.default.directory_provider" value="filesystem"/>
+			<property name="hibernate.search.default.indexBase" value="lucene/search"/>
+			<property name="hibernate.search.worker.execution" value="async"/>
+			<property name="hibernate.search.worker.thread_pool.size" value="3"/>
+			
+			<!-- DEBUG Hibernate -->
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.generate_statistics" value="true"/>
+			<property name="hibernate.use_sql_comments" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -1,17 +1,18 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	lang="en">
+	lang="zh-CN">
 <head>
 
 <title>Pear</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script th:src="@{/scripts/jquery/jquery-2.1.4.js}"></script>
 </head>
 
 <body>
 	<div>
 		<h1>Account List</h1>
-		<button><a href="create.html" th:href="@{/accounts/create}"><span th:text="#{button.create}">Create</span></a></button>
+		<div><a href="create.html" th:href="@{/accounts/create}"><span th:text="#{button.create}">Create</span></a></div>
 		<table border="1">
 			<thead>
 				<tr>
@@ -25,9 +26,9 @@
 			</thead>
 			<tbody>
 				<tr th:each="account : ${accounts}" th:class="${accountStat.odd} ? 'odd'">
-					<td th:text="*{account.name}">Mingle</td>
+					<td><a href="show.html" th:href="@{'/accounts/show/' + *{account.id}}"><span th:text="*{account.name}">Mingle</span></a></td>
 					<td th:text="*{account.age}">25</td>
-					<td th:text="((*{account.sex} == 'MAN') ? 'Man' : ((*{account.sex} == 'WOMAN') ? 'Woman' : 'Intersex'))">Man</td>
+					<td th:text="*{account.sex}">Man</td>
 					<td th:text="*{account.email}">jinminglei@yeah.net</td>
 					<td><a href="update.html" th:href="@{'/accounts/update/' + *{account.id}}"><span th:text="#{button.update}">Update</span></a></td>
 					<td><a href="list.html" th:href="@{'/accounts/delete/' + *{account.id}}" data-method="delete"><span th:text="#{button.delete}">Delete</span></a></td>
@@ -37,3 +38,25 @@
 	</div>
 </body>
 </html>
+
+<script>
+$(function() {
+	$("body a").each(function(index, element) {
+		var method;
+		if (method = $(element).data("method"))
+			$(this).on("click", function(event) {
+				$.ajax({
+					url: $(this).attr("href"),
+					type: method,
+					success: function(status) {
+						console.info(status);
+					},
+					error: function(status) {
+						console.info(status);
+					}
+				});
+				event.preventDefault();
+			});
+	});
+});
+</script>

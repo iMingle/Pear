@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	lang="en">
+	lang="zh-CN">
 <head>
 
 <title>Pear</title>
@@ -12,6 +12,9 @@
 	<div>
 		<h1>Account Update</h1>
 		<form action="list.html" th:action="@{/accounts/update}" th:object="${account}" method="post">
+			<input type="hidden" name="_method" value="put"/>
+			<input type="hidden" name="id" th:field="*{id}"/>
+			<input type="hidden" name="version" th:field="*{version}"/>
 			<div>
 				<label for="name">Name:</label>
 				<input type="text" name="name" id="name" th:field="*{name}"/>
