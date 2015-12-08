@@ -5,11 +5,20 @@
 <head>
 
 <title>Pear</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script th:src="@{/scripts/jquery/jquery-2.1.4.js}"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta charset="utf-8"/>
+
+<script src="../../../scripts/jquery/jquery-2.1.4.js" th:src="@{/scripts/jquery/jquery-2.1.4.js}"></script>
+<script src="../../../scripts/jquery/noty/jquery.noty-2.3.7.js" th:src="@{/scripts/jquery/noty/jquery.noty-2.3.7.js}"></script>
+<script src="../../../scripts/pear/noty.util.js" th:src="@{/scripts/pear/noty.util.js}"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/animate.css" th:href="@{/styles/jquery/noty/animate.css}"/>
+<link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/buttons.css" th:href="@{/styles/jquery/noty/buttons.css}"/>
+<link rel="stylesheet" type="text/css" href="../../../styles/font-awesome/css/font-awesome.css" th:href="@{/styles/font-awesome/css/font-awesome.css}"/>
 </head>
 
 <body>
+	<span th:include="@{templates/scripts} :: public"></span>
 	<div>
 		<h1>Account List</h1>
 		<div><a href="create.html" th:href="@{/accounts/create}"><span th:text="#{button.create}">Create</span></a></div>
@@ -35,6 +44,12 @@
 				</tr>
 			</tbody>
 		</table>
+		<div>
+			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=5)}">First</a></span>&nbsp;
+			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} - 1 < 1 ? 1 : ${T(Integer).parseInt(param.page)} - 1,size=5)}">Prev</a></span>&nbsp;
+			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} + 1 > ${maxPages} ? ${maxPages} : ${T(Integer).parseInt(param.page)} + 1,size=5)}">Next</a></span>&nbsp;
+			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=${maxPages},size=5)}">End</a></span>
+		</div>
 	</div>
 </body>
 </html>
@@ -45,14 +60,33 @@ $(function() {
 		var method;
 		if (method = $(element).data("method"))
 			$(this).on("click", function(event) {
+				var _this = $(this);
 				$.ajax({
 					url: $(this).attr("href"),
 					type: method,
-					success: function(status) {
-						console.info(status);
+					dataType: "json",
+					success: function(status, textStatus, jqXHR) {
+						var type = NotyUtil.type.SUCCESS;
+						if (status === Constants.DeleteStatus.SUCCESS) {
+							type = NotyUtil.type.SUCCESS;
+							_this.parentsUntil("tbody").empty();
+						} else if (status === Constants.DeleteStatus.FAIL) {
+							type = NotyUtil.type.ERROR;
+						}
+						NotyUtil.generate(type, status, "top", "relax", {
+							open: "animated flipInX", // Animate.css class names
+							close: "animated flipOutX", // Animate.css class names
+							easing: "swing", // easing
+							speed: 500 // opening &amp; closing animation speed
+					    });
 					},
-					error: function(status) {
-						console.info(status);
+					error: function(jqXHR, textStatus, errorThrown) {
+						NotyUtil.generate("error", errorThrown, "top", "relax", {
+							open: "animated flipInX",
+							close: "animated flipOutX",
+							easing: "swing",
+							speed: 500
+					    });
 					}
 				});
 				event.preventDefault();

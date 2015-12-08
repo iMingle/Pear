@@ -3,13 +3,13 @@
 	xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head>
 <title><div th:text="#{welcome_h3(#application_name)}"></div></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
 </head>
 
 <body class="tundra spring">
 	<div id="wrapper">
-		<tiles:insertAttribute name="header" ignore="true" />
 		<div th:include="header :: body"></div>
 		<div th:include="menu :: #menu"></div>
 		<div id="main">

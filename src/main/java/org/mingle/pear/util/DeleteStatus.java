@@ -10,5 +10,5 @@ package org.mingle.pear.util;
  * @author Mingle
  */
 public enum DeleteStatus {
-	SUCCESS, FAIL
+	SUCCESS, ERROR
 }

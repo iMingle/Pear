@@ -1,6 +1,7 @@
 package org.mingle.pear.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import com.google.common.collect.Maps;
 
 @RequestMapping("/accounts")
 @Controller
@@ -37,25 +41,29 @@ public class AccountController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Account account, BindingResult bindingResult,
-			Model uiModel, HttpServletRequest httpServletRequest) {
+			Model model, HttpServletRequest request) {
+		Map<String, Object> fields = Maps.newHashMap();
+		fields.put("name", account.getName());
+		if (accountService.isExist(Account.class, fields))
+			bindingResult.rejectValue("name", "", "This name already exists");
 		if (bindingResult.hasErrors()) {
-			populateEditForm(uiModel, account);
+			model.addAttribute("account", account);
 			return "accounts/create";
 		}
-		uiModel.asMap().clear();
+		model.asMap().clear();
 		accountService.persist(account);
-		return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
+		return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), request);
 	}
 
 	@RequestMapping(value = "/create", produces = "text/html")
 	public String createForm(Model uiModel) {
-		populateEditForm(uiModel, new Account());
+		uiModel.addAttribute("account", new Account());
 		return "accounts/create";
 	}
 
 	@RequestMapping(value = "/show/{id}", produces = "text/html")
-	public String show(@PathVariable("id") Long id, Model uiModel) {
-		uiModel.addAttribute("account", accountService.find(id));
+	public String show(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("account", accountService.find(id));
 		return "accounts/show";
 	}
 
@@ -65,7 +73,7 @@ public class AccountController {
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
 			@RequestParam(value = "sortOrder", required = false) SortOrder sortOrder,
-			Model uiModel) {
+			Model model) {
 		QueryTemplate qt = QueryTemplate.create(QueryType.JQL, "SELECT t FROM Account t");
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
@@ -74,61 +82,56 @@ public class AccountController {
 			qt.setFirstResult(firstResult);
 			qt.setMaxResults(sizeNo);
 			qt.append(QueryTemplate.buildOrderBy("t", sortFieldName, sortOrder));
-			uiModel.addAttribute("accounts", accountService.findDomains(qt));
-			qt = QueryTemplate.create(QueryType.JQL, "SELECT t FROM Account t");
-			int numberOfPages = accountService.findCount(qt).intValue() / sizeNo;
-			uiModel.addAttribute("maxPages", ((numberOfPages > numberOfPages || numberOfPages == 0.0) ? numberOfPages + 1
+			model.addAttribute("accounts", accountService.findDomains(qt));
+			qt = QueryTemplate.create(QueryType.JQL, "SELECT COUNT(t.id) FROM Account t");
+			float numberOfPages = (float) accountService.findCount(qt).intValue() / sizeNo;
+			model.addAttribute("maxPages", (int) ((numberOfPages > (int) numberOfPages || numberOfPages == 0.0) ? numberOfPages + 1
 							: numberOfPages));
 		} else {
-			qt = QueryTemplate.create(QueryType.JQL, "SELECT t FROM Account t");
 			qt.append(QueryTemplate.buildOrderBy("t", sortFieldName, sortOrder));
-			uiModel.addAttribute("accounts", accountService.findDomains(qt));
+			model.addAttribute("accounts", accountService.findDomains(qt));
 		}
 		return "accounts/list";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.PUT, produces = "text/html")
 	public String update(@Valid Account account, BindingResult bindingResult,
-			Model uiModel, HttpServletRequest httpServletRequest) {
+			Model model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
-			populateEditForm(uiModel, account);
+			model.addAttribute("account", account);
 			return "accounts/update";
 		}
-		uiModel.asMap().clear();
+		model.asMap().clear();
 		accountService.merge(account);
-		return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), httpServletRequest);
+		return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), request);
 	}
 
 	@RequestMapping(value = "/update/{id}", produces = "text/html")
-	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-		populateEditForm(uiModel, accountService.find(id));
+	public String updateForm(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("account", accountService.find(id));
 		return "accounts/update";
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "text/html")
-	public DeleteStatus delete(@PathVariable("id") Long id,
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json; charset=UTF-8")
+	public @ResponseBody DeleteStatus delete(@PathVariable("id") Long id,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
-			Model uiModel) {
+			Model model) {
 		try {
 			accountService.remove(id);
-			uiModel.asMap().clear();
-			uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-			uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+			model.asMap().clear();
+			model.addAttribute("page", (page == null) ? "1" : page.toString());
+			model.addAttribute("size", (size == null) ? "5" : size.toString());
 			return DeleteStatus.SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return DeleteStatus.FAIL;
+			return DeleteStatus.ERROR;
 		}
 	}
 
-	void populateEditForm(Model uiModel, Account account) {
-		uiModel.addAttribute("account", account);
-	}
-
-	String encodeUrlPathSegment(String pathSegment,
-			HttpServletRequest httpServletRequest) {
-		String enc = httpServletRequest.getCharacterEncoding();
+	private String encodeUrlPathSegment(String pathSegment,
+			HttpServletRequest request) {
+		String enc = request.getCharacterEncoding();
 		if (enc == null)
 			enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
 		

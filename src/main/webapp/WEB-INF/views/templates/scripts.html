@@ -2,20 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head>
-
-<title>Pear</title>
+<title><div th:text="#{welcome_h3(#application_name)}"></div></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
 </head>
 
 <body>
-	<div>
-		<h1>Logout</h1>
-		<p>You have successfully logged out.</p>
-		<hr />
-		<p>
-			<a href="#" th:href="@{/}">Continue</a>
-		</p>
+	<!-- For public use -->
+	<div th:fragment="public">
+		<script src="../../../scripts/pear/constants.js" th:src="@{/scripts/pear/constants.js}"></script>
 	</div>
 </body>
 </html>

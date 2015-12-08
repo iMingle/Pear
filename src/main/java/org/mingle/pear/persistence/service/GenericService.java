@@ -135,6 +135,14 @@ public interface GenericService<E extends Identifiable<ID>, ID extends Serializa
 	 * @return 对象是否存在
 	 */
 	boolean isExist(ID id);
+	
+	/**
+	 * 是否存在此对象
+	 * 
+	 * @param fields 字段名称和值
+	 * @return
+	 */
+	boolean isExist(Class<?> resultClass, Map<String, Object> fields);
 
 	/**
 	 * 状态合并
