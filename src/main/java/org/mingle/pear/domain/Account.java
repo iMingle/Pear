@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2016, Mingle. All rights reserved.
+ */
 package org.mingle.pear.domain;
 
 import javax.persistence.Column;
@@ -20,6 +23,12 @@ import lombok.EqualsAndHashCode;
 import org.mingle.pear.persistence.domain.BaseDomain;
 import org.mingle.pear.util.Sex;
 
+/**
+ * 账户
+ * 
+ * @since 1.8
+ * @author Mingle
+ */
 @Entity
 @Table(name = "t_account")
 @EqualsAndHashCode(callSuper = false)

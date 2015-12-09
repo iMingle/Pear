@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2016, Mingle. All rights reserved.
+ */
 package org.mingle.pear.config;
 
 import java.util.ArrayList;

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Mingle. All rights reserved.
+ * Copyright (c) 2016, Mingle. All rights reserved.
  */
 package org.mingle.pear.dao;
 

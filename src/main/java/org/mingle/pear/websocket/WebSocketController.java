@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2016, Mingle. All rights reserved.
+ */
 package org.mingle.pear.websocket;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;

@@ -1,4 +1,8 @@
+/**
+ * Copyright (c) 2016, Mingle. All rights reserved.
+ */
 package org.mingle.pear.web;
+
 import javax.inject.Inject;
 
 import org.mingle.pear.properties.PropertiesMail;
