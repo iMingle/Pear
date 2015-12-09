@@ -12,7 +12,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
 
 /**
-* 异步任务配置
+ * 异步任务配置
  * 
  * @since 1.8
  * @author Mingle

@@ -1,14 +1,16 @@
 package org.mingle.pear.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.EnableMBeanExport;
 
 /**
- * AOP配置
+ * JMX配置
  * 
  * @since 1.8
  * @author Mingle
  */
 @Configuration
-@EnableAspectJAutoProxy
-public class AspectJConfig {}
+@EnableMBeanExport
+public class MBeanConfig {
+	
+}

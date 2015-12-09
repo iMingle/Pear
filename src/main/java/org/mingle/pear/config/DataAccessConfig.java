@@ -11,6 +11,11 @@ import org.mingle.pear.properties.PropertiesDatabase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedOperationParameter;
+import org.springframework.jmx.export.annotation.ManagedOperationParameters;
+import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -25,10 +30,25 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages="org.mingle.pear")
+@ComponentScan(basePackages = "org.mingle.pear")
+@ManagedResource(description = "DataSource Manager.")
 public class DataAccessConfig {
 	@Inject
 	private PropertiesDatabase propDatabase;
+	private int initialSize = 5;
+
+	@ManagedAttribute(description = "The initialSize of connection pool.")
+	public int getInitialSize() {
+		return initialSize;
+	}
+
+	@ManagedOperation(description = "Change database connection pool initialSize.")
+	@ManagedOperationParameters({
+		@ManagedOperationParameter(name = "initialSize", description = "connection pool initialSize.")
+	})
+	public void setInitialSize(int initialSize) {
+		this.initialSize = initialSize;
+	}
 
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
@@ -54,7 +74,7 @@ public class DataAccessConfig {
 		dataSource.setUrl(propDatabase.getUrl());
 		dataSource.setUsername(propDatabase.getUsername());
 		dataSource.setPassword(propDatabase.getPassword());
-		dataSource.setInitialSize(5);
+		dataSource.setInitialSize(getInitialSize());
 		dataSource.setTestOnBorrow(true);
 		dataSource.setTestOnReturn(true);
 		dataSource.setTestWhileIdle(true);
