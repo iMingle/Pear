@@ -348,12 +348,13 @@ public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
 	}
 	
 	@Override
-	public boolean isExist(Class<?> resultClass, Map<String, Object> fields) {
+	public boolean isExist(Class<?> resultClass, Map<String, Object> parameters) {
 		QueryTemplate qt = QueryTemplate.create(QueryType.JQL, "SELECT t FROM " + resultClass.getSimpleName() + " t");
-		if (fields.size() != 0)
+		if (parameters.size() != 0)
 			qt.append(" WHERE 1 = 1");
-		for (Entry<String, Object> field : fields.entrySet()) {
-			qt.append(" AND t." + field.getKey() + "='" + field.getValue() + "'");
+		for (Entry<String, Object> parameter : parameters.entrySet()) {
+			qt.append(" AND t." + parameter.getKey() + " = :" + parameter.getKey());
+			qt.addParameter(parameter.getKey(), parameter.getValue());
 		}
 		return findFirstDomain(qt) != null;
 	}

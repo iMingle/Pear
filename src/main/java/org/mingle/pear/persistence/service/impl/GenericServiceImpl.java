@@ -90,8 +90,8 @@ public abstract class GenericServiceImpl<E extends Identifiable<ID>, ID extends 
 	}
 	
 	@Override
-	public boolean isExist(Class<?> resultClass, Map<String, Object> fields) {
-		return getDao().isExist(resultClass, fields);
+	public boolean isExist(Class<?> resultClass, Map<String, Object> parameters) {
+		return getDao().isExist(resultClass, parameters);
 	}
 
 	@Override

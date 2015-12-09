@@ -139,10 +139,10 @@ public interface GenericService<E extends Identifiable<ID>, ID extends Serializa
 	/**
 	 * 是否存在此对象
 	 * 
-	 * @param fields 字段名称和值
+	 * @param parameters 字段名称和值
 	 * @return
 	 */
-	boolean isExist(Class<?> resultClass, Map<String, Object> fields);
+	boolean isExist(Class<?> resultClass, Map<String, Object> parameters);
 
 	/**
 	 * 状态合并

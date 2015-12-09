@@ -12,6 +12,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -44,6 +45,7 @@ public @Data class Account extends BaseDomain<Long> {
 	private int age;
 
 	@Column(name = "email", length = 50)
+	@Pattern(regexp = "[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Invalid email address.")
 	private String email;
 	
 	@Column(name = "sex", length = 10)
