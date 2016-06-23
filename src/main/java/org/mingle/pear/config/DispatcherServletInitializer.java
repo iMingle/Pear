@@ -10,6 +10,7 @@ import javax.servlet.SessionCookieConfig;
 
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -52,7 +53,8 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 	protected Filter[] getServletFilters() {
 		return new Filter[] {
 			new HiddenHttpMethodFilter(),
-			new OpenEntityManagerInViewFilter()
+			new OpenEntityManagerInViewFilter(),
+			new ResourceUrlEncodingFilter()
 		};
 	}
 

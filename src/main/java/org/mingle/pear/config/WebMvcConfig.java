@@ -30,6 +30,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.resource.ContentVersionStrategy;
+import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.servlet.theme.CookieThemeResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 
@@ -52,10 +54,17 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-		registry.addResourceHandler("/images/**").addResourceLocations("/images/");
-		registry.addResourceHandler("/styles/**").addResourceLocations("/styles/");
-		registry.addResourceHandler("/scripts/**").addResourceLocations("/scripts/");
+	    VersionResourceResolver versionResourceResolver = new VersionResourceResolver()
+            .addVersionStrategy(new ContentVersionStrategy(), "/**");
+	    
+		registry.addResourceHandler("/selenium/**").addResourceLocations("/selenium/")
+	        .setCachePeriod(60 * 60).resourceChain(true).addResolver(versionResourceResolver);
+		registry.addResourceHandler("/images/**").addResourceLocations("/images/")
+	        .setCachePeriod(60 * 60).resourceChain(true).addResolver(versionResourceResolver);
+		registry.addResourceHandler("/styles/**").addResourceLocations("/styles/")
+	        .setCachePeriod(60 * 60).resourceChain(true).addResolver(versionResourceResolver);
+		registry.addResourceHandler("/scripts/**").addResourceLocations("/scripts/")
+	        .setCachePeriod(60 * 60).resourceChain(true).addResolver(versionResourceResolver);
 	}
 
 	@Override
