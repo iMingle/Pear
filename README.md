@@ -1,2 +1,2 @@
 # Pear
-Spring Roo
+Spring Java Config & JPA & WebSocket & Thymeleaf
