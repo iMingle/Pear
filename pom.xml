@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.2.RELEASE</version>
+    </parent>
+
     <groupId>org.mingle.pear</groupId>
     <artifactId>pear</artifactId>
-    <packaging>war</packaging>
     <version>0.1.0.BUILD-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>pear-web</module>
+    </modules>
+
     <name>pear</name>
-    
+
     <properties>
         <spring-framework-version>4.2.3.RELEASE</spring-framework-version>
-    	<spring-security.version>4.0.3.RELEASE</spring-security.version>
+        <spring-security.version>4.0.3.RELEASE</spring-security.version>
         <aspectj.version>1.8.7</aspectj.version>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,15 +62,15 @@
         <jasypt.version>1.9.2</jasypt.version>
         <javax.mail.version>1.5.4</javax.mail.version>
         <thymeleaf-version>3.0.0.BETA01</thymeleaf-version>
-		<thymeleaf-extras-tiles2-version>2.1.1.RELEASE</thymeleaf-extras-tiles2-version>
-		<thymeleaf-extras-springsecurity4-version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4-version>
-		<thymeleaf-extras-conditionalcomments-version>2.1.1.RELEASE</thymeleaf-extras-conditionalcomments-version>
-		<reactor-version>2.0.7.RELEASE</reactor-version>
-		<netty-version>4.0.33.Final</netty-version>
-		<lucene.version>5.3.1</lucene.version>
-		<javassist.version>3.18.2-GA</javassist.version>
+        <thymeleaf-extras-tiles2-version>2.1.1.RELEASE</thymeleaf-extras-tiles2-version>
+        <thymeleaf-extras-springsecurity4-version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4-version>
+        <thymeleaf-extras-conditionalcomments-version>2.1.1.RELEASE</thymeleaf-extras-conditionalcomments-version>
+        <reactor-version>2.0.7.RELEASE</reactor-version>
+        <netty-version>4.0.33.Final</netty-version>
+        <lucene.version>5.3.1</lucene.version>
+        <javassist.version>3.18.2-GA</javassist.version>
     </properties>
-    
+
     <repositories>
         <repository>
             <id>spring-maven-release</id>
@@ -69,7 +83,7 @@
             <url>http://maven.springframework.org/milestone</url>
         </repository>
     </repositories>
-    
+
     <pluginRepositories>
         <pluginRepository>
             <id>spring-maven-release</id>
@@ -83,607 +97,530 @@
         </pluginRepository>
     </pluginRepositories>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
-				<version>${spring-framework-version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-    <dependencies>
-        <!-- Spring Core -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <!-- Spring TestContext Framework -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        
-        <!-- Spring Context -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        
-        <!-- Spring Context Support -->
-        <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-		</dependency>
-        
-        <!-- Spring AOP -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        
-        <!-- Spring Aspects -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-        </dependency>
-        
-        <!-- Spring JDBC -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
-        
-        <!-- Spring Object/Relational Mapping -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-        </dependency>
-        
-        <!-- Spring Web MVC -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        
-        <!-- Spring WebSocket -->
-        <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-websocket</artifactId>
-		</dependency>
-		
-		<!-- Spring Messaging -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-messaging</artifactId>
-		</dependency>
-		
-        <!-- spring-security-core -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring-security.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <!-- spring-security-config -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring-security.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <!-- spring-security-web -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-        
-        <!-- spring-security-taglibs -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-        
-        <!-- The Apache Log4j Implementation -->
-        <dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		
-		<!-- The Apache Log4j API -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		
-		<!-- The Apache Log4j SLF4J API binding to Log4j 2 Core -->
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-slf4j-impl</artifactId>
-		    <version>${log4j.version}</version>
-		</dependency>
-		
-		<!-- This package provides additional appenders, filters and other capabilities 
-		for version 1.2 of Apache log4j™. Several of these were backported from the abandoned 
-		Apache log4j 1.3 development effort. -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>apache-log4j-extras</artifactId>
-			<version>${apache-log4j-extras.version}</version>
-		</dependency>
-		
-		<!-- The slf4j API -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        
-        <!-- The runtime needed to execute a program using AspectJ -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        
-        <!-- The AspectJ weaver introduces advices to java classes -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        
-        <!-- Lightweight Java SQL Database Engine -->
-		<dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>${hsqldb.version}</version>
-        </dependency>
-        
-        <!-- MySQL JDBC Type 4 driver -->
-        <dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.version}</version>
-		</dependency>
-        
-        <!-- The core O/RM functionality as provided by Hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.javassist</groupId>
-					<artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <!-- Hibernate O/RM implementation of the JPA specification -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>dom4j</groupId>
-                    <artifactId>dom4j</artifactId>
-                </exclusion>
-                <exclusion>
-            		<groupId>org.javassist</groupId>
-					<artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <!-- Hibernate Search integration with Hibernate Core -->
-        <dependency>
-		     <groupId>org.hibernate</groupId>
-		     <artifactId>hibernate-search</artifactId>
-		     <version>${hibernate-search.version}</version>
-		</dependency>
-		
-		<!-- Integration for Ehcache into Hibernate as a second-level caching service -->
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-ehcache</artifactId>
-		    <version>${hibernate.version}</version>
-		    <exclusions>
-		    	<exclusion>
-		    		<groupId>net.sf.ehcache</groupId>
-					<artifactId>ehcache-core</artifactId>
-		    	</exclusion>
-		    </exclusions>
-		</dependency>
-        
-        <!-- Hibernate definition of the Java Persistence 2.0 (JSR 317) API. -->
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>${hibernate-jpa.version}</version>
-        </dependency>
-        
-        <!-- Hibernate's Bean Validation (JSR-303) reference implementation. -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
-        </dependency>
-        
-        <!-- Bean Validation API -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>${validation.version}</version>
-        </dependency>
-        
-        <!-- The javax.inject API -->
-        <dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>${inject.version}</version>
-	    </dependency>
-	    
-	    <!-- Java Servlet API -->
-        <dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>${servlet.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!-- JavaServer Pages(TM) API -->
-		<dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>${jsp.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <!-- JavaServer Pages(TM) Standard Tag Library -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
-        </dependency>
-        
-        <!-- JavaMail API -->
-        <dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-			<version>${javax.mail.version}</version>
-		</dependency>
-		
-		<!-- JavaMail API -->
-		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>${javax.mail.version}</version>
-		</dependency>
-        
-        <!-- Date and time library to replace JDK date handling -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda.version}</version>
-        </dependency>
-        
-        <!-- XML/XHTML/HTML5 template engine for Java -->
-        <dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf</artifactId>
-			<version>${thymeleaf-version}</version>
-			<exclusions>
-				<exclusion>
-            		<groupId>javassist</groupId>
-					<artifactId>javassist</artifactId>
-                </exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf-spring4</artifactId>
-			<version>${thymeleaf-version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-			<version>${thymeleaf-extras-tiles2-version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			<version>${thymeleaf-extras-springsecurity4-version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-conditionalcomments</artifactId>
-			<version>${thymeleaf-extras-conditionalcomments-version}</version>
-		</dependency>
-        
-	    <!-- Tiles Core Library, including basic implementation of the APIs. -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-core</artifactId>
-			<version>${tiles.version}</version>
-		</dependency>
-		
-		<!-- Tiles APIs, containing interfaces and classes to interact with Tiles. -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-api</artifactId>
-			<version>${tiles.version}</version>
-		</dependency>
-		
-		<!-- Common code for integration of Tiles for different templating technologies. -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-template</artifactId>
-			<version>${tiles.version}</version>
-		</dependency>
-		
-		<!-- Tiles servlet support, to enable use of Tiles inside a Servlet environment. -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-servlet</artifactId>
-			<version>${tiles.version}</version>
-		</dependency>
-		
-		<!-- Tiles JSP support: Classes and tag libraries to use Tiles in a JSP environment. -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-			<version>${tiles.version}</version>
-		</dependency>
-	    
-	    <!-- Guava is a suite of core and expanded libraries that include utility classes, 
-	    google's collections, io classes, and much much more. Guava has only one code 
-	    dependency - javax.annotation, per the JSR-305 spec. -->
-	    <dependency>
-	        <groupId>com.google.guava</groupId>
-	        <artifactId>guava</artifactId>
-	        <version>${guava.version}</version>
-	    </dependency>
-	    
-	    <!-- General data-binding functionality for Jackson: works on core streaming API -->
-	    <dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		
-		<!-- Core annotations used for value types, used by Jackson data binding package -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		
-		<!-- Core Jackson abstractions, basic JSON streaming API implementation -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		
-		<!-- 轻量级的json解析类库 -->
-		<dependency>
-            <groupId>net.sf.flexjson</groupId>
-            <artifactId>flexjson</artifactId>
-            <version>${flexjson.version}</version>
-        </dependency>
-        
-        <!-- 单元测试 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        
-		<!-- Mock objects library for java -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>${mockito.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<!-- Ehcache is an open source, standards-based cache used to boost performance, 
-		offload the database and simplify scalability. Ehcache is robust, 
-		proven and full-featured and this has made it the most widely-used Java-based cache. -->
-		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
-			<version>${ehcache.version}</version>
-		</dependency>
-		
-		<!-- This is the ehcache core module. Pair it with other modules for added functionality. -->
-		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache-core</artifactId>
-			<version>${ehcache-core.version}</version>
-		</dependency>
-		
-		<!-- Apache Commons DBCP software implements Database Connection Pooling -->
-		<dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-            <version>${commons-dbcp2.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-		<!-- Apache Commons Lang, a package of Java utility classes for the classes 
-		that are in java.lang's hierarchy, or are considered to be so standard as to 
-		justify existence in java.lang. -->
-		<dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-        
-		<!-- The Commons IO library contains utility classes, stream implementations, 
-		file filters, file comparators, endian transformation classes, and much more. -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
-		</dependency>
-		
-		<!-- The Apache Commons FileUpload component provides a simple yet 
-		flexible means of adding support for multipart file upload functionality 
-		to servlets and web applications. -->
-		<dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>${commons-fileupload.version}</version>
-        </dependency>
-        
-        <!-- Apache Commons Logging is a thin adapter allowing configurable 
-        bridging to other, well known logging systems. -->
-        <dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>${commons-logging.version}</version>
-		</dependency>
-		
-		<!-- Java library for tuples in Java -->
-		<dependency>
-			<groupId>org.javatuples</groupId>
-			<artifactId>javatuples</artifactId>
-			<version>${javatuples.version}</version>
-		</dependency>
-		
-		<!-- Spice up your java: Automatic Resource Management, automatic generation 
-		of getters, setters, equals, hashCode and toString, and more! -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-		</dependency>
-		
-		<!-- MapDB provides concurrent Maps, Sets and Queues backed by disk storage or off-heap memory. 
-		It is a fast, scalable and easy to use embedded Java database. -->
-		<dependency>
-			<groupId>org.mapdb</groupId>
-			<artifactId>mapdb</artifactId>
-			<version>${mapdb.version}</version>
-		</dependency>
-		
-		<!-- The ActiveMQ Message Broker and Client implementations -->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-core</artifactId>
-			<version>${activemq.version}</version>
-		</dependency>
-		
-		<!-- Java library which enables encryption in java apps with minimum effort. -->
-		<dependency>
-			<groupId>org.jasypt</groupId>
-			<artifactId>jasypt</artifactId>
-			<version>${jasypt.version}</version>
-		</dependency>
-		
-		<!-- Reactor is a foundational library for building reactive fast-data applications on the JVM. 
-    	It is an implementation of the Reactive Streams Specification. 
-    	You can use Reactor to power an application that has a low tolerance for latency and demands 
-    	extremely high throughput. -->
-    	<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-net</artifactId>
-			<version>${reactor-version}</version>
-		</dependency>
-		<!-- Netty is a NIO client server framework which enables quick and easy development of 
-		network applications such as protocol servers and clients. It greatly simplifies and 
-		streamlines network programming such as TCP and UDP socket server. -->
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>${netty-version}</version>
-		</dependency>
-		
-		<!-- 全文检索 -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>${lucene.version}</version>
-		</dependency>
-		
-		<!-- 词法分析和语言处理 -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-common</artifactId>
-			<version>${lucene.version}</version>
-		</dependency>
-		
-		<!-- 对查询语句进行语法分析 -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>${lucene.version}</version>
-		</dependency>
-		
-		<!-- 中文分词 -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-smartcn</artifactId>
-			<version>${lucene.version}</version>
-		</dependency>
-		
-		<!-- Javassist (JAVA programming ASSISTant) makes Java bytecode manipulation simple. 
-		It is a class library for editing bytecodes in Java. -->
-		<dependency>
-			<groupId>org.javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>${javassist.version}</version>
-		</dependency>
-    </dependencies>
-    
+            <!-- spring-security-core -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring-security.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- spring-security-config -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring-security.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- spring-security-web -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+            <!-- spring-security-taglibs -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-taglibs</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+            <!-- The Apache Log4j Implementation -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!-- The Apache Log4j API -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!-- The Apache Log4j SLF4J API binding to Log4j 2 Core -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!-- This package provides additional appenders, filters and other capabilities
+            for version 1.2 of Apache log4j™. Several of these were backported from the abandoned
+            Apache log4j 1.3 development effort. -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>apache-log4j-extras</artifactId>
+                <version>${apache-log4j-extras.version}</version>
+            </dependency>
+
+            <!-- The slf4j API -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- The runtime needed to execute a program using AspectJ -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <!-- The AspectJ weaver introduces advices to java classes -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <!-- Lightweight Java SQL Database Engine -->
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${hsqldb.version}</version>
+            </dependency>
+
+            <!-- MySQL JDBC Type 4 driver -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <!-- The core O/RM functionality as provided by Hibernate -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Hibernate O/RM implementation of the JPA specification -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>cglib</groupId>
+                        <artifactId>cglib</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>dom4j</groupId>
+                        <artifactId>dom4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Hibernate Search integration with Hibernate Core -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-search</artifactId>
+                <version>${hibernate-search.version}</version>
+            </dependency>
+
+            <!-- Integration for Ehcache into Hibernate as a second-level caching service -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernate.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>net.sf.ehcache</groupId>
+                        <artifactId>ehcache-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Hibernate definition of the Java Persistence 2.0 (JSR 317) API. -->
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>${hibernate-jpa.version}</version>
+            </dependency>
+
+            <!-- Hibernate's Bean Validation (JSR-303) reference implementation. -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <!-- Bean Validation API -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation.version}</version>
+            </dependency>
+
+            <!-- The javax.inject API -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${inject.version}</version>
+            </dependency>
+
+            <!-- Java Servlet API -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- JavaServer Pages(TM) API -->
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>${jsp.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- JavaServer Pages(TM) Standard Tag Library -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
+
+            <!-- JavaMail API -->
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>javax.mail-api</artifactId>
+                <version>${javax.mail.version}</version>
+            </dependency>
+
+            <!-- JavaMail API -->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${javax.mail.version}</version>
+            </dependency>
+
+            <!-- Date and time library to replace JDK date handling -->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.version}</version>
+            </dependency>
+
+            <!-- XML/XHTML/HTML5 template engine for Java -->
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>${thymeleaf-version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf-spring4</artifactId>
+                <version>${thymeleaf-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.thymeleaf.extras</groupId>
+                <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
+                <version>${thymeleaf-extras-tiles2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.thymeleaf.extras</groupId>
+                <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+                <version>${thymeleaf-extras-springsecurity4-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.thymeleaf.extras</groupId>
+                <artifactId>thymeleaf-extras-conditionalcomments</artifactId>
+                <version>${thymeleaf-extras-conditionalcomments-version}</version>
+            </dependency>
+
+            <!-- Tiles Core Library, including basic implementation of the APIs. -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-core</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <!-- Tiles APIs, containing interfaces and classes to interact with Tiles. -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-api</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <!-- Common code for integration of Tiles for different templating technologies. -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-template</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <!-- Tiles servlet support, to enable use of Tiles inside a Servlet environment. -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-servlet</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <!-- Tiles JSP support: Classes and tag libraries to use Tiles in a JSP environment. -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-jsp</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <!-- Guava is a suite of core and expanded libraries that include utility classes,
+            google's collections, io classes, and much much more. Guava has only one code
+            dependency - javax.annotation, per the JSR-305 spec. -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- General data-binding functionality for Jackson: works on core streaming API -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- Core annotations used for value types, used by Jackson data binding package -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- Core Jackson abstractions, basic JSON streaming API implementation -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- 轻量级的json解析类库 -->
+            <dependency>
+                <groupId>net.sf.flexjson</groupId>
+                <artifactId>flexjson</artifactId>
+                <version>${flexjson.version}</version>
+            </dependency>
+
+            <!-- 单元测试 -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!-- Mock objects library for java -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+
+            <!-- Ehcache is an open source, standards-based cache used to boost performance,
+            offload the database and simplify scalability. Ehcache is robust,
+            proven and full-featured and this has made it the most widely-used Java-based cache. -->
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+
+            <!-- This is the ehcache core module. Pair it with other modules for added functionality. -->
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache-core</artifactId>
+                <version>${ehcache-core.version}</version>
+            </dependency>
+
+            <!-- Apache Commons DBCP software implements Database Connection Pooling -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>${commons-dbcp2.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Apache Commons Lang, a package of Java utility classes for the classes
+            that are in java.lang's hierarchy, or are considered to be so standard as to
+            justify existence in java.lang. -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!-- The Commons IO library contains utility classes, stream implementations,
+            file filters, file comparators, endian transformation classes, and much more. -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
+            <!-- The Apache Commons FileUpload component provides a simple yet
+            flexible means of adding support for multipart file upload functionality
+            to servlets and web applications. -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+
+            <!-- Apache Commons Logging is a thin adapter allowing configurable
+            bridging to other, well known logging systems. -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.version}</version>
+            </dependency>
+
+            <!-- Java library for tuples in Java -->
+            <dependency>
+                <groupId>org.javatuples</groupId>
+                <artifactId>javatuples</artifactId>
+                <version>${javatuples.version}</version>
+            </dependency>
+
+            <!-- Spice up your java: Automatic Resource Management, automatic generation
+            of getters, setters, equals, hashCode and toString, and more! -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- MapDB provides concurrent Maps, Sets and Queues backed by disk storage or off-heap memory.
+            It is a fast, scalable and easy to use embedded Java database. -->
+            <dependency>
+                <groupId>org.mapdb</groupId>
+                <artifactId>mapdb</artifactId>
+                <version>${mapdb.version}</version>
+            </dependency>
+
+            <!-- The ActiveMQ Message Broker and Client implementations -->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-core</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <!-- Java library which enables encryption in java apps with minimum effort. -->
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
+
+            <!-- Reactor is a foundational library for building reactive fast-data applications on the JVM.
+            It is an implementation of the Reactive Streams Specification.
+            You can use Reactor to power an application that has a low tolerance for latency and demands
+            extremely high throughput. -->
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-net</artifactId>
+                <version>${reactor-version}</version>
+            </dependency>
+            <!-- Netty is a NIO client server framework which enables quick and easy development of
+            network applications such as protocol servers and clients. It greatly simplifies and
+            streamlines network programming such as TCP and UDP socket server. -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty-version}</version>
+            </dependency>
+
+            <!-- 全文检索 -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-core</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <!-- 词法分析和语言处理 -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analyzers-common</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <!-- 对查询语句进行语法分析 -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-queryparser</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <!-- 中文分词 -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analyzers-smartcn</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <!-- Javassist (JAVA programming ASSISTant) makes Java bytecode manipulation simple.
+            It is a class library for editing bytecodes in Java. -->
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -691,8 +628,8 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -818,25 +755,15 @@
                 <version>2.2</version>
             </plugin>
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.6.v20151106</version>
-                <configuration>
-                    <webAppConfig>
-                        <contextPath>/${project.name}</contextPath>
-                    </webAppConfig>
-                </configuration>
-            </plugin>
-        <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>selenium-maven-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
-                <browser>*firefox</browser>
-                <suite>src/main/webapp/selenium/test-suite.xhtml</suite>
-                <results>${project.build.directory}/selenium.html</results>
-                <startURL>http://localhost:4444/</startURL>
-            </configuration>
+                    <browser>*firefox</browser>
+                    <suite>pear-web/src/main/webapp/selenium/test-suite.xhtml</suite>
+                    <results>${project.build.directory}/selenium.html</results>
+                    <startURL>http://localhost:4444/</startURL>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.seleniumhq.selenium</groupId>

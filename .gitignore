@@ -5,3 +5,6 @@ target/
 .project
 *.aj
 *.iml
+*.ipr
+*.iws
+out/
