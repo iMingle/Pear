@@ -5,10 +5,10 @@ package org.mingle.pear.util;
 
 /**
  * 性别
- * 
- * @since 1.8
+ *
  * @author Mingle
+ * @since 1.8
  */
 public enum Sex {
-	MAN, WOMAN, INTERSEX
+    MAN, WOMAN, INTERSEX
 }

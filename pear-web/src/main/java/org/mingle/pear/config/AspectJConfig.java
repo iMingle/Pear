@@ -8,9 +8,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * AOP配置
- * 
- * @since 1.8
+ *
  * @author Mingle
+ * @since 1.8
  */
 @Configuration
 @EnableAspectJAutoProxy

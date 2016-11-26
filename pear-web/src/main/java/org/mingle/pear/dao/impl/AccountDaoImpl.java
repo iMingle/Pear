@@ -9,17 +9,15 @@ import org.mingle.pear.persistence.dao.impl.GenericDaoImpl;
 import org.springframework.stereotype.Repository;
 
 /**
- * 
- * 
- * @since 1.8
  * @author Mingle
+ * @since 1.8
  */
 @Repository
 public class AccountDaoImpl extends GenericDaoImpl<Account, Long> implements
-		AccountDao {
+        AccountDao {
 
-	public AccountDaoImpl() {
-		super(Account.class);
-	}
+    public AccountDaoImpl() {
+        super(Account.class);
+    }
 
 }

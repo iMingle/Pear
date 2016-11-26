@@ -11,25 +11,25 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
 /**
  * websocket配置
- * 
- * @since 1.8
+ *
  * @author Mingle
+ * @since 1.8
  */
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
-	@Override
-	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker("/topic", "/queue");	// Simple Broker
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        config.enableSimpleBroker("/topic", "/queue");    // Simple Broker
 //		config.enableStompBrokerRelay("/topic", "/queue");	// Full-Featured Broker for Use ActiveMQ etc.
-		config.setApplicationDestinationPrefixes("/app");
-	}
+        config.setApplicationDestinationPrefixes("/app");
+    }
 
-	@Override
-	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/greeting").withSockJS()
-			.setHeartbeatTime(5 * 1000)
-			.setDisconnectDelay(3 * 1000);
-	}
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/greeting").withSockJS()
+                .setHeartbeatTime(5 * 1000)
+                .setDisconnectDelay(3 * 1000);
+    }
 }

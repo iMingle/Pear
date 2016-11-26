@@ -3,14 +3,13 @@
  */
 package org.mingle.pear.config;
 
-import java.util.EnumSet;
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
-
-import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
-import org.springframework.web.filter.CharacterEncodingFilter;
+import java.util.EnumSet;
 
 /**
  * ServletContext initializer for Spring Security specific configuration such as
@@ -18,13 +17,13 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  */
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
-	@Override
-	protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
-		FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
-	    characterEncodingFilter.setInitParameter("encoding", "UTF-8");
-	    characterEncodingFilter.setInitParameter("forceEncoding", "true");
-	    characterEncodingFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
-		super.beforeSpringSecurityFilterChain(servletContext);
-	}
-	
+    @Override
+    protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
+        FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
+        characterEncodingFilter.setInitParameter("encoding", "UTF-8");
+        characterEncodingFilter.setInitParameter("forceEncoding", "true");
+        characterEncodingFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
+        super.beforeSpringSecurityFilterChain(servletContext);
+    }
+
 }

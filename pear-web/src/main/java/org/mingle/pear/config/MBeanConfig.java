@@ -8,12 +8,12 @@ import org.springframework.context.annotation.EnableMBeanExport;
 
 /**
  * JMX配置
- * 
- * @since 1.8
+ *
  * @author Mingle
+ * @since 1.8
  */
 @Configuration
 @EnableMBeanExport
 public class MBeanConfig {
-	
+
 }

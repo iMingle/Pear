@@ -4,16 +4,14 @@
 package org.mingle.pear.aop;
 
 /**
- * 
- * 
- * @since 1.8
  * @author Mingle
+ * @since 1.8
  */
 public class NewFunctionImpl implements Comparable<NewFunction> {
 
-	@Override
-	public int compareTo(NewFunction o) {
-		return 0;
-	}
+    @Override
+    public int compareTo(NewFunction o) {
+        return 0;
+    }
 
 }

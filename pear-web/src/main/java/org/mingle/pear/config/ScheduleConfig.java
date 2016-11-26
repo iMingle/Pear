@@ -11,23 +11,23 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * 任务调度配置
- * 
- * @since 1.8
+ *
  * @author Mingle
+ * @since 1.8
  */
 @Configuration
 @EnableScheduling
 public class ScheduleConfig {
-	private static final Logger logger = LogManager.getLogger(ScheduleConfig.class.getName());
-	
-	@Scheduled(fixedDelay = 2000)
-	public void test() {
-		logger.debug("Schedule fixedDelay 2s");
-	}
-	
-	@Scheduled(cron = "0/3 * * * * ?")
-	public void test1() {
-		logger.debug("Schedule every 3s");
-	}
-	
+    private static final Logger logger = LogManager.getLogger(ScheduleConfig.class.getName());
+
+    @Scheduled(fixedDelay = 2000)
+    public void test() {
+        logger.debug("Schedule fixedDelay 2s");
+    }
+
+    @Scheduled(cron = "0/3 * * * * ?")
+    public void test1() {
+        logger.debug("Schedule every 3s");
+    }
+
 }

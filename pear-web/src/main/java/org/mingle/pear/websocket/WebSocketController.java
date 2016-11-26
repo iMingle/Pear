@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 public class WebSocketController {
 //	@Inject
 //	private SimpMessagingTemplate template;
-	
-	@MessageMapping("/greeting")
-	@SendTo("/topic/welcome")
-	public String welcome(String name) {
+
+    @MessageMapping("/greeting")
+    @SendTo("/topic/welcome")
+    public String welcome(String name) {
 //		this.template.convertAndSend("/topic/welcome", "Welcome " + name + "!");
-		return "Welcome " + name + "!";
-	}
-	
+        return "Welcome " + name + "!";
+    }
+
 }

@@ -7,10 +7,8 @@ import org.mingle.pear.domain.Account;
 import org.mingle.pear.persistence.service.GenericService;
 
 /**
- * 
- * 
- * @since 1.8
  * @author Mingle
+ * @since 1.8
  */
 public interface AccountService extends GenericService<Account, Long> {
 

@@ -13,25 +13,25 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /**
  * 邮件服务配置
- * 
- * @since 1.8
+ *
  * @author Mingle
+ * @since 1.8
  */
 @Configuration
 public class MailConfig {
-	@Inject
-	private PropertiesMail propMail;
-	
-	@Bean
-	public JavaMailSenderImpl mailSender() {
-		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost(propMail.getHost());
-		mailSender.setPort(propMail.getPort());
-		mailSender.setDefaultEncoding("UTF-8");
-		mailSender.setProtocol(propMail.getProtocol());
-		mailSender.setUsername(propMail.getUsername());
-		mailSender.setPassword(MailUtils.decryptPassword(propMail.getPassword()));
-		return mailSender;
-	}
+    @Inject
+    private PropertiesMail propMail;
+
+    @Bean
+    public JavaMailSenderImpl mailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost(propMail.getHost());
+        mailSender.setPort(propMail.getPort());
+        mailSender.setDefaultEncoding("UTF-8");
+        mailSender.setProtocol(propMail.getProtocol());
+        mailSender.setUsername(propMail.getUsername());
+        mailSender.setPassword(MailUtils.decryptPassword(propMail.getPassword()));
+        return mailSender;
+    }
 
 }

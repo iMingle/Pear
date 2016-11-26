@@ -3,13 +3,7 @@
  */
 package org.mingle.pear.web;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
+import com.google.common.collect.Maps;
 import org.mingle.pear.domain.Account;
 import org.mingle.pear.persistence.query.QueryTemplate;
 import org.mingle.pear.persistence.query.QueryType;
@@ -17,22 +11,23 @@ import org.mingle.pear.persistence.query.SortOrder;
 import org.mingle.pear.service.AccountService;
 import org.mingle.pear.util.DeleteStatus;
 import org.mingle.pear.util.Sex;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.google.common.collect.Maps;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 @RequestMapping("/accounts")
 @Controller
+@EnableAutoConfiguration
 public class AccountController {
     @Inject
     private AccountService accountService;

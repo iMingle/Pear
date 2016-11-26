@@ -10,14 +10,14 @@ import org.springframework.stereotype.Controller;
 
 /**
  * 应用程序配置
- * 
- * @since 1.8
+ *
  * @author Mingle
+ * @since 1.8
  */
 @Configuration
 @ComponentScan(basePackages = "org.mingle.pear", excludeFilters = {
-	@Filter(value = Controller.class)
+        @Filter(value = Controller.class)
 })
 public class ApplicationConfig {
-	
+
 }
