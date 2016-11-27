@@ -39,8 +39,8 @@ import java.util.Properties;
 @EnableWebMvc
 @Configuration
 @PropertySource({
-        "classpath:META-INF/database.properties",
-        "classpath:META-INF/mail.properties"
+        "classpath:prop/database.properties",
+        "classpath:prop/mail.properties"
 })
 @ComponentScan(basePackages = "org.mingle.pear", includeFilters = {
         @Filter(value = Controller.class)
@@ -132,7 +132,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames("WEB-INF/i18n/messages", "WEB-INF/i18n/application");
+        messageSource.setBasenames("resources/prop");
         messageSource.setFallbackToSystemLocale(false);
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setUseCodeAsDefaultMessage(true);

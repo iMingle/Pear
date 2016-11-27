@@ -14,8 +14,6 @@
         <exclude-unlisted-classes/>
 
         <validation-mode>NONE</validation-mode>
-        <!-- 只有显式标注@Cacheable的对象才缓存 -->
-        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
         <properties>
             <!-- Basic Hibernate -->

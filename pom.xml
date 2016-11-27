@@ -24,6 +24,8 @@
     <properties>
         <spring-framework-version>4.3.4.RELEASE</spring-framework-version>
         <spring-security.version>4.2.0.RELEASE</spring-security.version>
+        <mybatis.version>3.4.1</mybatis.version>
+        <mybatis-spring.version>1.3.0</mybatis-spring.version>
         <aspectj.version>1.8.7</aspectj.version>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -145,6 +147,45 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-taglibs</artifactId>
                 <version>${spring-security.version}</version>
+            </dependency>
+
+            <!-- The MyBatis SQL mapper framework makes it easier to use a relational database with object-oriented
+            applications. MyBatis couples objects with stored procedures or SQL statements using a XML descriptor
+            or annotations. Simplicity is the biggest advantage of the MyBatis data mapper over object relational
+            mapping tools. -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- An easy-to-use Spring bridge for MyBatis sql mapping framework. -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>mybatis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-jdbc</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-context</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-tx</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- The Apache Log4j Implementation -->
@@ -299,7 +340,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!-- JavaServer Pages(TM) API -->
@@ -307,7 +347,6 @@
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
                 <version>${jsp.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!-- JavaServer Pages(TM) Standard Tag Library -->

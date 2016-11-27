@@ -77,14 +77,14 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setPrefix("/views/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setCacheable(false);    // Default is true
         // Default is no TTL (only LRU would remove entries)
         templateResolver.setCacheTTLMs(60000L);
-        templateResolver.getCacheablePatternSpec().addPattern("/templates/*");
+        templateResolver.getCacheablePatternSpec().addPattern("/views/templates/*");
         return templateResolver;
     }
 
@@ -102,7 +102,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
      */
     public static TilesConfigurer tilesConfigurer() {
         TilesConfigurer configurer = new TilesConfigurer();
-        configurer.setDefinitions("/WEB-INF/layouts/layouts.xml", "/WEB-INF/layouts/**/views.xml");
+        configurer.setDefinitions("/views/layouts/layouts.xml", "/views/layouts/**/views.xml");
         configurer.setPreparerFactoryClass(SpringBeanPreparerFactory.class);
         return configurer;
     }
@@ -110,7 +110,7 @@ public class WebViewConfig extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setPrefix("/views/");
         resolver.setSuffix(".html");
         resolver.setOrder(3);
         return resolver;
