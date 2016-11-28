@@ -28,6 +28,11 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
         <!-- Spring Core -->
         <dependency>
             <groupId>org.springframework</groupId>
