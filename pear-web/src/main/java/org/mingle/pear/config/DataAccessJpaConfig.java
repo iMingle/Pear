@@ -4,7 +4,6 @@
 package org.mingle.pear.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -23,10 +22,9 @@ import java.util.Collections;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "org.mingle.pear")
 public class DataAccessJpaConfig extends DataAccessConfig {
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    public PlatformTransactionManager transactionManagerJpa(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;

@@ -5,9 +5,10 @@ package org.mingle.pear.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.mingle.pear.properties.PropertiesDatabase;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.jmx.export.annotation.*;
 
 import javax.inject.Inject;
@@ -20,11 +21,9 @@ import javax.sql.DataSource;
  * @since 1.8
  */
 @Configuration
-@ComponentScan(basePackages = "org.mingle.pear")
 @ManagedResource(description = "DataSource Manager.")
 public abstract class DataAccessConfig {
-    @Inject
-    private PropertiesDatabase propDatabase;
+    @Inject private PropertiesDatabase propDatabase;
     private int initialSize = 5;
 
     @ManagedAttribute(description = "The initialSize of connection pool.")
