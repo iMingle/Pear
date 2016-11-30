@@ -5,13 +5,12 @@ package org.mingle.pear.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.mingle.pear.properties.PropertiesDatabase;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.jmx.export.annotation.*;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedOperationParameter;
+import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 /**
@@ -20,10 +19,7 @@ import javax.sql.DataSource;
  * @author Mingle
  * @since 1.8
  */
-@Configuration
-@ManagedResource(description = "DataSource Manager.")
 public abstract class DataAccessConfig {
-    @Inject private PropertiesDatabase propDatabase;
     private int initialSize = 5;
 
     @ManagedAttribute(description = "The initialSize of connection pool.")
@@ -39,13 +35,15 @@ public abstract class DataAccessConfig {
         this.initialSize = initialSize;
     }
 
+    public abstract PropertiesDatabase getPropDatabase();
+
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(propDatabase.getDriverClassName());
-        dataSource.setUrl(propDatabase.getUrl());
-        dataSource.setUsername(propDatabase.getUsername());
-        dataSource.setPassword(propDatabase.getPassword());
+        dataSource.setDriverClassName(getPropDatabase().getDriverClassName());
+        dataSource.setUrl(getPropDatabase().getUrl());
+        dataSource.setUsername(getPropDatabase().getUsername());
+        dataSource.setPassword(getPropDatabase().getPassword());
         dataSource.setInitialSize(getInitialSize());
         dataSource.setTestOnBorrow(true);
         dataSource.setTestOnReturn(true);

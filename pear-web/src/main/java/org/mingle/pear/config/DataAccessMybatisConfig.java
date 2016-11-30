@@ -3,12 +3,17 @@
  */
 package org.mingle.pear.config;
 
+import org.mingle.pear.properties.PropertiesDatabase;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.inject.Inject;
 
 /**
  * 数据访问配置
@@ -18,16 +23,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
+@ManagedResource(description = "DataSource Manager.")
+@MapperScan("org.mingle.pear.domain.mapper")
 public class DataAccessMybatisConfig extends DataAccessConfig {
+    @Inject private PropertiesDatabase propDatabase;
+
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory() {
-        SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(dataSource());
+        SqlSessionFactoryBean sqlSession = new SqlSessionFactoryBean();
+        sqlSession.setDataSource(dataSource());
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
-        sqlSessionFactory.setConfiguration(configuration);
+        sqlSession.setConfiguration(configuration);
 
-        return sqlSessionFactory;
+        return sqlSession;
     }
 
     @Bean
@@ -37,10 +46,15 @@ public class DataAccessMybatisConfig extends DataAccessConfig {
         return transactionManager;
     }
 
-    @Bean
+//    @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setBasePackage("org.mingle.pear.domain.mapper");
         return mapperScannerConfigurer;
+    }
+
+    @Override
+    public PropertiesDatabase getPropDatabase() {
+        return propDatabase;
     }
 }
