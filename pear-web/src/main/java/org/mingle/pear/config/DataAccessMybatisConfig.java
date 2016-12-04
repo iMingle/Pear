@@ -39,14 +39,12 @@ public class DataAccessMybatisConfig extends DataAccessConfig {
         return sqlSession;
     }
 
-    @Bean
     public DataSourceTransactionManager transactionManagerMybatis() {
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
         transactionManager.setDataSource(dataSource());
         return transactionManager;
     }
 
-//    @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setBasePackage("org.mingle.pear.domain.mapper");
