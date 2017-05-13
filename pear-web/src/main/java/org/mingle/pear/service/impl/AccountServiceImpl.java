@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
 /**
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Service

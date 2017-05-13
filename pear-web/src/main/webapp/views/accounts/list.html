@@ -1,96 +1,102 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <title>Pear</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
 
-<title>Pear</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
+    <script src="../../../scripts/jquery/jquery-2.1.4.js" th:src="@{/scripts/jquery/jquery-2.1.4.js}"></script>
+    <script src="../../../scripts/jquery/noty/jquery.noty-2.3.7.js"
+            th:src="@{/scripts/jquery/noty/jquery.noty-2.3.7.js}"></script>
+    <script src="../../../scripts/pear/noty.util.js" th:src="@{/scripts/pear/noty.util.js}"></script>
 
-<script src="../../../scripts/jquery/jquery-2.1.4.js" th:src="@{/scripts/jquery/jquery-2.1.4.js}"></script>
-<script src="../../../scripts/jquery/noty/jquery.noty-2.3.7.js" th:src="@{/scripts/jquery/noty/jquery.noty-2.3.7.js}"></script>
-<script src="../../../scripts/pear/noty.util.js" th:src="@{/scripts/pear/noty.util.js}"></script>
-
-<link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/animate.css" th:href="@{/styles/jquery/noty/animate.css}"/>
-<link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/buttons.css" th:href="@{/styles/jquery/noty/buttons.css}"/>
-<link rel="stylesheet" type="text/css" href="../../../styles/font-awesome/css/font-awesome.css" th:href="@{/styles/font-awesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/animate.css"
+          th:href="@{/styles/jquery/noty/animate.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/buttons.css"
+          th:href="@{/styles/jquery/noty/buttons.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../styles/font-awesome/css/font-awesome.css"
+          th:href="@{/styles/font-awesome/css/font-awesome.css}"/>
 </head>
 
 <body>
-	<span th:include="@{templates/scripts} :: public"></span>
-	<div>
-		<h1>Account List</h1>
-		<div><a href="create.html" th:href="@{/accounts/create}"><span th:text="#{button.create}">Create</span></a></div>
-		<table border="1">
-			<thead>
-				<tr>
-					<td>Name</td>
-					<td>Age</td>
-					<td>Sex</td>
-					<td>Email</td>
-					<td>Update</td>
-					<td>Delete</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="account : ${accounts}" th:class="${accountStat.odd} ? 'odd'">
-					<td><a href="show.html" th:href="@{'/accounts/show/' + *{account.id}}"><span th:text="*{account.name}">Mingle</span></a></td>
-					<td th:text="*{account.age}">25</td>
-					<td th:text="*{account.sex}">Man</td>
-					<td th:text="*{account.email}">jinminglei@yeah.net</td>
-					<td><a href="update.html" th:href="@{'/accounts/update/' + *{account.id}}"><span th:text="#{button.update}">Update</span></a></td>
-					<td><a href="list.html" th:href="@{'/accounts/delete/' + *{account.id}}" data-method="delete"><span th:text="#{button.delete}">Delete</span></a></td>
-				</tr>
-			</tbody>
-		</table>
-		<div>
-			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=5)}">First</a></span>&nbsp;
-			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} - 1 < 1 ? 1 : ${T(Integer).parseInt(param.page)} - 1,size=5)}">Prev</a></span>&nbsp;
-			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} + 1 > ${maxPages} ? ${maxPages} : ${T(Integer).parseInt(param.page)} + 1,size=5)}">Next</a></span>&nbsp;
-			<span><a href="accounts/list.html" th:href="@{/accounts/list(page=${maxPages},size=5)}">End</a></span>
-		</div>
-	</div>
+<span th:include="@{templates/scripts} :: public"></span>
+<div>
+    <h1>Account List</h1>
+    <div><a href="create.html" th:href="@{/accounts/create}"><span th:text="#{button.create}">Create</span></a></div>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Sex</td>
+            <td>Email</td>
+            <td>Update</td>
+            <td>Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account : ${accounts}" th:class="${accountStat.odd} ? 'odd'">
+            <td><a href="show.html" th:href="@{'/accounts/show/' + *{account.id}}"><span th:text="*{account.name}">Mingle</span></a>
+            </td>
+            <td th:text="*{account.age}">25</td>
+            <td th:text="*{account.sex}">Man</td>
+            <td th:text="*{account.email}">jinminglei@yeah.net</td>
+            <td><a href="update.html" th:href="@{'/accounts/update/' + *{account.id}}"><span th:text="#{button.update}">Update</span></a>
+            </td>
+            <td><a href="list.html" th:href="@{'/accounts/delete/' + *{account.id}}" data-method="delete"><span
+                    th:text="#{button.delete}">Delete</span></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <span><a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=5)}">First</a></span>&nbsp;
+        <span><a href="accounts/list.html"
+                 th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} - 1 < 1 ? 1 : ${T(Integer).parseInt(param.page)} - 1,size=5)}">Prev</a></span>&nbsp;
+        <span><a href="accounts/list.html"
+                 th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} + 1 > ${maxPages} ? ${maxPages} : ${T(Integer).parseInt(param.page)} + 1,size=5)}">Next</a></span>&nbsp;
+        <span><a href="accounts/list.html" th:href="@{/accounts/list(page=${maxPages},size=5)}">End</a></span>
+    </div>
+</div>
 </body>
 </html>
 
 <script>
-$(function() {
-	$("body a").each(function(index, element) {
-		var method;
-		if (method = $(element).data("method"))
-			$(this).on("click", function(event) {
-				var _this = $(this);
-				$.ajax({
-					url: $(this).attr("href"),
-					type: method,
-					dataType: "json",
-					success: function(status, textStatus, jqXHR) {
-						var type = NotyUtil.type.SUCCESS;
-						if (status === Constants.DeleteStatus.SUCCESS) {
-							type = NotyUtil.type.SUCCESS;
-							_this.parentsUntil("tbody").empty();
-						} else if (status === Constants.DeleteStatus.FAIL) {
-							type = NotyUtil.type.ERROR;
-						}
-						NotyUtil.generate(type, status, "top", "relax", {
-							open: "animated flipInX", // Animate.css class names
-							close: "animated flipOutX", // Animate.css class names
-							easing: "swing", // easing
-							speed: 500 // opening &amp; closing animation speed
-					    });
-					},
-					error: function(jqXHR, textStatus, errorThrown) {
-						NotyUtil.generate("error", errorThrown, "top", "relax", {
-							open: "animated flipInX",
-							close: "animated flipOutX",
-							easing: "swing",
-							speed: 500
-					    });
-					}
-				});
-				event.preventDefault();
-			});
-	});
-});
+    $(function () {
+        $('body a').each(function (index, element) {
+            var method;
+            if (method = $(element).data('method'))
+                $(this).on('click', function (event) {
+                    var _this = $(this);
+                    $.ajax({
+                        url: $(this).attr('href'),
+                        type: method,
+                        dataType: 'json',
+                        success: function (status, textStatus, jqXHR) {
+                            var type = NotyUtil.type.SUCCESS;
+                            if (status === Constants.DeleteStatus.SUCCESS) {
+                                type = NotyUtil.type.SUCCESS;
+                                _this.parentsUntil('tbody').empty();
+                            } else if (status === Constants.DeleteStatus.FAIL) {
+                                type = NotyUtil.type.ERROR;
+                            }
+                            NotyUtil.generate(type, status, 'top', 'relax', {
+                                open: 'animated flipInX', // Animate.css class names
+                                close: 'animated flipOutX', // Animate.css class names
+                                easing: 'swing', // easing
+                                speed: 500 // opening &amp; closing animation speed
+                            });
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            NotyUtil.generate('error', errorThrown, 'top', 'relax', {
+                                open: 'animated flipInX',
+                                close: 'animated flipOutX',
+                                easing: 'swing',
+                                speed: 500
+                            });
+                        }
+                    });
+                    event.preventDefault();
+                });
+        });
+    });
 </script>

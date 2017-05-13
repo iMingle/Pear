@@ -24,7 +24,6 @@ import org.mingle.pear.persistence.query.SortOrder;
 import org.mingle.pear.service.AccountService;
 import org.mingle.pear.util.DeleteStatus;
 import org.mingle.pear.util.Sex;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,10 +39,8 @@ import java.util.Map;
 
 @RequestMapping("/accounts")
 @Controller
-@EnableAutoConfiguration
 public class AccountController {
-    @Inject
-    private AccountService accountService;
+    @Inject private AccountService accountService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -124,12 +121,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json; charset=UTF-8")
-    public
-    @ResponseBody
-    DeleteStatus delete(@PathVariable("id") Long id,
-                        @RequestParam(value = "page", required = false) Integer page,
-                        @RequestParam(value = "size", required = false) Integer size,
-                        Model model) {
+    public @ResponseBody DeleteStatus delete(@PathVariable("id") Long id,
+                                             @RequestParam(value = "page", required = false) Integer page,
+                                             @RequestParam(value = "size", required = false) Integer size,
+                                             Model model) {
         try {
             accountService.remove(id);
             model.asMap().clear();

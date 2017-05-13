@@ -17,7 +17,6 @@
 package org.mingle.pear.web;
 
 import org.mingle.pear.properties.PropertiesMail;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +28,9 @@ import javax.inject.Inject;
 
 @RequestMapping("/mail")
 @RestController
-@EnableAutoConfiguration
 public class MailController {
-    @Inject
-    private MailSender mailSender;
-    @Inject
-    private PropertiesMail propMail;
+    @Inject private MailSender mailSender;
+    @Inject private PropertiesMail propMail;
 
     @RequestMapping(value = "/send/{address}", method = {RequestMethod.GET, RequestMethod.POST})
     public boolean send(@PathVariable String address) {

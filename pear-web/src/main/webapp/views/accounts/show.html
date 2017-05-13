@@ -1,36 +1,33 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<title>Pear</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
+    <title>Pear</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
 </head>
 
 <body>
-	<h1>Account Info</h1>
-	<div th:object="${account}">
-		<div>
-			<label for="name">Name:</label>
-			<span id="name" th:text="*{name}">Mingle</span>
-		</div>
-		<div>
-			<label for="age">Age:</label>
-			<span id="age" th:text="*{age}">25</span>
-		</div>
-		<div>
-			<label for="email">Email:</label>
-			<span id="email" th:text="*{email}">jinminglei@yeah.net</span>
-		</div>
-		<div>
-			<label for="sex">Sex:</label>
-			<span id="sex" th:text="*{sex}">Man</span>
-		</div>
-	</div>
-	<div>
-		<a href="list.html" th:href="@{/accounts/list(page=1,size=5)}">Back to list</a>
-	</div>
+<h1>Account Info</h1>
+<div th:object="${account}">
+    <div>
+        <label for="name">Name:</label>
+        <span id="name" th:text="*{name}">Mingle</span>
+    </div>
+    <div>
+        <label for="age">Age:</label>
+        <span id="age" th:text="*{age}">25</span>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <span id="email" th:text="*{email}">jinminglei@yeah.net</span>
+    </div>
+    <div>
+        <label for="sex">Sex:</label>
+        <span id="sex" th:text="*{sex}">Man</span>
+    </div>
+</div>
+<div>
+    <a href="list.html" th:href="@{/accounts/list(page=1,size=5)}">Back to list</a>
+</div>
 </body>
 </html>

@@ -53,11 +53,9 @@ import com.google.common.collect.Maps;
 /**
  * 基于Hibernate的JPA实现
  *
- * @author Mingle
- * @since 1.8
+ * @author mingle
  */
-public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable>
-        implements GenericDao<E, ID> {
+public class GenericDaoImpl<E extends Identifiable<ID>, ID extends Serializable> implements GenericDao<E, ID> {
     private final Class<E> persistentClass;
 
     @PersistenceContext(unitName = BaseConstants.PERSIST_UNIT_NAME, type = PersistenceContextType.TRANSACTION)

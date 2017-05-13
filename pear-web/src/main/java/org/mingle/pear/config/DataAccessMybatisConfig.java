@@ -16,7 +16,6 @@
 
 package org.mingle.pear.config;
 
-import org.mingle.pear.properties.PropertiesDatabase;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -26,20 +25,16 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.inject.Inject;
-
 /**
  * 数据访问配置
  *
- * @author Mingle
- * @since 1.8
+ * @author mingle
  */
 @Configuration
 @EnableTransactionManagement
 @ManagedResource(description = "DataSource Manager.")
 @MapperScan("org.mingle.pear.domain.mapper")
-public class DataAccessMybatisConfig extends DataAccessConfig {
-    @Inject private PropertiesDatabase propDatabase;
+public class DataAccessMybatisConfig extends DataAccessJpaConfig {
 
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory() {
@@ -64,8 +59,4 @@ public class DataAccessMybatisConfig extends DataAccessConfig {
         return mapperScannerConfigurer;
     }
 
-    @Override
-    public PropertiesDatabase getPropDatabase() {
-        return propDatabase;
-    }
 }

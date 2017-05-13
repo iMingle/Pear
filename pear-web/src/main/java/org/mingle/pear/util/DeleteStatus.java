@@ -19,7 +19,7 @@ package org.mingle.pear.util;
 /**
  * 删除的状态
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public enum DeleteStatus {

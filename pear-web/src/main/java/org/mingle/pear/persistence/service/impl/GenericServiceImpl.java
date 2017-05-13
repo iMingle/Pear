@@ -34,7 +34,7 @@ import java.util.Map;
 /**
  * 泛型服务的实现类
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public abstract class GenericServiceImpl<E extends Identifiable<ID>, ID extends Serializable>

@@ -19,7 +19,7 @@ package org.mingle.pear.persistence.query;
 /**
  * 通过SQL映射创建SQL查询模板
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public class SqlResultSetMappingQueryTemplate extends QueryTemplate {

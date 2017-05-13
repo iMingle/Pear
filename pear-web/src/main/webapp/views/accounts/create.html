@@ -1,44 +1,42 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<title>Pear</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
+    <title>Pear</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
 </head>
 
 <body>
-	<h1>Register Account</h1>
-	<form action="list.html" th:action="@{/accounts/create}" th:object="${account}" method="post">
-		<div>
-			<label for="name">Name:</label>
-			<input type="text" name="name" id="name" th:field="*{name}" th:errorclass="fieldError"/>
-			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect Name</div>
-		</div>
-		<div>
-			<label for="age">Age:</label>
-			<input type="text" name="age" id="age" th:field="*{age}" th:errorclass="fieldError"/>
-			<div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Incorrect Age</div>
-		</div>
-		<div>
-			<label for="email">Email:</label>
-			<input type="text" name="email" id="email" th:field="*{email}" th:errorclass="fieldError"/>
-			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect Email</div>
-		</div>
-		<div>
-			<ul>
-				<li th:each="type : ${sexTypes}">
-					<input type="radio" th:field="*{sex}" th:value="${type}" th:errorclass="fieldError"/>
-					<label th:for="${#ids.prev('sex')}" th:text="${#strings.capitalize(#strings.toLowerCase(type))}">Man</label>
-				</li>
-			</ul>
-			<div th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Incorrect SexType</div>
-		</div>
-		<div>
-			<input type="submit" name="submit" value="Create"/>
-		</div>
-	</form>
+<h1>Register Account</h1>
+<form action="list.html" th:action="@{/accounts/create}" th:object="${account}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" th:field="*{name}" th:errorclass="fieldError"/>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect Name</div>
+    </div>
+    <div>
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age" th:field="*{age}" th:errorclass="fieldError"/>
+        <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Incorrect Age</div>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" th:field="*{email}" th:errorclass="fieldError"/>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect Email</div>
+    </div>
+    <div>
+        <ul>
+            <li th:each="type : ${sexTypes}">
+                <input type="radio" th:field="*{sex}" th:value="${type}" th:errorclass="fieldError"/>
+                <label th:for="${#ids.prev('sex')}"
+                       th:text="${#strings.capitalize(#strings.toLowerCase(type))}">Man</label>
+            </li>
+        </ul>
+        <div th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Incorrect SexType</div>
+    </div>
+    <div>
+        <input type="submit" name="submit" value="Create"/>
+    </div>
+</form>
 </body>
 </html>

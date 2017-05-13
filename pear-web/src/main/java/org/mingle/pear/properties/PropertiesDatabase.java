@@ -24,8 +24,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 读取数据库的配置文件信息
  *
- * @author Mingle
- * @since 1.8
+ * @author mingle
  */
 @Repository
 public class PropertiesDatabase {

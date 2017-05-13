@@ -22,7 +22,7 @@ import org.mingle.pear.persistence.dao.impl.GenericDaoImpl;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Repository

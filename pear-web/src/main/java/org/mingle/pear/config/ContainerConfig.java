@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * 容器配置
  *
  * @since 1.8
- * @author Mingle
+ * @author mingle
  */
 @Configuration
 public class ContainerConfig {

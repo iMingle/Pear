@@ -16,26 +16,42 @@
 
 package org.mingle.pear.web;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/")
-@Controller
-public class ApplicationController {
+import java.util.concurrent.Callable;
 
-    @RequestMapping(value = {"/uncaughtException"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String uncaughtException() {
-        return "errors/uncaughtException";
+/**
+ * @author mingle
+ */
+@RequestMapping("/async")
+@RestController
+public class AsyncController {
+    private static final int MAX = Integer.MAX_VALUE;
+
+    @RequestMapping(value = "/sum", method = RequestMethod.GET)
+    public Callable<Long> sum() {
+        return () -> {
+            long sum = 0;
+
+            Thread.sleep(5000);
+
+            for (int i = 0; i < MAX; i++)
+                sum += i;
+
+            return sum;
+        };
     }
 
-    @RequestMapping(value = {"/resourceNotFound"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String resourceNotFound() {
-        return "errors/resourceNotFound";
-    }
+    public static void main(String[] args) throws InterruptedException {
+        long sum = 0;
 
-    @RequestMapping(value = {"/dataAccessFailure"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String dataAccessFailure() {
-        return "errors/dataAccessFailure";
+        Thread.sleep(5000);
+
+        for (int i = 0; i < MAX; i++)
+            sum += i;
+
+        System.out.println(sum);
     }
 }

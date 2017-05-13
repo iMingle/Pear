@@ -1,45 +1,43 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<title>Pear</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
+    <title>Pear</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
 </head>
 
 <body>
-	<div>
-		<h1>Account Update</h1>
-		<form action="list.html" th:action="@{/accounts/update}" th:object="${account}" method="post">
-			<input type="hidden" name="_method" value="put"/>
-			<input type="hidden" name="id" th:field="*{id}"/>
-			<input type="hidden" name="version" th:field="*{version}"/>
-			<div>
-				<label for="name">Name:</label>
-				<input type="text" name="name" id="name" th:field="*{name}"/>
-			</div>
-			<div>
-				<label for="age">Age:</label>
-				<input type="text" name="age" id="age" th:field="*{age}"/>
-			</div>
-			<div>
-				<label for="email">Email:</label>
-				<input type="text" name="email" id="email" th:field="*{email}"/>
-			</div>
-			<div>
-				<ul>
-					<li th:each="type : ${sexTypes}">
-						<input type="radio" th:field="*{sex}" th:value="${type}" />
-						<label th:for="${#ids.prev('sex')}" th:text="${#strings.capitalize(#strings.toLowerCase(type))}">Man</label>
-					</li>
-				</ul>
-			</div>
-			<div>
-				<input type="submit" name="submit" value="Update"/>
-			</div>
-		</form>
-	</div>
+<div>
+    <h1>Account Update</h1>
+    <form action="list.html" th:action="@{/accounts/update}" th:object="${account}" method="post">
+        <input type="hidden" name="_method" value="put"/>
+        <input type="hidden" name="id" th:field="*{id}"/>
+        <input type="hidden" name="version" th:field="*{version}"/>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" th:field="*{name}"/>
+        </div>
+        <div>
+            <label for="age">Age:</label>
+            <input type="text" name="age" id="age" th:field="*{age}"/>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" th:field="*{email}"/>
+        </div>
+        <div>
+            <ul>
+                <li th:each="type : ${sexTypes}">
+                    <input type="radio" th:field="*{sex}" th:value="${type}"/>
+                    <label th:for="${#ids.prev('sex')}"
+                           th:text="${#strings.capitalize(#strings.toLowerCase(type))}">Man</label>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <input type="submit" name="submit" value="Update"/>
+        </div>
+    </form>
+</div>
 </body>
 </html>

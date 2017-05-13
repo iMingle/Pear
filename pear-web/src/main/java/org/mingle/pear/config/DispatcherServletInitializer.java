@@ -29,8 +29,7 @@ import javax.servlet.SessionCookieConfig;
 /**
  * DispatcherServlet初始化
  *
- * @author Mingle
- * @since 1.8
+ * @author mingle
  */
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

@@ -25,7 +25,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 /**
  * 任务调度配置
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Configuration

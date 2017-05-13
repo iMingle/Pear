@@ -16,6 +16,7 @@
 
 package org.mingle.pear.config;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.mingle.pear.properties.PropertiesDatabase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,19 +29,36 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 import java.util.Collections;
 
 /**
  * 数据访问配置
  *
- * @author Mingle
- * @since 1.8
+ * @author mingle
  */
 @Configuration
 @EnableTransactionManagement
 @ManagedResource(description = "DataSource Manager.")
-public class DataAccessJpaConfig extends DataAccessConfig {
+public class DataAccessJpaConfig {
     @Inject private PropertiesDatabase propDatabase;
+
+    @Bean
+    public DataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName(propDatabase.getDriverClassName());
+        dataSource.setUrl(propDatabase.getUrl());
+        dataSource.setUsername(propDatabase.getUsername());
+        dataSource.setPassword(propDatabase.getPassword());
+        dataSource.setInitialSize(5);
+        dataSource.setTestOnBorrow(true);
+        dataSource.setTestOnReturn(true);
+        dataSource.setTestWhileIdle(true);
+        dataSource.setTimeBetweenEvictionRunsMillis(1800000L);
+        dataSource.setNumTestsPerEvictionRun(3);
+        dataSource.setMinEvictableIdleTimeMillis(1800000L);
+        return dataSource;
+    }
 
     @Bean
     public PlatformTransactionManager transactionManagerJpa(EntityManagerFactory entityManagerFactory) {
@@ -59,8 +77,4 @@ public class DataAccessJpaConfig extends DataAccessConfig {
         return entityManagerFactory;
     }
 
-    @Override
-    public PropertiesDatabase getPropDatabase() {
-        return propDatabase;
-    }
 }

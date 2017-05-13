@@ -24,7 +24,7 @@ import org.springframework.stereotype.Controller;
 /**
  * 应用程序配置
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Configuration

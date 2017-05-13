@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 分页构造器,用于返回分页查询的结果T代表返回的数据类型,可以是Object[]\POJO\Map
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public

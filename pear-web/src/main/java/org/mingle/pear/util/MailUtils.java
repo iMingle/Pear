@@ -21,7 +21,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 /**
  * 邮件工具类
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public abstract class MailUtils {

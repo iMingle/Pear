@@ -33,7 +33,7 @@ import org.mingle.pear.persistence.query.QueryType;
 /**
  * 泛型数据库访问接口
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public interface GenericDao<E extends Identifiable<ID>, ID extends Serializable> {

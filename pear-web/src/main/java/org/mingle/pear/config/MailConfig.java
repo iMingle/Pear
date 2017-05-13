@@ -27,7 +27,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 /**
  * 邮件服务配置
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Configuration

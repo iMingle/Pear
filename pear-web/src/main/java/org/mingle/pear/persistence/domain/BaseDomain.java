@@ -25,7 +25,7 @@ import java.util.Objects;
 /**
  * domain的基础类
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public abstract class BaseDomain<ID extends Serializable> implements Identifiable<ID> {

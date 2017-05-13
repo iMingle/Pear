@@ -26,7 +26,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /**
  * 安全配置
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Configuration
@@ -49,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login/**")
                 .permitAll()
                 .antMatchers("/logout/**")
+                .permitAll()
+                .antMatchers("/async/**")
                 .permitAll()
                 .antMatchers("/**")
                 .authenticated()

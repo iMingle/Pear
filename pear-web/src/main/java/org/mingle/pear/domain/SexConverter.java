@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-package org.mingle.pear.domain.mapper;
+package org.mingle.pear.domain;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Select;
-import org.mingle.pear.domain.Account;
+import org.mingle.pear.util.Sex;
+
+import javax.persistence.AttributeConverter;
 
 /**
- * 账户Mapper
- *
  * @author mingle
- * @since 1.8
  */
-public interface AccountMapper {
-    @Select("SELECT * FROM t_account WHERE id = #{accountId}")
-    Account getAccount(Long accountId);
+public class SexConverter implements AttributeConverter<Sex, Integer> {
+    @Override public Integer convertToDatabaseColumn(Sex sex) {
+        return sex.getValue();
+    }
 
-    @InsertProvider(type = AccountSqlProvider.class, method = "insert")
-    int insertAccount(Account account);
-
-    @Delete("DELETE FROM t_account WHERE id = #{accountId}")
-    int deleteAccount(Long accountId);
+    @Override public Sex convertToEntityAttribute(Integer integer) {
+        return Sex.getMap().get(integer);
+    }
 }

@@ -30,7 +30,7 @@ import javax.validation.constraints.Pattern;
 /**
  * 账户
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Entity
@@ -62,6 +62,6 @@ public @Data class Account extends BaseDomain<Long> {
     private String email;
 
     @Column(name = "sex", length = 10)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = SexConverter.class)
     private Sex sex = Sex.MAN;
 }

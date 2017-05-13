@@ -18,16 +18,26 @@ package org.mingle.pear.util;
 
 import lombok.Getter;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 性别
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public enum Sex {
     WOMAN(0), MAN(1), INTERSEX(2);
 
     @Getter private int value;
+
+    @Getter private static final Map<Integer, Sex> map = Collections.unmodifiableMap(new HashMap<Integer, Sex>() {{
+        put(WOMAN.getValue(), Sex.WOMAN);
+        put(MAN.getValue(), Sex.MAN);
+        put(INTERSEX.getValue(), Sex.INTERSEX);
+    }});
 
     Sex(int value) {
         this.value = value;

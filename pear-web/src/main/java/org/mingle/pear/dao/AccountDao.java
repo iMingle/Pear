@@ -20,7 +20,7 @@ import org.mingle.pear.domain.Account;
 import org.mingle.pear.persistence.dao.GenericDao;
 
 /**
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public interface AccountDao extends GenericDao<Account, Long> {

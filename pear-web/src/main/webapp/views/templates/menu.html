@@ -1,24 +1,25 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">ml>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title><div th:text="#{welcome_h3(#application_name)}"></div></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+    <title>
+        <div th:text="#{welcome_h3(#application_name)}"></div>
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=8"/>
 </head>
 
 <body>
-	<div id="menu">
-		<a href="#" th:href="@{/accounts?form}">
-    		<span th:text="#{global_menu_new}"></span>
-		</a>
-		<a href="#" th:href="@{/accounts?page=1&amp;size=${empty param.size ? 10 : param.size}}">
-    		<span th:text="#{global_menu_list}"></span>
-		</a>
-		<a href="#" th:href="@{/selenium/test-suite.xhtml}">
-    		<span th:text="#{selenium_menu_test_suite}"></span>
-		</a>
-	</div>
+<div id="menu">
+    <a href="#" th:href="@{/accounts?form}">
+        <span th:text="#{global_menu_new}"></span>
+    </a>
+    <a href="#" th:href="@{/accounts?page=1&amp;size=${empty param.size ? 10 : param.size}}">
+        <span th:text="#{global_menu_list}"></span>
+    </a>
+    <a href="#" th:href="@{/selenium/test-suite.xhtml}">
+        <span th:text="#{selenium_menu_test_suite}"></span>
+    </a>
+</div>
 </body>
 </html>

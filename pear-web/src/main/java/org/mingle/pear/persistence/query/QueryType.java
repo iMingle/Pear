@@ -19,7 +19,7 @@ package org.mingle.pear.persistence.query;
 /**
  * 查询分类
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public enum QueryType {

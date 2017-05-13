@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 读取邮件的配置文件信息
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Repository

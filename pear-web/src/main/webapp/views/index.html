@@ -1,121 +1,123 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
-<title>Pear</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
+    <title>Pear</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
 
-<script src="../../scripts/websocket/sockjs-0.3.4.js" th:src="@{/scripts/websocket/sockjs-0.3.4.js}"></script>
-<script src="../../scripts/websocket/stomp.js" th:src="@{/scripts/websocket/stomp.js}"></script>
-<script src="../../../scripts/jquery/jquery-2.1.4.js" th:src="@{/scripts/jquery/jquery-2.1.4.js}"></script>
-<script src="../../../scripts/jquery/noty/jquery.noty-2.3.7.js" th:src="@{/scripts/jquery/noty/jquery.noty-2.3.7.js}"></script>
-<script src="../../../scripts/pear/noty.util.js" th:src="@{/scripts/pear/noty.util.js}"></script>
+    <script src="../../scripts/websocket/sockjs-0.3.4.js" th:src="@{/scripts/websocket/sockjs-0.3.4.js}"></script>
+    <script src="../../scripts/websocket/stomp.js" th:src="@{/scripts/websocket/stomp.js}"></script>
+    <script src="../../../scripts/jquery/jquery-2.1.4.js" th:src="@{/scripts/jquery/jquery-2.1.4.js}"></script>
+    <script src="../../../scripts/jquery/noty/jquery.noty-2.3.7.js"
+            th:src="@{/scripts/jquery/noty/jquery.noty-2.3.7.js}"></script>
+    <script src="../../../scripts/pear/noty.util.js" th:src="@{/scripts/pear/noty.util.js}"></script>
 
-<link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/animate.css" th:href="@{/styles/jquery/noty/animate.css}"/>
-<link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/buttons.css" th:href="@{/styles/jquery/noty/buttons.css}"/>
-<link rel="stylesheet" type="text/css" href="../../../styles/font-awesome/css/font-awesome.css" th:href="@{/styles/font-awesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/animate.css"
+          th:href="@{/styles/jquery/noty/animate.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../styles/jquery/noty/buttons.css"
+          th:href="@{/styles/jquery/noty/buttons.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../styles/font-awesome/css/font-awesome.css"
+          th:href="@{/styles/font-awesome/css/font-awesome.css}"/>
 
-<script>
-var stompClient = null;
+    <script>
+        var stompClient = null;
 
-function setConnected(connected) {
-    document.getElementById('connect').disabled = connected;
-    document.getElementById('disconnect').disabled = !connected;
-    document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-    document.getElementById('response').innerHTML = '';
-}
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+            document.getElementById('response').innerHTML = '';
+        }
 
-function connect() {
-    var socket = new SockJS('/greeting');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function(frame) {
-        setConnected(true);
-        stompClient.subscribe('/topic/welcome', function(greeting) {
-            showGreeting(greeting.body);
-        });
-    });
-}
+        function connect() {
+            var socket = new SockJS('/greeting');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                setConnected(true);
+                stompClient.subscribe('/topic/welcome', function (greeting) {
+                    showGreeting(greeting.body);
+                });
+            });
+        }
 
-function disconnect() {
-    if (stompClient != null) {
-        stompClient.disconnect();
-    }
-    setConnected(false);
-}
+        function disconnect() {
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+        }
 
-function sendName() {
-    var name = document.getElementById('name').value;
-    stompClient.send("/app/greeting", {}, name);
-}
+        function sendName() {
+            var name = document.getElementById('name').value;
+            stompClient.send('/app/greeting', {}, name);
+        }
 
-function showGreeting(message) {
-    var response = document.getElementById('response');
-    var p = document.createElement('p');
-    p.style.wordWrap = 'break-word';
-    p.appendChild(document.createTextNode(message));
-    response.appendChild(p);
-}
-</script>
+        function showGreeting(message) {
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(message));
+            response.appendChild(p);
+        }
+    </script>
 </head>
 
-<body onload="disconnect()">
-	<span th:include="@{templates/scripts} :: public"></span>
-	<div>
-		<h1>
-			<span th:text="#{welcome_titlepane(Spring)}">Spring</span>
-			<span th:text="#{application_name}">pear</span> <br />
-			<br />
-		</h1>
-		<h2>
-			Now time is <span
-				th:text="${#calendars.format(#execInfo.now, 'yyyy-MM-dd HH:mm:ss')}"></span>
-		</h2>
-		<p>This sample demonstrates how to use Spring MVC together with
-			Thymeleaf.</p>
-		<p>
-			<a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=5)}">Start your
-				Spring Travel experience</a>
-		</p>
-	</div>
-	
-	<div>
-		<div>
-			<button id="connect" onclick="connect();">Connect</button>
-			<button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
-		</div>
-		<div id="conversationDiv">
-			<label>What is your name?</label><input type="text" id="name" />
-			<button id="sendName" onclick="sendName();">Send</button>
-			<p id="response"></p>
-		</div>
-	</div>
+<body onload="disconnect();">
+<span th:include="@{templates/scripts} :: public"></span>
+<div>
+    <h1>
+        <span th:text="#{welcome_titlepane(Spring)}">Spring</span>
+        <span th:text="#{application_name}">pear</span> <br/>
+        <br/>
+    </h1>
+    <h2>
+        Now time is <span
+            th:text="${#calendars.format(#execInfo.now, 'yyyy-MM-dd HH:mm:ss')}"></span>
+    </h2>
+    <p>This sample demonstrates how to use Spring MVC together with
+        Thymeleaf.</p>
+    <p>
+        <a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=5)}">Start your Spring Travel experience</a>
+    </p>
+</div>
+
+<div>
+    <div>
+        <button id="connect" onclick="connect();">Connect</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+    </div>
+    <div id="conversationDiv">
+        <label>What is your name?</label><input type="text" id="name"/>
+        <button id="sendName" onclick="sendName();">Send</button>
+        <p id="response"></p>
+    </div>
+</div>
 </body>
 </html>
 
 <script>
-$(function() {
-	// notification body's can be any html string or just string
-	var notification_html = [];
-	notification_html[0] = '<div class="activity-item"> <i class="fa fa-tasks text-warning"></i> <div class="activity"> There are <a href="#">6 new tasks</a> waiting for you. Don\'t forget! <span>About 3 hours ago</span> </div> </div>',
-	notification_html[1] = '<div class="activity-item"> <i class="fa fa-check text-success"></i> <div class="activity"> Mail server was updated. See <a href="#">changelog</a> <span>About 2 hours ago</span> </div> </div>',
-	notification_html[2] = '<div class="activity-item"> <i class="fa fa-heart text-danger"></i> <div class="activity"> Your <a href="#">latest post</a> was liked by <a href="#">Audrey Mall</a> <span>35 minutes ago</span> </div> </div>',
-	notification_html[3] = '<div class="activity-item"> <i class="fa fa-shopping-cart text-success"></i> <div class="activity"> <a href="#">Eugene</a> ordered 2 copies of <a href="#">OEM license</a> <span>14 minutes ago</span> </div> </div>';
+    $(function () {
+        // notification body's can be any html string or just string
+        var notification_html = [];
+        notification_html[0] = '<div class="activity-item"> <i class="fa fa-tasks text-warning"></i> <div class="activity"> There are <a href="#">6 new tasks</a> waiting for you. Don\'t forget! <span>About 3 hours ago</span> </div> </div>',
+            notification_html[1] = '<div class="activity-item"> <i class="fa fa-check text-success"></i> <div class="activity"> Mail server was updated. See <a href="#">changelog</a> <span>About 2 hours ago</span> </div> </div>',
+            notification_html[2] = '<div class="activity-item"> <i class="fa fa-heart text-danger"></i> <div class="activity"> Your <a href="#">latest post</a> was liked by <a href="#">Audrey Mall</a> <span>35 minutes ago</span> </div> </div>',
+            notification_html[3] = '<div class="activity-item"> <i class="fa fa-shopping-cart text-success"></i> <div class="activity"> <a href="#">Eugene</a> ordered 2 copies of <a href="#">OEM license</a> <span>14 minutes ago</span> </div> </div>';
 
-    function generateAll() {
-    	var animation = {
-            open  : 'animated bounceInRight',
-            close : 'animated bounceOutRight',
-            easing: 'swing',
-            speed : 500
-        };
-        NotyUtil.generate('warning', notification_html[0], 'topRight', 'relax', animation);
-        NotyUtil.generate('error', notification_html[1], 'topRight', 'relax', animation);
-        NotyUtil.generate('information', notification_html[2], 'topRight', 'relax', animation);
-        NotyUtil.generate('success', notification_html[3], 'topRight', 'relax', animation);
-    }
-    
-    generateAll();
-});
+        function generateAll() {
+            var animation = {
+                open: 'animated bounceInRight',
+                close: 'animated bounceOutRight',
+                easing: 'swing',
+                speed: 500
+            };
+            NotyUtil.generate('warning', notification_html[0], 'topRight', 'relax', animation);
+            NotyUtil.generate('error', notification_html[1], 'topRight', 'relax', animation);
+            NotyUtil.generate('information', notification_html[2], 'topRight', 'relax', animation);
+            NotyUtil.generate('success', notification_html[3], 'topRight', 'relax', animation);
+        }
+
+        generateAll();
+    });
 </script>

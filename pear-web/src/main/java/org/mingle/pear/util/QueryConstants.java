@@ -19,7 +19,7 @@ package org.mingle.pear.util;
 /**
  * 查询常量
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public final class QueryConstants {

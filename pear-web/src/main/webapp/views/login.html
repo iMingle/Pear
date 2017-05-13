@@ -1,47 +1,48 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<title>Pear</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
+    <title>Pear</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
 </head>
 
 <body>
-	<div class="span-10 append-2 last">
+<div class="span-10 append-2 last">
 
-		<div class="error" th:if="${param.login_error}">
-			<div th:text="#{security_login_unsuccessful}"></div>
-			<div th:text="*{SPRING_SECURITY_LAST_EXCEPTION}"></div>
-			<br /> <br />
-		</div>
-		<div class="success" th:if="${param.login_error == null}">
-			<div th:text="#{security_login_message}"></div>
-			<br /> <br />
-		</div>
+    <div class="error" th:if="${param.login_error}">
+        <div th:text="#{security_login_unsuccessful}"></div>
+        <div th:text="*{SPRING_SECURITY_LAST_EXCEPTION}"></div>
+        <br/> <br/>
+    </div>
+    <div class="success" th:if="${param.login_error == null}">
+        <div th:text="#{security_login_message}"></div>
+        <br/> <br/>
+    </div>
 
-		<form name="f" action="#" th:action="@{/loginProcess}" method="post">
-			<fieldset>
-				<legend>Login Information</legend>
+    <form name="f" action="#" th:action="@{/loginProcess}" method="post">
+        <fieldset>
+            <legend>Login Information</legend>
 
-				<p>
-					<label for="username"><div th:text="#{security_login_form_name}"></div></label> <br /> <input type="text" name="username" id="username" />
-				</p>
-				<p>
-					<label for="password"><div th:text="#{security_login_form_password}"></div></label> <br /> <input type="password" name="password" id="password" />
-				</p>
-				<p>
-					<input type="checkbox" name="_spring_security_remember_me"
-						id="remember_me" /> <label for="remember_me">Don't ask
-						for my password for two weeks:</label>
-				</p>
-				<p>
-					<button id="submit" type="submit">Login</button>
-				</p>
-			</fieldset>
-		</form>
-	</div>
+            <p>
+                <label for="username">
+                    <div th:text="#{security_login_form_name}"></div>
+                </label> <br/> <input type="text" name="username" id="username"/>
+            </p>
+            <p>
+                <label for="password">
+                    <div th:text="#{security_login_form_password}"></div>
+                </label> <br/> <input type="password" name="password" id="password"/>
+            </p>
+            <p>
+                <input type="checkbox" name="_spring_security_remember_me"
+                       id="remember_me"/>
+                <label for="remember_me">Don't ask for my password for two weeks:</label>
+            </p>
+            <p>
+                <button id="submit" type="submit">Login</button>
+            </p>
+        </fieldset>
+    </form>
+</div>
 </body>
 </html>

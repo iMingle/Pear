@@ -23,7 +23,7 @@ import org.mingle.pear.persistence.query.QueryTemplate;
 /**
  * 分页查询构造器,依次构造count,list以及where查询条件
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public interface PaginationBuilder<S, P extends PageQuery<S>> extends

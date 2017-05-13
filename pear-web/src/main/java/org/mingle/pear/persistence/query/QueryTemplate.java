@@ -32,7 +32,7 @@ import com.google.common.collect.Maps;
 /**
  * 查询模板的抽象类
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public

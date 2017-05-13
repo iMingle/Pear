@@ -20,7 +20,7 @@ package org.mingle.pear.persistence.query;
  * 数据库排序
  * 
  * @since 1.8
- * @author Mingle
+ * @author mingle
  */
 public enum SortOrder {
 	ASC, DESC

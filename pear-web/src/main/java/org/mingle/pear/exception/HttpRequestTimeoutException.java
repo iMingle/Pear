@@ -19,7 +19,7 @@ package org.mingle.pear.exception;
 /**
  * HTTP请求超时异常
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 public class HttpRequestTimeoutException extends RuntimeException {

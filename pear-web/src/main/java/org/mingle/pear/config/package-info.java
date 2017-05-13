@@ -18,6 +18,6 @@
  * Spring配置文件
  * 
  * @since 1.8
- * @author Mingle
+ * @author mingle
  */
 package org.mingle.pear.config;

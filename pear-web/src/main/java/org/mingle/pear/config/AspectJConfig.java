@@ -22,7 +22,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 /**
  * AOP配置
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @Configuration

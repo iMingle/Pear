@@ -46,7 +46,7 @@ import java.util.Properties;
 /**
  * WEB MVC配置
  *
- * @author Mingle
+ * @author mingle
  * @since 1.8
  */
 @EnableWebMvc

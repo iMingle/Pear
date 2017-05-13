@@ -28,37 +28,32 @@ import javax.inject.Inject;
 /**
  * A central place to register application converters and formatters.
  *
- * @author Mingle
- * @since 1.8
+ * @author mingle
  */
 @Component("applicationConversionService")
-public class ApplicationConversionServiceFactoryBean extends
-        FormattingConversionServiceFactoryBean {
-    @Inject
-    private AccountService accountService;
+public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
+    @Inject private AccountService accountService;
 
     public Converter<Account, String> getAccountToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<org.mingle.pear.domain.Account, java.lang.String>() {
+        return new Converter<Account, String>() {
             public String convert(Account account) {
-                return new StringBuilder().append(account.getName())
-                        .append(' ').append(account.getAge()).toString();
+                return new StringBuilder().append(account.getName()).append(' ').append(account.getAge()).toString();
             }
         };
     }
 
     public Converter<Long, Account> getIdToAccountConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, org.mingle.pear.domain.Account>() {
-            public org.mingle.pear.domain.Account convert(java.lang.Long id) {
+        return new Converter<Long, Account>() {
+            public Account convert(java.lang.Long id) {
                 return accountService.find(id);
             }
         };
     }
 
     public Converter<String, Account> getStringToAccountConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, org.mingle.pear.domain.Account>() {
-            public org.mingle.pear.domain.Account convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class),
-                        Account.class);
+        return new Converter<String, Account>() {
+            public Account convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Account.class);
             }
         };
     }
