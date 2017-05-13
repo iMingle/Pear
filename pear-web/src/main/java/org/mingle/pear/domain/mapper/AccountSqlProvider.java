@@ -3,8 +3,6 @@ package org.mingle.pear.domain.mapper;
 import org.apache.ibatis.jdbc.SQL;
 import org.mingle.pear.domain.Account;
 
-import static org.apache.ibatis.jdbc.SelectBuilder.BEGIN;
-
 /**
  * @author mingle
  */
@@ -14,7 +12,6 @@ public class AccountSqlProvider {
     public String insert(final Account account) {
         return new SQL() {
             {
-                BEGIN();
                 INSERT_INTO(TABLE_NAME);
                 VALUES("age", "#{age}");
                 VALUES("email", "#{email}");
