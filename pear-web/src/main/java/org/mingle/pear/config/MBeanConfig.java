@@ -23,7 +23,6 @@ import org.springframework.context.annotation.EnableMBeanExport;
  * JMX配置
  *
  * @author mingle
- * @since 1.8
  */
 @Configuration
 @EnableMBeanExport

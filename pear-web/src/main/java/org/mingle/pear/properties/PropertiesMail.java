@@ -25,7 +25,6 @@ import org.springframework.stereotype.Repository;
  * 读取邮件的配置文件信息
  *
  * @author mingle
- * @since 1.8
  */
 @Repository
 public class PropertiesMail {

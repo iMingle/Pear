@@ -22,7 +22,6 @@ import java.util.Map;
  * Java查询语言模板
  *
  * @author mingle
- * @since 1.8
  */
 public class JqlQueryTemplate extends QueryTemplate {
 

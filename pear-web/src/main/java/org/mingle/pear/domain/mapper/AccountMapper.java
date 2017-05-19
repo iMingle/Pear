@@ -25,7 +25,6 @@ import org.mingle.pear.domain.Account;
  * 账户Mapper
  *
  * @author mingle
- * @since 1.8
  */
 public interface AccountMapper {
     @Select("SELECT * FROM t_account WHERE id = #{accountId}")

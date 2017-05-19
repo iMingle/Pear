@@ -45,7 +45,6 @@ import java.util.Map;
  * 视图解析配置
  *
  * @author mingle
- * @since 1.8
  */
 @EnableWebMvc
 @Configuration

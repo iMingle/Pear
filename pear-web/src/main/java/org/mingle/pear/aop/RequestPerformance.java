@@ -33,7 +33,6 @@ import org.springframework.stereotype.Component;
  * web请求性能测试
  *
  * @author mingle
- * @since 1.8
  */
 @Component
 @Aspect

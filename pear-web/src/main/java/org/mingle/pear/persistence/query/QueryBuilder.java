@@ -20,7 +20,6 @@ package org.mingle.pear.persistence.query;
  * 查询构造器
  *
  * @author mingle
- * @since 1.8
  */
 public interface QueryBuilder<T> {
 

@@ -33,7 +33,6 @@ import org.mingle.pear.persistence.query.QueryType;
  * Service层
  *
  * @author mingle
- * @since 1.8
  */
 public interface GenericService<E extends Identifiable<ID>, ID extends Serializable> {
 

@@ -16,19 +16,18 @@
 
 package org.mingle.pear.config;
 
-import javax.inject.Inject;
-
 import org.mingle.pear.properties.PropertiesMail;
 import org.mingle.pear.util.MailUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import javax.inject.Inject;
+
 /**
  * 邮件服务配置
  *
  * @author mingle
- * @since 1.8
  */
 @Configuration
 public class MailConfig {

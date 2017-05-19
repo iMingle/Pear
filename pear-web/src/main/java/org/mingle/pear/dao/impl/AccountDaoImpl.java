@@ -23,7 +23,6 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author mingle
- * @since 1.8
  */
 @Repository
 public class AccountDaoImpl extends GenericDaoImpl<Account, Long> implements

@@ -26,7 +26,6 @@ import java.util.Map;
  * 性别
  *
  * @author mingle
- * @since 1.8
  */
 public enum Sex {
     WOMAN(0), MAN(1), INTERSEX(2);

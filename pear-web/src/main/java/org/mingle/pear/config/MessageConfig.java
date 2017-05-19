@@ -26,7 +26,6 @@ import org.springframework.context.annotation.Configuration;
  * 消息配置
  *
  * @author mingle
- * @since 1.8
  */
 @Configuration
 public class MessageConfig {

@@ -22,7 +22,6 @@ import java.util.Map;
  * 命名查询模板
  *
  * @author mingle
- * @since 1.8
  */
 public class NamedQueryTemplate extends QueryTemplate {
 

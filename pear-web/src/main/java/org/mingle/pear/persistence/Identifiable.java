@@ -22,7 +22,6 @@ import java.io.Serializable;
  * 可持久化类主键接口
  *
  * @author mingle
- * @since 1.8
  */
 public interface Identifiable<ID extends Serializable> extends Serializable {
     /**

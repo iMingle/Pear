@@ -27,7 +27,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * 安全配置
  *
  * @author mingle
- * @since 1.8
  */
 @Configuration
 @EnableWebSecurity

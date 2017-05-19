@@ -33,7 +33,6 @@ import com.google.common.collect.Maps;
  * 查询模板的抽象类
  *
  * @author mingle
- * @since 1.8
  */
 public
 @Data

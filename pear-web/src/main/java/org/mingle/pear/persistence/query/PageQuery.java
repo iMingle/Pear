@@ -25,7 +25,6 @@ import java.io.Serializable;
  * 分页查询的查询表单,包含分页查询的所需的所有信息,<T>代表需要查询的表单
  *
  * @author mingle
- * @since 1.8
  */
 public
 @Data

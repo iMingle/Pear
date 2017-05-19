@@ -21,7 +21,6 @@ import org.mingle.pear.persistence.dao.GenericDao;
 
 /**
  * @author mingle
- * @since 1.8
  */
 public interface AccountDao extends GenericDao<Account, Long> {
 

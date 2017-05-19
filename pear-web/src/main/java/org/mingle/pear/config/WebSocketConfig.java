@@ -26,7 +26,6 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
  * websocket配置
  *
  * @author mingle
- * @since 1.8
  */
 @Configuration
 @EnableWebSocketMessageBroker

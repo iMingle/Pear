@@ -20,7 +20,6 @@ package org.mingle.pear.exception;
  * HTTP请求超时异常
  *
  * @author mingle
- * @since 1.8
  */
 public class HttpRequestTimeoutException extends RuntimeException {
     private static final long serialVersionUID = -1626960970904228309L;

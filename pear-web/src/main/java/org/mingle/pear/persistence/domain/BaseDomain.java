@@ -26,7 +26,6 @@ import java.util.Objects;
  * domain的基础类
  *
  * @author mingle
- * @since 1.8
  */
 public abstract class BaseDomain<ID extends Serializable> implements Identifiable<ID> {
     private static final long serialVersionUID = 3030311272814932991L;

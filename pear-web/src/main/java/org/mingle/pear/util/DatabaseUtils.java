@@ -22,7 +22,6 @@ import org.jasypt.util.text.BasicTextEncryptor;
  * 数据库工具类
  *
  * @author mingle
- * @since 1.8
  */
 public abstract class DatabaseUtils {
     public static String decryptPassword(String password) {

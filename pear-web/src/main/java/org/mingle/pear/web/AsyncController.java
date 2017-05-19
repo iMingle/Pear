@@ -19,8 +19,12 @@ package org.mingle.pear.web;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * @author mingle
@@ -28,30 +32,38 @@ import java.util.concurrent.Callable;
 @RequestMapping("/async")
 @RestController
 public class AsyncController {
-    private static final int MAX = Integer.MAX_VALUE;
+    private static final Executor executor = Executors.newWorkStealingPool(2000);
+
+    @RequestMapping(value = "/sync", method = RequestMethod.GET)
+    public Long sync() throws InterruptedException {
+        Thread.sleep(1000);
+
+        return 1L;
+    }
 
     @RequestMapping(value = "/sum", method = RequestMethod.GET)
     public Callable<Long> sum() {
         return () -> {
-            long sum = 0;
+            Thread.sleep(1000);
 
-            Thread.sleep(5000);
-
-            for (int i = 0; i < MAX; i++)
-                sum += i;
-
-            return sum;
+            return 1L;
         };
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        long sum = 0;
+    @RequestMapping(value = "/deferred", method = RequestMethod.GET)
+    public DeferredResult<Long> deferred() {
+        DeferredResult<Long> deferredResult = new DeferredResult<>();
 
-        Thread.sleep(5000);
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // ignore
+            }
 
-        for (int i = 0; i < MAX; i++)
-            sum += i;
+            return 1L;
+        }, executor).whenComplete((result, throwable) -> deferredResult.setResult(result));
 
-        System.out.println(sum);
+        return deferredResult;
     }
 }

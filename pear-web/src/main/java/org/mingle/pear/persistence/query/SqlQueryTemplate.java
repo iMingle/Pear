@@ -20,7 +20,6 @@ package org.mingle.pear.persistence.query;
  * SQL查询模板,支持用于JPA的SQL查询
  *
  * @author mingle
- * @since 1.8
  */
 public class SqlQueryTemplate extends QueryTemplate {
 

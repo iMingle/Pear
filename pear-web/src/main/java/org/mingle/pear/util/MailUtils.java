@@ -22,7 +22,6 @@ import org.jasypt.util.text.BasicTextEncryptor;
  * 邮件工具类
  *
  * @author mingle
- * @since 1.8
  */
 public abstract class MailUtils {
     public static String decryptPassword(String password) {

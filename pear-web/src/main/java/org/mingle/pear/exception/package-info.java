@@ -17,7 +17,6 @@
 /**
  * 异常类定义
  * 
- * @since 1.8
  * @author mingle
  */
 package org.mingle.pear.exception;

@@ -18,7 +18,6 @@ package org.mingle.pear.aop;
 
 /**
  * @author mingle
- * @since 1.8
  */
 public class NewFunctionImpl implements Comparable<NewFunction> {
 

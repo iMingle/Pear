@@ -27,7 +27,6 @@ import javax.inject.Inject;
 
 /**
  * @author mingle
- * @since 1.8
  */
 @Service
 public class AccountServiceImpl extends GenericServiceImpl<Account, Long> implements AccountService {

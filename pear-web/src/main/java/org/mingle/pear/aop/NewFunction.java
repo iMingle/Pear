@@ -20,7 +20,6 @@ package org.mingle.pear.aop;
  * 通过切面引入新功能
  *
  * @author mingle
- * @since 1.8
  */
 public interface NewFunction {
 

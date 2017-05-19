@@ -31,7 +31,6 @@ import javax.validation.constraints.Pattern;
  * 账户
  *
  * @author mingle
- * @since 1.8
  */
 @Entity
 @Table(name = "t_account")

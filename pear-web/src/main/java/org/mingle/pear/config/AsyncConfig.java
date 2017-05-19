@@ -30,7 +30,6 @@ import java.util.concurrent.Future;
 /**
  * 异步任务配置
  * 
- * @since 1.8
  * @author mingle
  */
 @Configuration

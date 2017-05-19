@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
  * 所有实体实现Comparable接口
  *
  * @author mingle
- * @since 1.8
  */
 @Component
 @Aspect
