@@ -18,6 +18,10 @@ package org.mingle.pear.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.ibatis.annotations.Arg;
+import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
+import org.mingle.pear.domain.handler.SexHandler;
 import org.mingle.pear.persistence.domain.BaseDomain;
 import org.mingle.pear.util.Sex;
 

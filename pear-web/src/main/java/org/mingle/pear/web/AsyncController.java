@@ -16,11 +16,14 @@
 
 package org.mingle.pear.web;
 
+import org.mingle.pear.domain.mapper.AccountMapper;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import javax.inject.Inject;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -34,9 +37,17 @@ import java.util.concurrent.Executors;
 public class AsyncController {
     private static final Executor executor = Executors.newWorkStealingPool(2000);
 
+    @Inject private AccountMapper accountMapper;
+
     @RequestMapping(value = "/sync", method = RequestMethod.GET)
     public Long sync() throws InterruptedException {
         Thread.sleep(1000);
+
+        try {
+            accountMapper.getAccount(1L);
+        } catch (MyBatisSystemException e) {
+            e.printStackTrace();
+        }
 
         return 1L;
     }

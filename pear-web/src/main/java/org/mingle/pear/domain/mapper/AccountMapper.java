@@ -16,10 +16,9 @@
 
 package org.mingle.pear.domain.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.mingle.pear.domain.Account;
+import org.mingle.pear.domain.handler.SexHandler;
 
 /**
  * 账户Mapper
@@ -27,6 +26,9 @@ import org.mingle.pear.domain.Account;
  * @author mingle
  */
 public interface AccountMapper {
+    @Results(id = "userResult", value = {
+            @Result(column = "sex", typeHandler = SexHandler.class)
+    })
     @Select("SELECT * FROM t_account WHERE id = #{accountId}")
     Account getAccount(Long accountId);
 
