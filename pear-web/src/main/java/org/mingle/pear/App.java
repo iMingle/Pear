@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Boot
+ *
+ * @author mingle
  */
 @SpringBootApplication(scanBasePackages = "org.mingle.pear")
 public class App {

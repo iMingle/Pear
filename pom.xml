@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.2.RELEASE</version>
+        <version>1.5.8.RELEASE</version>
     </parent>
 
     <groupId>org.mingle.pear</groupId>
@@ -36,6 +36,15 @@
             <id>spring-maven-milestone</id>
             <name>Spring Maven Milestone Repository</name>
             <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -203,82 +212,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.37</version>
-            </dependency>
-
-            <!-- The core O/RM functionality as provided by Hibernate -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>5.0.3.Final</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.javassist</groupId>
-                        <artifactId>javassist</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- Hibernate O/RM implementation of the JPA specification -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>5.0.3.Final</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>cglib</groupId>
-                        <artifactId>cglib</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>dom4j</groupId>
-                        <artifactId>dom4j</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.javassist</groupId>
-                        <artifactId>javassist</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- Hibernate Search integration with Hibernate Core -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-search</artifactId>
-                <version>5.5.1.Final</version>
-            </dependency>
-
-            <!-- Integration for Ehcache into Hibernate as a second-level caching service -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-ehcache</artifactId>
-                <version>5.0.3.Final</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>net.sf.ehcache</groupId>
-                        <artifactId>ehcache-core</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- Hibernate definition of the Java Persistence 2.0 (JSR 317) API. -->
-            <dependency>
-                <groupId>org.hibernate.javax.persistence</groupId>
-                <artifactId>hibernate-jpa-2.1-api</artifactId>
-                <version>1.0.0.Final</version>
-            </dependency>
-
-            <!-- Hibernate's Bean Validation (JSR-303) reference implementation. -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>5.2.2.Final</version>
-            </dependency>
-
-            <!-- Bean Validation API -->
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>1.1.0.Final</version>
+                <version>8.0.15</version>
             </dependency>
 
             <!-- The javax.inject API -->
@@ -293,20 +227,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
-            </dependency>
-
-            <!-- JavaServer Pages(TM) API -->
-            <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>2.2</version>
-            </dependency>
-
-            <!-- JavaServer Pages(TM) Standard Tag Library -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <version>1.2</version>
             </dependency>
 
             <!-- JavaMail API -->
@@ -425,13 +345,6 @@
                 <version>2.6.3</version>
             </dependency>
 
-            <!-- 轻量级的json解析类库 -->
-            <dependency>
-                <groupId>net.sf.flexjson</groupId>
-                <artifactId>flexjson</artifactId>
-                <version>3.3</version>
-            </dependency>
-
             <!-- 单元测试 -->
             <dependency>
                 <groupId>junit</groupId>
@@ -443,7 +356,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>2.7.22</version>
+                <version>2.24.0</version>
             </dependency>
 
             <!-- Ehcache is an open source, standards-based cache used to boost performance,
@@ -455,21 +368,11 @@
                 <version>2.10.4</version>
             </dependency>
 
-            <!-- Apache Commons DBCP software implements Database Connection Pooling -->
+            <!-- Ultimate JDBC Connection Pool -->
             <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-dbcp2</artifactId>
-                <version>2.1.1</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>xml-apis</groupId>
-                        <artifactId>xml-apis</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>3.3.1</version>
             </dependency>
 
             <!-- Apache Commons Lang, a package of Java utility classes for the classes

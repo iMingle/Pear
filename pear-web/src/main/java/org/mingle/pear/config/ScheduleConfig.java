@@ -16,8 +16,8 @@
 
 package org.mingle.pear.config;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -30,7 +30,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Configuration
 @EnableScheduling
 public class ScheduleConfig {
-    private static final Logger logger = LogManager.getLogger(ScheduleConfig.class.getName());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Scheduled(fixedDelay = 2000)
     public void test() {

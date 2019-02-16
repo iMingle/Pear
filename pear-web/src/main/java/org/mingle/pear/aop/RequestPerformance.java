@@ -16,17 +16,11 @@
 
 package org.mingle.pear.aop;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.mingle.pear.exception.HttpRequestTimeoutException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,7 +31,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class RequestPerformance {
-    private static final Logger logger = LogManager.getLogger(RequestPerformance.class.getName());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * A join point is in the web layer if the method is defined

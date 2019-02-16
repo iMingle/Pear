@@ -16,7 +16,7 @@
 
 package org.mingle.pear.web;
 
-import org.mingle.pear.domain.mapper.AccountMapper;
+import org.mingle.pear.dao.AccountDao;
 import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,14 +37,14 @@ import java.util.concurrent.Executors;
 public class AsyncController {
     private static final Executor executor = Executors.newWorkStealingPool(2000);
 
-    @Inject private AccountMapper accountMapper;
+    @Inject private AccountDao accountDao;
 
     @RequestMapping(value = "/sync", method = RequestMethod.GET)
     public Long sync() throws InterruptedException {
         Thread.sleep(1000);
 
         try {
-            accountMapper.getAccount(1L);
+            accountDao.getById(1L);
         } catch (MyBatisSystemException e) {
             e.printStackTrace();
         }

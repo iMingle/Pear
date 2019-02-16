@@ -16,7 +16,6 @@
 
 package org.mingle.pear.config;
 
-import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -38,7 +37,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
         return new Class<?>[]{
                 ApplicationConfig.class,
                 SecurityConfig.class,
-                DataAccessJpaConfig.class,
+                DataAccessMybatisConfig.class,
                 WebMvcConfig.class,
                 WebViewConfig.class,
                 MessageConfig.class,
@@ -46,9 +45,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
                 ScheduleConfig.class,
                 AsyncConfig.class,
                 AspectJConfig.class,
-                WebSocketConfig.class,
-                MBeanConfig.class,
-                ContainerConfig.class
+                WebSocketConfig.class
         };
     }
 
@@ -66,7 +63,6 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     protected Filter[] getServletFilters() {
         return new Filter[]{
                 new HiddenHttpMethodFilter(),
-                new OpenEntityManagerInViewFilter(),
                 new ResourceUrlEncodingFilter()
         };
     }

@@ -25,7 +25,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -116,17 +115,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         resolver.setExceptionMappings(mappings);
 
         exceptionResolvers.add(resolver);
-    }
-
-    /**
-     * Open EntityManager in View, i.e. to allow for lazy loading in web views
-     * despite the original transactions already being completed.
-     *
-     * @return
-     */
-    @Bean
-    public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
-        return new OpenEntityManagerInViewInterceptor();
     }
 
     @Bean

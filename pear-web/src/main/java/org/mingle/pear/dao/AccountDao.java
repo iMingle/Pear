@@ -16,12 +16,28 @@
 
 package org.mingle.pear.dao;
 
+import org.apache.ibatis.annotations.*;
 import org.mingle.pear.domain.Account;
-import org.mingle.pear.persistence.dao.GenericDao;
+import org.mingle.pear.dto.AccountQueryParam;
+
+import java.util.List;
 
 /**
  * @author mingle
  */
-public interface AccountDao extends GenericDao<Account, Long> {
+public interface AccountDao {
+    @Select("SELECT * FROM t_account WHERE id = #{accountId}")
+    Account getById(Long accountId);
 
+    @SelectProvider(type = AccountSqlProvider.class, method = "query")
+    List<Account> query(AccountQueryParam queryParam);
+
+    @InsertProvider(type = AccountSqlProvider.class, method = "insert")
+    int insert(Account account);
+
+    @UpdateProvider(type = AccountSqlProvider.class, method = "update")
+    int update(Account account);
+
+    @Delete("DELETE FROM t_account WHERE id = #{accountId}")
+    int delete(Long accountId);
 }

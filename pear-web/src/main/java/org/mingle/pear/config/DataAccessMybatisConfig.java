@@ -16,6 +16,9 @@
 
 package org.mingle.pear.config;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.mingle.pear.properties.PropertiesDatabase;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -25,6 +28,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.inject.Inject;
+import javax.sql.DataSource;
+
 /**
  * 数据访问配置
  *
@@ -33,8 +39,29 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ManagedResource(description = "DataSource Manager.")
-@MapperScan("org.mingle.pear.domain.mapper")
-public class DataAccessMybatisConfig extends DataAccessJpaConfig {
+@MapperScan("org.mingle.pear.dao")
+public class DataAccessMybatisConfig {
+    @Inject private PropertiesDatabase propDatabase;
+
+    @Bean
+    public DataSource dataSource() {
+        return new HikariDataSource(hikariConfig(propDatabase.getUrl(), propDatabase.getUsername(),
+                propDatabase.getPassword()));
+    }
+
+    private HikariConfig hikariConfig(String url, String userName, String password) {
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName(propDatabase.getDriverClassName());
+        config.setAutoCommit(true);
+        config.setConnectionTestQuery("SELECT 1");
+        config.setMaximumPoolSize(100);
+        config.setJdbcUrl(url);
+        config.setUsername(userName);
+        config.setPassword(password);
+        config.setConnectionTimeout(10000);
+        config.setMaxLifetime(180000);
+        return config;
+    }
 
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory() {
@@ -55,7 +82,7 @@ public class DataAccessMybatisConfig extends DataAccessJpaConfig {
 
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setBasePackage("org.mingle.pear.domain.mapper");
+        mapperScannerConfigurer.setBasePackage("org.mingle.pear.dao");
         return mapperScannerConfigurer;
     }
 

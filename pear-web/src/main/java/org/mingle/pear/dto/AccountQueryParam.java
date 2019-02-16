@@ -14,27 +14,15 @@
  * limitations under the License.
  */
 
-package org.mingle.pear.persistence.query;
+package org.mingle.pear.dto;
 
-import java.util.Map;
+import lombok.Data;
 
 /**
- * Java查询语言模板
- *
  * @author mingle
  */
-public class JqlQueryTemplate extends QueryTemplate {
-
-    public JqlQueryTemplate() {
-        super();
-    }
-
-    public JqlQueryTemplate(String query, Map<String, Object> parameters) {
-        super(query, parameters);
-    }
-
-    public JqlQueryTemplate(String query) {
-        super(query);
-    }
-
+@Data
+public class AccountQueryParam {
+    private Long id;
+    private Integer age;
 }

@@ -17,11 +17,21 @@
 package org.mingle.pear.service;
 
 import org.mingle.pear.domain.Account;
-import org.mingle.pear.persistence.service.GenericService;
+import org.mingle.pear.dto.AccountQueryParam;
+
+import java.util.List;
 
 /**
  * @author mingle
  */
-public interface AccountService extends GenericService<Account, Long> {
+public interface AccountService {
+    int createAccount(Account account);
 
+    int updateAccount(Account account);
+
+    int deleteAccount(Long id);
+
+    boolean isNameExist(String name);
+
+    List<Account> queryAccounts(AccountQueryParam queryParam);
 }

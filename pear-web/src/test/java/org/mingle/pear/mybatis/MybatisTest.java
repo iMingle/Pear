@@ -1,67 +1,82 @@
 package org.mingle.pear.mybatis;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mingle.pear.App;
+import org.mingle.pear.BaseTest;
+import org.mingle.pear.dao.AccountDao;
 import org.mingle.pear.domain.Account;
-import org.mingle.pear.domain.mapper.AccountMapper;
-import org.mingle.pear.util.Sex;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mingle.pear.dto.AccountQueryParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.util.*;
-import java.util.concurrent.atomic.LongAdder;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created by mingle on 2016/11/28.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = App.class)
-public class MybatisTest {
-    @Inject private AccountMapper accountMapper;
+public class MybatisTest extends BaseTest {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Inject private AccountDao accountDao;
 
     @Test
     public void testSelect() {
-        System.out.println(accountMapper.getAccount(8L));
+        logger.info("account: {}", accountDao.getById(1L));
     }
 
     @Test
-    public void insert() {
+    public void testQuery() {
+        AccountQueryParam queryParam = new AccountQueryParam();
+        queryParam.setAge(25);
+        logger.info("account: {}", accountDao.query(queryParam));
+    }
+
+    @Test
+    public void testInsert() {
+        Account account = new Account();
+        account.setAge(10);
+        String name = "test";
+        account.setName(name);
+        account.setSex(2);
+        account.setVersion(1);
+        account.setEmail(name + "@yeah.net");
+        accountDao.insert(account);
+    }
+
+    @Test
+    public void testUpdate() {
+        Account account = new Account();
+        account.setId(10L);
+        account.setAge(16);
+        String name = "test1";
+        account.setName(name);
+        account.setSex(1);
+        account.setVersion(2);
+        account.setEmail(name + "@yeah.net");
+        accountDao.update(account);
+    }
+
+    @Test
+    public void testDelete() {
+        accountDao.delete(20L);
+    }
+
+    @Test
+    public void multiInsert() {
         Random random = new Random();
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 10000; i++) {
             Account account = new Account();
             account.setAge(random.nextInt(100));
             String name = UUID.randomUUID().toString();
             account.setName(name);
-            account.setSex(Sex.values()[random.nextInt(3)]);
+            account.setSex(random.nextInt(3));
             account.setVersion(1);
             account.setEmail(name + "@yeah.net");
-            accountMapper.insertAccount(account);
+            accountDao.insert(account);
         }
 
         System.out.println(System.currentTimeMillis() - start);
-    }
-
-    public static void main(String[] args) {
-        String[] str = new String[]{
-                "a", "b"
-        };
-
-        List<? extends Integer> list = new ArrayList<>();
-        list.add(null);
-        System.out.println(list.size());
-        System.out.println(Arrays.toString(list.toArray()));
-
-        Map<String, Long> map = new HashMap<>();
-        map.forEach((key, value) -> {
-
-        });
-
-        LongAdder longAdder = new LongAdder();
-        for (int i = 0; i < 10; i++)
-            longAdder.increment();
-        System.out.println(longAdder.sum());
     }
 }
