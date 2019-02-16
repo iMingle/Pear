@@ -68,8 +68,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     }
 
     @Override
-    public void onStartup(ServletContext servletContext)
-            throws ServletException {
+    public void onStartup(ServletContext servletContext) throws ServletException {
         /* Enable escaping of form submission contents */
         servletContext.setInitParameter("defaultHtmlEscape", "true");
         SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
