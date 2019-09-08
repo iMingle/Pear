@@ -41,9 +41,9 @@ public class AsyncConfig {
     }
 
     @Async
-	public Future<Long> async(Long id) throws InterruptedException {
+	public Future<Long> async(Long id) {
 		RestTemplate restTemplate = new RestTemplate();
 		Long result = restTemplate.getForObject("https://api.github.com/users/" + id, Long.class);
-		return new AsyncResult<Long>(result);
+		return new AsyncResult<>(result);
 	}
 }

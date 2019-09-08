@@ -40,4 +40,7 @@ public interface AccountDao {
 
     @Delete("DELETE FROM t_account WHERE id = #{accountId}")
     int delete(Long accountId);
+
+    @SelectProvider(type = AccountSqlProvider.class, method = "count")
+    int count(AccountQueryParam queryParam);
 }

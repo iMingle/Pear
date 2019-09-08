@@ -8,7 +8,7 @@ import org.mingle.pear.dto.AccountQueryParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import java.util.Random;
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class MybatisTest extends BaseTest {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Inject private AccountDao accountDao;
+    @Resource private AccountDao accountDao;
 
     @Test
     public void testSelect() {

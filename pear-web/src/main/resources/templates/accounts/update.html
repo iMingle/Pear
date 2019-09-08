@@ -27,10 +27,9 @@
         </div>
         <div>
             <ul>
-                <li th:each="type : ${sexTypes}">
-                    <input type="radio" th:field="*{sex}" th:value="${type}"/>
-                    <label th:for="${#ids.prev('sex')}"
-                           th:text="${#strings.capitalize(#strings.toLowerCase(type))}">Man</label>
+                <li th:each="entry : ${sexTypes.entrySet()}">
+                    <input type="radio" th:field="*{sex}" th:value="${entry.getValue()}"/>
+                    <label th:text="${entry.getKey()}">Man</label>
                 </li>
             </ul>
         </div>

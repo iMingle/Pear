@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -34,7 +34,7 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Inject private AccountDao accountDao;
+    @Resource private AccountDao accountDao;
 
     @Override public int createAccount(Account account) {
         return accountDao.insert(account);
@@ -54,5 +54,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override public List<Account> queryAccounts(AccountQueryParam queryParam) {
         return accountDao.query(queryParam);
+    }
+
+    @Override public int countAccount(AccountQueryParam queryParam) {
+        return accountDao.count(queryParam);
     }
 }

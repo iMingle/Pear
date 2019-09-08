@@ -19,7 +19,6 @@ package org.mingle.pear.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
@@ -28,7 +27,7 @@ import org.springframework.scheduling.annotation.Scheduled;
  * @author mingle
  */
 @Configuration
-@EnableScheduling
+//@EnableScheduling
 public class ScheduleConfig {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

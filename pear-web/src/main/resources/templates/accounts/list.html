@@ -22,7 +22,7 @@
 <span th:include="@{templates/scripts} :: public"></span>
 <div>
     <h1>Account List</h1>
-    <div><a href="create.html" th:href="@{/accounts/create}"><span th:text="#{button.create}">Create</span></a></div>
+    <div><a href="create.html" th:href="@{/accounts/create}"><span>Create Account</span></a></div>
     <table border="1">
         <thead>
         <tr>
@@ -32,29 +32,53 @@
             <td>Email</td>
             <td>Update</td>
             <td>Delete</td>
+            <td>Email</td>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="account : ${accounts}" th:class="${accountStat.odd} ? 'odd'">
-            <td><a href="show.html" th:href="@{'/accounts/show/' + *{account.id}}"><span th:text="*{account.name}">Mingle</span></a>
+        <tr th:each="account : ${accounts.items}" th:class="${accountStat.odd} ? 'odd'">
+            <td>
+                <a href="show.html" th:href="@{'/accounts/show/' + *{account.id}}">
+                    <span th:text="*{account.name}">Mingle</span>
+                </a>
             </td>
             <td th:text="*{account.age}">25</td>
             <td th:text="*{account.sex}">Man</td>
             <td th:text="*{account.email}">jinminglei@yeah.net</td>
-            <td><a href="update.html" th:href="@{'/accounts/update/' + *{account.id}}"><span th:text="#{button.update}">Update</span></a>
+            <td>
+                <a href="update.html" th:href="@{'/accounts/update/' + *{account.id}}">
+                    <span>Update</span>
+                </a>
             </td>
-            <td><a href="list.html" th:href="@{'/accounts/delete/' + *{account.id}}" data-method="delete"><span
-                    th:text="#{button.delete}">Delete</span></a></td>
+            <td>
+                <a href="list.html" th:href="@{'/accounts/delete/' + *{account.id}}" data-method="delete">
+                    <span>Delete</span>
+                </a>
+            </td>
+            <td>
+                <a href="list.html" th:href="@{'/accounts/email/' + *{account.id}}" data-method="POST">
+                    <span>Send Email</span>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
     <div>
-        <span><a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=5)}">First</a></span>&nbsp;
-        <span><a href="accounts/list.html"
-                 th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} - 1 < 1 ? 1 : ${T(Integer).parseInt(param.page)} - 1,size=5)}">Prev</a></span>&nbsp;
-        <span><a href="accounts/list.html"
-                 th:href="@{/accounts/list(page=${T(Integer).parseInt(param.page)} + 1 > ${maxPages} ? ${maxPages} : ${T(Integer).parseInt(param.page)} + 1,size=5)}">Next</a></span>&nbsp;
-        <span><a href="accounts/list.html" th:href="@{/accounts/list(page=${maxPages},size=5)}">End</a></span>
+        <span>
+            <a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=2)}">First</a>
+        </span>&nbsp;
+        <span>
+            <a href="accounts/list.html"
+               th:href="@{/accounts/list(page=${accounts.pageNumber - 1} < 1 ? 1 : ${accounts.pageNumber - 1},size=2)}">Prev</a>
+        </span>&nbsp;
+        <span>
+            <a href="accounts/list.html"
+               th:href="@{/accounts/list(page=${accounts.pageNumber + 1} > ${(accounts.totalCount + accounts.pageSize - 1) / accounts.pageSize} ? ${(accounts.totalCount + accounts.pageSize - 1) / accounts.pageSize} : ${accounts.pageNumber + 1},size=2)}">Next</a>
+        </span>&nbsp;
+        <span>
+            <a href="accounts/list.html"
+               th:href="@{/accounts/list(page=${(accounts.totalCount + accounts.pageSize - 1) / accounts.pageSize},size=2)}">End</a>
+        </span>
     </div>
 </div>
 </body>

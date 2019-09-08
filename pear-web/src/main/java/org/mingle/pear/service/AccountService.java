@@ -25,13 +25,51 @@ import java.util.List;
  * @author mingle
  */
 public interface AccountService {
+    /**
+     * 创建账户
+     *
+     * @param account
+     * @return
+     */
     int createAccount(Account account);
 
+    /**
+     * 更新账户
+     *
+     * @param account
+     * @return
+     */
     int updateAccount(Account account);
 
+    /**
+     * 删除账户
+     *
+     * @param id
+     * @return
+     */
     int deleteAccount(Long id);
 
+    /**
+     * 校验名称是否存在
+     *
+     * @param name
+     * @return
+     */
     boolean isNameExist(String name);
 
+    /**
+     * 查询账户
+     *
+     * @param queryParam
+     * @return
+     */
     List<Account> queryAccounts(AccountQueryParam queryParam);
+
+    /**
+     * 查询数量
+     *
+     * @param queryParam
+     * @return
+     */
+    int countAccount(AccountQueryParam queryParam);
 }

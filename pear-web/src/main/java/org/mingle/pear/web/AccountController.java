@@ -16,22 +16,39 @@
 
 package org.mingle.pear.web;
 
+import com.alibaba.fastjson.JSON;
 import org.mingle.pear.domain.Account;
 import org.mingle.pear.dto.AccountQueryParam;
+import org.mingle.pear.dto.Page;
+import org.mingle.pear.properties.PropertiesMail;
 import org.mingle.pear.service.AccountService;
 import org.mingle.pear.util.DeleteStatus;
 import org.mingle.pear.util.Sex;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author mingle
@@ -39,14 +56,17 @@ import java.util.List;
 @RequestMapping("/accounts")
 @Controller
 public class AccountController {
-    @Inject private AccountService accountService;
+    @Resource private AccountService accountService;
+    @Resource private JavaMailSenderImpl mailSender;
+    @Resource private PropertiesMail propMail;
+    @Resource private TemplateEngine templateEngine;
 
     @ModelAttribute
     public void init(Model model) {
-        model.addAttribute("sexTypes", Sex.values());
+        model.addAttribute("sexTypes", Sex.mapValue());
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "text/html")
+    @PostMapping(value = "/create", produces = "text/html")
     public String create(Account account, BindingResult bindingResult,
                          Model model, HttpServletRequest request) {
         if (accountService.isNameExist(account.getName()))
@@ -57,16 +77,16 @@ public class AccountController {
         }
         model.asMap().clear();
         accountService.createAccount(account);
-        return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), request);
+        return "redirect:/accounts/list";
     }
 
-    @RequestMapping(value = "/create", produces = "text/html")
+    @GetMapping(value = "/create", produces = "text/html")
     public String createForm(Model uiModel) {
         uiModel.addAttribute("account", new Account());
         return "accounts/create";
     }
 
-    @RequestMapping(value = "/show/{id}", produces = "text/html")
+    @GetMapping(value = "/show/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model model) {
         AccountQueryParam queryParam = new AccountQueryParam();
         queryParam.setId(id);
@@ -75,17 +95,60 @@ public class AccountController {
         return "accounts/show";
     }
 
-    @RequestMapping(value = "/list", produces = "text/html")
+    @GetMapping(value = "/list", produces = "text/html")
     public String list(
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "size", required = false) Integer size,
             Model model) {
+        if (Objects.isNull(page))
+            page = 1;
+        if (Objects.isNull(size))
+            size = 10;
         AccountQueryParam queryParam = new AccountQueryParam();
-        model.addAttribute("accounts", accountService.queryAccounts(queryParam));
+        queryParam.setPageNumber(page);
+        queryParam.setPageSize(size);
+        List<Account> accounts = accountService.queryAccounts(queryParam);
+        model.addAttribute("accounts", Page.<Account>builder()
+                .pageNumber(page)
+                .pageSize(size)
+                .totalCount(accountService.countAccount(queryParam))
+                .items(accounts).build());
         return "accounts/list";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = "text/html")
+    @PostMapping(value = "/email/{id}", produces = "text/html")
+    public @ResponseBody boolean sendEmail(@PathVariable Long id) {
+        if (Objects.isNull(id))
+            return false;
+
+        AccountQueryParam queryParam = new AccountQueryParam();
+        queryParam.setId(id);
+        List<Account> accounts = accountService.queryAccounts(queryParam);
+        if (accounts.isEmpty())
+            return false;
+
+        Account account = accounts.get(0);
+        try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setSubject("测试邮件");
+            helper.setFrom(propMail.getUsername());
+            helper.setTo(account.getEmail());
+            helper.setCc(account.getEmail());
+            helper.setBcc(account.getEmail());
+            helper.setSentDate(new Date());
+            Context context = new Context();
+            context.setVariables(JSON.parseObject(JSON.toJSONString(account)));
+            String process = templateEngine.process("mail/table.html", context);
+            helper.setText(process,true);
+            mailSender.send(mimeMessage);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    @PutMapping(value = "/update", produces = "text/html")
     public String update(Account account, BindingResult bindingResult,
                          Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
@@ -97,7 +160,7 @@ public class AccountController {
         return "redirect:/accounts/show/" + encodeUrlPathSegment(account.getId().toString(), request);
     }
 
-    @RequestMapping(value = "/update/{id}", produces = "text/html")
+    @GetMapping(value = "/update/{id}", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model model) {
         AccountQueryParam queryParam = new AccountQueryParam();
         queryParam.setId(id);
@@ -106,7 +169,7 @@ public class AccountController {
         return "accounts/update";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json; charset=UTF-8")
+    @DeleteMapping(value = "/delete/{id}", produces = "application/json; charset=UTF-8")
     public @ResponseBody DeleteStatus delete(@PathVariable("id") Long id,
                                              @RequestParam(value = "page", required = false) Integer page,
                                              @RequestParam(value = "size", required = false) Integer size,
@@ -129,10 +192,7 @@ public class AccountController {
         if (enc == null)
             enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
 
-        try {
-            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-        } catch (UnsupportedEncodingException uee) {
-        }
+        pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
         return pathSegment;
     }
 }

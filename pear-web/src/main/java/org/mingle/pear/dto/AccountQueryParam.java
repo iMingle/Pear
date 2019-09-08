@@ -23,6 +23,8 @@ import lombok.Data;
  */
 @Data
 public class AccountQueryParam {
+    private Integer pageSize;
+    private Integer pageNumber;
     private Long id;
     private Integer age;
 }

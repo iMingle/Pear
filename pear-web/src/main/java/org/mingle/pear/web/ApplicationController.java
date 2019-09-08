@@ -17,25 +17,23 @@
 package org.mingle.pear.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * @author mingle
+ */
 @RequestMapping("/")
 @Controller
 public class ApplicationController {
 
-    @RequestMapping(value = {"/uncaughtException"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String uncaughtException() {
-        return "errors/uncaughtException";
+    @GetMapping(value = {"/"})
+    public String index() {
+        return "index";
     }
 
-    @RequestMapping(value = {"/resourceNotFound"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String resourceNotFound() {
-        return "errors/resourceNotFound";
-    }
-
-    @RequestMapping(value = {"/dataAccessFailure"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String dataAccessFailure() {
-        return "errors/dataAccessFailure";
+    @GetMapping(value = {"/systemError"})
+    public String error() {
+        return "errors/error";
     }
 }

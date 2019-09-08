@@ -42,6 +42,28 @@ public class AccountSqlProvider {
                     AND();
                     WHERE("age = #{age}");
                 }
+                if (Objects.nonNull(queryParam.getPageNumber()) && Objects.nonNull(queryParam.getPageSize())) {
+                    LIMIT(queryParam.getPageSize());
+                    OFFSET((queryParam.getPageNumber() - 1) * queryParam.getPageSize());
+                }
+            }
+        }.toString();
+    }
+
+    public String count(final AccountQueryParam queryParam) {
+        return new SQL() {
+            {
+                SELECT("COUNT(*)");
+                FROM(TABLE_NAME);
+                WHERE("1 = 1");
+                if (Objects.nonNull(queryParam.getId())) {
+                    AND();
+                    WHERE("id = #{id}");
+                }
+                if (Objects.nonNull(queryParam.getAge())) {
+                    AND();
+                    WHERE("age = #{age}");
+                }
             }
         }.toString();
     }

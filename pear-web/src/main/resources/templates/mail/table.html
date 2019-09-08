@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table Email</title>
+</head>
+<body>
+<div style="font-size: 12px; color: red">此邮件是系统自动发送，请勿回复</div>
+<br>
+<br>
+<br>
+<!--<table border="0" cellspacing="1" cellpadding="5" bgcolor="#ccc">-->
+<table style="width: 80%; border-collapse: separate; border-spacing: 1px; background-color: #cccccc">
+    <thead>
+    <tr>
+        <th style="font-size: 12px; background-color: #eeeeee; text-align: center; padding: 5px">name</th>
+        <th style="font-size: 12px; background-color: #eeeeee; text-align: center; padding: 5px">age</th>
+        <th style="font-size: 12px; background-color: #eeeeee; text-align: center; padding: 5px">sex</th>
+        <th style="font-size: 12px; background-color: #eeeeee; text-align: center; padding: 5px">email</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr style="background-color: #ffffff">
+        <td style="font-size: 12px; padding: 5px" th:text="${name}">mingle</td>
+        <td style="font-size: 12px; padding: 5px" th:text="${age}">30</td>
+        <td style="font-size: 12px; padding: 5px" th:text="${sex}">man</td>
+        <td style="font-size: 12px; padding: 5px" th:text="${email}">test@163.com</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="font-size: 12px">From Pear</div>
+</body>
+</html>

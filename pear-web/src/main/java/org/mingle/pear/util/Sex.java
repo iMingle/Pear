@@ -32,13 +32,28 @@ public enum Sex {
 
     @Getter private int value;
 
-    @Getter private static final Map<Integer, Sex> map = Collections.unmodifiableMap(new HashMap<Integer, Sex>() {{
-        put(WOMAN.getValue(), Sex.WOMAN);
-        put(MAN.getValue(), Sex.MAN);
-        put(INTERSEX.getValue(), Sex.INTERSEX);
+    @Getter private static final Map<Integer, Sex> MAP = Collections.unmodifiableMap(new HashMap<Integer, Sex>() {{
+        put(WOMAN.getValue(), WOMAN);
+        put(MAN.getValue(), MAN);
+        put(INTERSEX.getValue(), INTERSEX);
     }});
+
+    @Getter private static final Map<Sex, Integer> SEX_VALUE = Collections.unmodifiableMap(
+            new HashMap<Sex, Integer>() {{
+                put(WOMAN, WOMAN.getValue());
+                put(MAN, MAN.getValue());
+                put(INTERSEX, INTERSEX.getValue());
+            }});
 
     Sex(int value) {
         this.value = value;
+    }
+
+    public static Map<Integer, Sex> mapSex() {
+        return MAP;
+    }
+
+    public static Map<Sex, Integer> mapValue() {
+        return SEX_VALUE;
     }
 }

@@ -20,19 +20,22 @@ import org.mingle.pear.properties.PropertiesMail;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 
+/**
+ * @author mingle
+ */
 @RequestMapping("/mail")
 @RestController
 public class MailController {
-    @Inject private MailSender mailSender;
-    @Inject private PropertiesMail propMail;
+    @Resource private MailSender mailSender;
+    @Resource private PropertiesMail propMail;
 
-    @RequestMapping(value = "/send/{address}", method = {RequestMethod.GET, RequestMethod.POST})
+    @PostMapping(value = "/send/{address}")
     public boolean send(@PathVariable String address) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(propMail.getUsername());

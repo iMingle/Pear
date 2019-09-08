@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 
 /**
  * 邮件服务配置
@@ -31,8 +31,7 @@ import javax.inject.Inject;
  */
 @Configuration
 public class MailConfig {
-    @Inject
-    private PropertiesMail propMail;
+    @Resource private PropertiesMail propMail;
 
     @Bean
     public JavaMailSenderImpl mailSender() {

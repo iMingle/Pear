@@ -18,12 +18,14 @@ package org.mingle.pear.websocket;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
+import javax.annotation.Resource;
 
 @Controller
 public class WebSocketController {
-//	@Inject
-//	private SimpMessagingTemplate template;
+	@Resource private SimpMessagingTemplate template;
 
     @MessageMapping("/greeting")
     @SendTo("/topic/welcome")

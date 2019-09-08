@@ -67,18 +67,17 @@
 <span th:include="@{templates/scripts} :: public"></span>
 <div>
     <h1>
-        <span th:text="#{welcome_titlepane(Spring)}">Spring</span>
-        <span th:text="#{application_name}">pear</span> <br/>
+        <span>Welcome to Pear</span>
         <br/>
     </h1>
     <h2>
         Now time is <span
             th:text="${#calendars.format(#execInfo.now, 'yyyy-MM-dd HH:mm:ss')}"></span>
     </h2>
-    <p>This sample demonstrates how to use Spring MVC together with
+    <p>This sample demonstrates how to use Spring-Boot together with
         Thymeleaf.</p>
     <p>
-        <a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=5)}">Start your Spring Travel experience</a>
+        <a href="accounts/list.html" th:href="@{/accounts/list(page=1,size=2)}">Start your Spring Travel experience</a>
     </p>
 </div>
 

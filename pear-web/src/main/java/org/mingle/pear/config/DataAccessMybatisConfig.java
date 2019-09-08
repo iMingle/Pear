@@ -28,7 +28,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -41,7 +41,7 @@ import javax.sql.DataSource;
 @ManagedResource(description = "DataSource Manager.")
 @MapperScan("org.mingle.pear.dao")
 public class DataAccessMybatisConfig {
-    @Inject private PropertiesDatabase propDatabase;
+    @Resource private PropertiesDatabase propDatabase;
 
     @Bean
     public DataSource dataSource() {

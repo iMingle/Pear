@@ -18,12 +18,12 @@ package org.mingle.pear.web;
 
 import org.mingle.pear.dao.AccountDao;
 import org.mybatis.spring.MyBatisSystemException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -37,9 +37,9 @@ import java.util.concurrent.Executors;
 public class AsyncController {
     private static final Executor executor = Executors.newWorkStealingPool(2000);
 
-    @Inject private AccountDao accountDao;
+    @Resource private AccountDao accountDao;
 
-    @RequestMapping(value = "/sync", method = RequestMethod.GET)
+    @GetMapping(value = "/sync")
     public Long sync() throws InterruptedException {
         Thread.sleep(1000);
 
@@ -52,7 +52,7 @@ public class AsyncController {
         return 1L;
     }
 
-    @RequestMapping(value = "/sum", method = RequestMethod.GET)
+    @GetMapping(value = "/sum")
     public Callable<Long> sum() {
         return () -> {
             Thread.sleep(1000);
@@ -61,7 +61,7 @@ public class AsyncController {
         };
     }
 
-    @RequestMapping(value = "/deferred", method = RequestMethod.GET)
+    @GetMapping(value = "/deferred")
     public DeferredResult<Long> deferred() {
         DeferredResult<Long> deferredResult = new DeferredResult<>();
 

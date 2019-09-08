@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: pear
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+    cache: false
+    enabled: true
+
+management:
+  health:
+    defaults:
+      enabled: false
+
+database:
+  driverClassName: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/pear?characterEncoding=UTF-8
+  username: root
+  password: password
+
+mybatis:
+  mapper-locations: mapper/*.xml
+
+mail:
+  protocol: smtp
+  host: smtp.yeah.net
+  port: 25
+  username: jinminglei@yeah.net
+  password: YTUbtUJne2HnGlPNm9TAmYQ9C3uQlwnu
