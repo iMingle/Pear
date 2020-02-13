@@ -8,4 +8,5 @@ target/
 *.ipr
 *.iws
 out/
+logs/
 .DS_Store

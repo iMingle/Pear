@@ -14,6 +14,9 @@ management:
     defaults:
       enabled: false
 
+server:
+  port: 8081
+
 database:
   driverClassName: com.mysql.cj.jdbc.Driver
   url: jdbc:mysql://localhost:3306/pear?characterEncoding=UTF-8

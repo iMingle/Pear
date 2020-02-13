@@ -16,9 +16,9 @@
 
 package org.mingle.pear.config;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
-import org.apache.activemq.spring.ActiveMQConnectionFactoryFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,9 +35,9 @@ public class MessageConfig {
      * @return
      */
     @Bean
-    public ActiveMQConnectionFactoryFactoryBean activeMQConnectionFactoryFactoryBean() {
-        ActiveMQConnectionFactoryFactoryBean bean = new ActiveMQConnectionFactoryFactoryBean();
-        bean.setTcpHostAndPort("tcp://localhost:61616");
+    public ActiveMQConnectionFactory activeMQConnectionFactory() {
+        ActiveMQConnectionFactory bean = new ActiveMQConnectionFactory();
+        bean.setBrokerURL("tcp://localhost:61616");
         return bean;
     }
 
