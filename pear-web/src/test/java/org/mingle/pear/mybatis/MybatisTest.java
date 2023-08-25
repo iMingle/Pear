@@ -1,12 +1,10 @@
 package org.mingle.pear.mybatis;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mingle.pear.BaseTest;
 import org.mingle.pear.dao.AccountDao;
 import org.mingle.pear.domain.Account;
 import org.mingle.pear.dto.AccountQueryParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.util.Random;
@@ -16,8 +14,6 @@ import java.util.UUID;
  * Created by mingle on 2016/11/28.
  */
 public class MybatisTest extends BaseTest {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Resource private AccountDao accountDao;
 
     @Test

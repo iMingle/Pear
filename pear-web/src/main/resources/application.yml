@@ -12,10 +12,20 @@ spring:
 management:
   health:
     defaults:
+      enabled: true
+    jms:
       enabled: false
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 server:
-  port: 8081
+  port: 8080
 
 database:
   driverClassName: com.mysql.cj.jdbc.Driver
@@ -32,3 +42,8 @@ mail:
   port: 25
   username: jinminglei@yeah.net
   password: YTUbtUJne2HnGlPNm9TAmYQ9C3uQlwnu
+
+web3j:
+  network-id: 12345
+  admin-client: false
+  client-address: http://localhost:8545

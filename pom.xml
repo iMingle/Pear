@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.8.RELEASE</version>
+        <version>2.7.8</version>
     </parent>
 
     <groupId>org.mingle.pear</groupId>
@@ -64,6 +64,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.2.15</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>2.1.0</version>
@@ -112,6 +118,30 @@
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
                 <version>1.9.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>4.10.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.10.1</version>
+            </dependency>
+
+            <!-- web3 -->
+            <dependency>
+                <groupId>org.web3j</groupId>
+                <artifactId>web3j-spring-boot-starter</artifactId>
+                <version>4.0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.web3j</groupId>
+                <artifactId>core</artifactId>
+                <version>5.0.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -186,6 +216,14 @@
                         <descriptorRefs>
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.web3j</groupId>
+                    <artifactId>web3j-maven-plugin</artifactId>
+                    <version>4.8.1</version>
+                    <configuration>
+                        <soliditySourceFiles/>
                     </configuration>
                 </plugin>
             </plugins>
